@@ -18,7 +18,7 @@ public:
 
     void setData(std::initializer_list<Vertex> vertices, GLenum usage);
 
-    void bindAndDraw();
+    void bindAndDraw(GLenum mode);
 
 private:
     GLuint vbo = 0;

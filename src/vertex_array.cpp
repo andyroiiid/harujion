@@ -33,8 +33,8 @@ void VertexArray::setData(std::initializer_list<Vertex> vertices, GLenum usage) 
     glNamedBufferData(vbo, static_cast<GLsizeiptr>(sizeof(Vertex) * count), vertices.begin(), usage);
 }
 
-void VertexArray::bindAndDraw() { // NOLINT(readability-make-member-function-const)
+void VertexArray::bindAndDraw(GLenum mode) { // NOLINT(readability-make-member-function-const)
     if (count <= 0) return;
     glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, count);
+    glDrawArrays(mode, 0, count);
 }
