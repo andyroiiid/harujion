@@ -10,7 +10,9 @@
 #include "non_copyable.h"
 #include "window.h"
 #include "dynamic_draw_shader.h"
+#include "sprite_shader.h"
 #include "vertex_array.h"
+#include "texture.h"
 
 class Renderer : NonCopyable {
 public:
@@ -34,6 +36,8 @@ public:
 
     void drawLine(float x0, float y0, float x1, float y1, float width);
 
+    void test();
+
 private:
     Renderer();
 
@@ -45,11 +49,15 @@ private:
 
     Window &window = Window::getInstance();
     DynamicDrawShader &dynamicDrawShader = DynamicDrawShader::getInstance();
+    SpriteShader &spriteShader = SpriteShader::getInstance();
 
     glm::vec4 clearColor = {0.2f, 0.2f, 0.2f, 1.0f};
     glm::vec4 drawColor = {1.0f, 1.0f, 1.0f, 1.0f};
 
     VertexArray dynamicDrawVao;
+    VertexArray spriteVao;
+
+    Texture texture;
 };
 
 #endif //HARUJION_RENDERER_H

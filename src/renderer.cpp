@@ -20,6 +20,21 @@ Renderer::Renderer() {
     LOG_GL_STRING(GL_VENDOR);
     LOG_GL_STRING(GL_RENDERER);
 #undef LOG_GL_STRING
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    spriteVao.setData(
+            {
+                    {glm::vec2{-0.5f, -0.5f}, glm::vec2{0.0f, 0.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
+                    {glm::vec2{0.5f, -0.5f},  glm::vec2{1.0f, 0.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
+                    {glm::vec2{-0.5f, 0.5f},  glm::vec2{0.0f, 1.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
+                    {glm::vec2{0.5f, 0.5f},   glm::vec2{1.0f, 1.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}}
+            },
+            GL_STATIC_DRAW
+    );
+
+    texture.loadFromFile("test.png", true);
 }
 
 void Renderer::update() {
@@ -62,6 +77,7 @@ sol::table Renderer::getLuaTable(sol::state &lua) {
                     [this](float x0, float y0, float x1, float y1, float width) { drawLine(x0, y0, x1, y1, width); }
             )
     );
+    table.set_function("test", [this]() { test(); });
     return table;
 }
 
@@ -112,4 +128,13 @@ void Renderer::drawLine(float x0, float y0, float x1, float y1, float width) {
     glLineWidth(width);
     drawLine(x0, y0, x1, y1);
     glLineWidth(1.0f);
+}
+
+void Renderer::test() {
+    spriteShader.use();
+    texture.bind(0);
+    spriteVao.bindAndDraw(GL_TRIANGLE_STRIP);
+    glBindVertexArray(0);
+    glBindTextureUnit(0, 0);
+    glUseProgram(0);
 }

@@ -6,6 +6,9 @@ add_executable(${PROJECT_NAME}
         shader.cpp
         dynamic_draw_shader.cpp
         vertex_array.cpp
+        image.cpp
+        sprite_shader.cpp
+        texture.cpp
         renderer.cpp
         engine.cpp
         main.cpp)

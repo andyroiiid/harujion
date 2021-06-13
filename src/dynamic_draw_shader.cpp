@@ -14,7 +14,7 @@ DynamicDrawShader::DynamicDrawShader() : Shader(R"GLSL(
 layout(location = 0) in vec2 aPosition;
 layout(location = 2) in vec4 aColor;
 
-layout(location = 1) out vec4 vColor;
+layout(location = 0) out vec4 vColor;
 
 void main() {
     gl_Position = vec4(aPosition, 0, 1);
@@ -22,7 +22,7 @@ void main() {
 }
 )GLSL", R"GLSL(
 #version 450 core
-layout(location = 1) in vec4 vColor;
+layout(location = 0) in vec4 vColor;
 
 layout(location = 0) out vec4 fColor;
 

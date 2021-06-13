@@ -21,6 +21,8 @@ Physfs::Physfs() {
         PHYSFS_Version version;
         PHYSFS_getLinkedVersion(&version);
         spdlog::info("physfs {}.{}.{} init", version.major, version.minor, version.patch);
+
+        mount("assets", "/");
     }
 }
 

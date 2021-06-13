@@ -13,7 +13,6 @@ Engine &Engine::getInstance() {
 }
 
 Engine::Engine() {
-    physfs.mount("assets", "/");
     initEnv();
 }
 
