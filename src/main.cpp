@@ -1,10 +1,10 @@
 #include <GLFW/glfw3.h>
-#include <glad/gl.h>
 #include <sol/sol.hpp>
 #include <spdlog/spdlog.h>
 
 #include "physfs.h"
 #include "window.h"
+#include "renderer.h"
 
 void checkLuaResult(const sol::protected_function_result &result) {
     if (!result.valid()) {
@@ -23,8 +23,8 @@ int main() {
     lua.add_package_loader(Physfs::luaPackageLoader);
 
     sol::table haru = lua.create_table("haru");
-    float clearColor[4] = {0.4f, 0.8f, 1.0f, 1.0f};
-    haru["clearColor"] = std::ref(clearColor);
+    auto &renderer = Renderer::getInstance();
+    haru["clearColor"] = std::ref(renderer.clearColor);
 
     auto &window = Window::getInstance();
     auto result = lua.script(physfs.readFile("main.lua"), "main.lua");
@@ -43,7 +43,7 @@ int main() {
         checkLuaResult(result);
         prevTime = currTime;
 
-        glClearBufferfv(GL_COLOR, 0, clearColor);
+        renderer.clear();
 
         result = haru["draw"]();
         checkLuaResult(result);

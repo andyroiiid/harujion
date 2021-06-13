@@ -46,13 +46,6 @@ Window::Window() {
         spdlog::error("failed to load glad");
         return;
     }
-
-#define LOG_GL_STRING(name) spdlog::info(#name ": {}", glGetString(name))
-    LOG_GL_STRING(GL_VERSION);
-    LOG_GL_STRING(GL_SHADING_LANGUAGE_VERSION);
-    LOG_GL_STRING(GL_VENDOR);
-    LOG_GL_STRING(GL_RENDERER);
-#undef LOG_GL_STRING
 }
 
 Window::~Window() {
