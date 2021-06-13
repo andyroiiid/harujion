@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
-project(lua C)
+project(lua CXX)
 
-set(CMAKE_C_STANDARD 90)
+set(CMAKE_CXX_STANDARD 98)
 
 file(GLOB LUA_SRC src/*.c src/*.h)
 
