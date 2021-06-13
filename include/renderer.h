@@ -10,6 +10,7 @@
 #include "non_copyable.h"
 #include "window.h"
 #include "basic_shader.h"
+#include "vertex_array.h"
 
 class Renderer : NonCopyable {
 public:
@@ -26,15 +27,11 @@ public:
 private:
     Renderer();
 
-    ~Renderer();
-
     Window &window = Window::getInstance();
     BasicShader &shader = BasicShader::getInstance();
 
     float clearColor[4] = {0.2f, 0.2f, 0.2f, 1.0f};
-
-    GLuint vbo = 0;
-    GLuint vao = 0;
+    VertexArray vao;
 };
 
 #endif //HARUJION_RENDERER_H

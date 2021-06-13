@@ -5,6 +5,7 @@ add_executable(${PROJECT_NAME}
         window.cpp
         shader.cpp
         basic_shader.cpp
+        vertex_array.cpp
         renderer.cpp
         engine.cpp
         main.cpp)

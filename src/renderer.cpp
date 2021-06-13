@@ -7,8 +7,6 @@
 #include <spdlog/spdlog.h>
 #include <sol/sol.hpp>
 
-#include "vertex.h"
-
 Renderer &Renderer::getInstance() {
     static Renderer instance;
     return instance;
@@ -22,34 +20,14 @@ Renderer::Renderer() {
     LOG_GL_STRING(GL_RENDERER);
 #undef LOG_GL_STRING
 
-    static const Vertex vertices[] = {
-            {glm::vec2{-0.5f, -0.5f}, glm::vec2{0.0f, 0.0f}, glm::vec4{1.0f, 0.0f, 0.0f, 1.0f}},
-            {glm::vec2{0.5f, -0.5f},  glm::vec2{1.0f, 0.0f}, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f}},
-            {glm::vec2{0.0f, 0.5f},   glm::vec2{0.5f, 1.0f}, glm::vec4{0.0f, 0.0f, 1.0f, 1.0f}}
-    };
-
-    glCreateBuffers(1, &vbo);
-    glNamedBufferData(vbo, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glCreateVertexArrays(1, &vao);
-    glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(Vertex));
-
-    glEnableVertexArrayAttrib(vao, 0);
-    glVertexArrayAttribBinding(vao, 0, 0);
-    glVertexArrayAttribFormat(vao, 0, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, aPosition));
-
-    glEnableVertexArrayAttrib(vao, 1);
-    glVertexArrayAttribBinding(vao, 1, 0);
-    glVertexArrayAttribFormat(vao, 1, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, aTexCoord));
-
-    glEnableVertexArrayAttrib(vao, 2);
-    glVertexArrayAttribBinding(vao, 2, 0);
-    glVertexArrayAttribFormat(vao, 2, 4, GL_FLOAT, GL_FALSE, offsetof(Vertex, aColor));
-}
-
-Renderer::~Renderer() {
-    glDeleteBuffers(1, &vbo);
-    glDeleteVertexArrays(1, &vao);
+    vao.setData(
+            {
+                    {glm::vec2{-0.5f, -0.5f}, glm::vec2{0.0f, 0.0f}, glm::vec4{1.0f, 0.0f, 0.0f, 1.0f}},
+                    {glm::vec2{0.5f, -0.5f},  glm::vec2{1.0f, 0.0f}, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f}},
+                    {glm::vec2{0.0f, 0.5f},   glm::vec2{0.5f, 1.0f}, glm::vec4{0.0f, 0.0f, 1.0f, 1.0f}}
+            },
+            GL_STATIC_DRAW
+    );
 }
 
 void Renderer::update() {
@@ -64,8 +42,7 @@ void Renderer::clear() {
 
 void Renderer::test() {
     shader.use();
-    glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+    vao.bindAndDraw();
     glBindVertexArray(0);
     glUseProgram(0);
 }
