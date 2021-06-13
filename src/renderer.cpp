@@ -6,6 +6,7 @@
 
 #include <glad/gl.h>
 #include <spdlog/spdlog.h>
+#include <sol/sol.hpp>
 
 Renderer &Renderer::getInstance() {
     static Renderer instance;
@@ -23,4 +24,10 @@ Renderer::Renderer() {
 
 void Renderer::clear() {
     glClearBufferfv(GL_COLOR, 0, clearColor);
+}
+
+sol::table Renderer::getLuaTable(sol::state &lua) {
+    sol::table table = lua.create_table();
+    table["clearColor"] = std::ref(clearColor);
+    return table;
 }

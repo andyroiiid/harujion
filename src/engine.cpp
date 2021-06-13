@@ -22,7 +22,7 @@ void Engine::initEnv() {
     lua.add_package_loader(Physfs::luaPackageLoader);
 
     haru = lua.create_table("haru");
-    haru["clearColor"] = std::ref(renderer.clearColor);
+    haru["renderer"] = renderer.getLuaTable(lua);
     haru.set_function("setTitle", [this](const char *title) { window.setTitle(title); });
 }
 
