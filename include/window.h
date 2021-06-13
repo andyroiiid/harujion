@@ -17,6 +17,8 @@ public:
 
     void swapBuffers();
 
+    void getFramebufferSize(int *w, int *h);
+
     void setTitle(const char *title);
 
 private:

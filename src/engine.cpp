@@ -58,6 +58,7 @@ void Engine::mainLoop() {
 void Engine::update(float deltaTime) {
     glfwPollEvents();
     checkLua(haru["update"](deltaTime));
+    renderer.update();
 }
 
 void Engine::draw() {

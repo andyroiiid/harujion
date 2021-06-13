@@ -3,6 +3,8 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(${PROJECT_NAME}
         physfs.cpp
         window.cpp
+        shader.cpp
+        basic_shader.cpp
         renderer.cpp
         engine.cpp
         main.cpp)

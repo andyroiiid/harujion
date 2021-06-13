@@ -61,6 +61,10 @@ void Window::swapBuffers() {
     glfwSwapBuffers(window);
 }
 
+void Window::getFramebufferSize(int *w, int *h) {
+    glfwGetFramebufferSize(window, w, h);
+}
+
 void Window::setTitle(const char *title) {
     glfwSetWindowTitle(window, title);
 }
