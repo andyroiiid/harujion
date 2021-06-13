@@ -15,9 +15,9 @@ public:
 
     bool shouldClose();
 
-    void pollEvents();
-
     void swapBuffers();
+
+    void setTitle(const char *title);
 
 private:
     Window();

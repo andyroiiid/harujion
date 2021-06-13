@@ -57,10 +57,10 @@ bool Window::shouldClose() {
     return glfwWindowShouldClose(window);
 }
 
-void Window::pollEvents() { // NOLINT(readability-convert-member-functions-to-static)
-    glfwPollEvents();
-}
-
 void Window::swapBuffers() {
     glfwSwapBuffers(window);
+}
+
+void Window::setTitle(const char *title) {
+    glfwSetWindowTitle(window, title);
 }
