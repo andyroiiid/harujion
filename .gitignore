@@ -1,0 +1,12 @@
+# CLion
+/.idea
+/cmake-build-*
+
+# Dependencies
+/dependencies/glfw
+/dependencies/glm
+/dependencies/physfs
+/dependencies/spdlog
+
+# Assets
+/Assets
