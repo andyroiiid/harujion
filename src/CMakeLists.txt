@@ -4,7 +4,7 @@ add_executable(${PROJECT_NAME}
         physfs.cpp
         window.cpp
         shader.cpp
-        basic_shader.cpp
+        dynamic_draw_shader.cpp
         vertex_array.cpp
         renderer.cpp
         engine.cpp

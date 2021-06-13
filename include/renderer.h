@@ -9,7 +9,7 @@
 
 #include "non_copyable.h"
 #include "window.h"
-#include "basic_shader.h"
+#include "dynamic_draw_shader.h"
 #include "vertex_array.h"
 
 class Renderer : NonCopyable {
@@ -44,12 +44,12 @@ private:
     void dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode);
 
     Window &window = Window::getInstance();
-    BasicShader &shader = BasicShader::getInstance();
+    DynamicDrawShader &dynamicDrawShader = DynamicDrawShader::getInstance();
 
     glm::vec4 clearColor = {0.2f, 0.2f, 0.2f, 1.0f};
     glm::vec4 drawColor = {1.0f, 1.0f, 1.0f, 1.0f};
 
-    VertexArray vao;
+    VertexArray dynamicDrawVao;
 };
 
 #endif //HARUJION_RENDERER_H

@@ -74,9 +74,9 @@ void Renderer::setDrawColor(float r, float g, float b, float a) {
 }
 
 void Renderer::dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode) {
-    shader.use();
-    vao.setData(vertices, GL_DYNAMIC_DRAW);
-    vao.bindAndDraw(mode);
+    dynamicDrawShader.use();
+    dynamicDrawVao.setData(vertices, GL_DYNAMIC_DRAW);
+    dynamicDrawVao.bindAndDraw(mode);
     glBindVertexArray(0);
     glUseProgram(0);
 }
