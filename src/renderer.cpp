@@ -40,6 +40,13 @@ void Renderer::clear() {
     glClearBufferfv(GL_COLOR, 0, clearColor);
 }
 
+void Renderer::setClearColor(float r, float g, float b, float a) {
+    clearColor[0] = r;
+    clearColor[1] = g;
+    clearColor[2] = b;
+    clearColor[3] = a;
+}
+
 void Renderer::test() {
     shader.use();
     vao.bindAndDraw();
@@ -49,7 +56,7 @@ void Renderer::test() {
 
 sol::table Renderer::getLuaTable(sol::state &lua) {
     sol::table table = lua.create_table();
-    table["clearColor"] = std::ref(clearColor);
+    table.set_function("setClearColor", [this](float r, float g, float b, float a) { setClearColor(r, g, b, a); });
     table.set_function("test", [this]() { test(); });
     return table;
 }
