@@ -9,6 +9,7 @@
 
 #include "non_copyable.h"
 #include "window.h"
+#include "shader_globals.h"
 #include "dynamic_draw_shader.h"
 #include "sprite_shader.h"
 #include "vertex_array.h"
@@ -48,6 +49,7 @@ private:
     void dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode);
 
     Window &window = Window::getInstance();
+    ShaderGlobals &shaderGlobals = ShaderGlobals::getInstance();
     DynamicDrawShader &dynamicDrawShader = DynamicDrawShader::getInstance();
     SpriteShader &spriteShader = SpriteShader::getInstance();
 

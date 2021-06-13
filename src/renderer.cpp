@@ -26,10 +26,10 @@ Renderer::Renderer() {
 
     spriteVao.setData(
             {
-                    {glm::vec2{-0.5f, -0.5f}, glm::vec2{0.0f, 0.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
-                    {glm::vec2{0.5f, -0.5f},  glm::vec2{1.0f, 0.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
-                    {glm::vec2{-0.5f, 0.5f},  glm::vec2{0.0f, 1.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
-                    {glm::vec2{0.5f, 0.5f},   glm::vec2{1.0f, 1.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}}
+                    {glm::vec2{0.0f, 0.0f}, glm::vec2{0.0f, 0.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
+                    {glm::vec2{1.0f, 0.0f}, glm::vec2{1.0f, 0.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
+                    {glm::vec2{0.0f, 1.0f}, glm::vec2{0.0f, 1.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
+                    {glm::vec2{1.0f, 1.0f}, glm::vec2{1.0f, 1.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}}
             },
             GL_STATIC_DRAW
     );
@@ -38,9 +38,14 @@ Renderer::Renderer() {
 }
 
 void Renderer::update() {
-    int w = 0, h = 0;
-    window.getFramebufferSize(&w, &h);
-    glViewport(0, 0, w, h);
+    int width = 0, height = 0;
+    window.getFramebufferSize(&width, &height);
+    glViewport(0, 0, width, height);
+
+    float screenRatio = static_cast<float>(width) / static_cast<float>(height);
+    float cameraHalfHeight = 1.0f;
+    float cameraHalfWidth = screenRatio * cameraHalfHeight;
+    shaderGlobals.setMatrix(glm::ortho(-cameraHalfWidth, cameraHalfWidth, -cameraHalfHeight, cameraHalfHeight));
 }
 
 void Renderer::clear() {
@@ -132,6 +137,15 @@ void Renderer::drawLine(float x0, float y0, float x1, float y1, float width) {
 
 void Renderer::test() {
     spriteShader.use();
+
+    spriteShader.setTexturePixelSize({1200, 1200});
+    spriteShader.setPixelRect({0, 0, 600, 600});
+    spriteShader.setPixelPivot({300, 300});
+    spriteShader.setPixelsPerUnit(600);
+    spriteShader.setPosition(0, 0);
+    spriteShader.setRotation(0);
+    spriteShader.setFlip(false, false);
+
     texture->bind(0);
     spriteVao.bindAndDraw(GL_TRIANGLE_STRIP);
     glBindVertexArray(0);

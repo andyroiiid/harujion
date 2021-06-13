@@ -16,8 +16,12 @@ layout(location = 2) in vec4 aColor;
 
 layout(location = 0) out vec4 vColor;
 
+layout(std140, binding = 0) uniform ShaderGlobalData {
+    mat4 uMatrix;
+};
+
 void main() {
-    gl_Position = vec4(aPosition, 0, 1);
+    gl_Position = uMatrix * vec4(aPosition, 0, 1);
     vColor = aColor;
 }
 )GLSL", R"GLSL(

@@ -4,6 +4,8 @@
 
 #include "sprite_shader.h"
 
+#include <glm/gtc/type_ptr.hpp>
+
 SpriteShader &SpriteShader::getInstance() {
     static SpriteShader instance;
     return instance;
@@ -18,9 +20,47 @@ layout(location = 2) in vec4 aColor;
 layout(location = 0) out vec2 vTexCoord;
 layout(location = 1) out vec4 vColor;
 
+layout(location = 0) uniform ivec2 uTexturePixelSize;
+layout(location = 1) uniform ivec4 uPixelRect;
+layout(location = 2) uniform ivec2 uPixelPivot;
+layout(location = 3) uniform int uPixelsPerUnit;
+layout(location = 4) uniform vec2 uPosition;
+layout(location = 5) uniform float uRotation;
+layout(location = 6) uniform bvec2 uFlip;
+
+layout(std140, binding = 0) uniform ShaderGlobalData {
+    mat4 uMatrix;
+};
+
+vec2 flippedTexCoord(vec2 texCoord) {
+    return vec2(
+        uFlip.x ? 1.0 - texCoord.x : texCoord.x,
+        uFlip.y ? 1.0 - texCoord.y : texCoord.y
+    );
+}
+
+ivec2 flippedPixelPivot(ivec2 pixelSize, ivec2 pixelPivot) {
+    return ivec2(
+        uFlip.x ? pixelSize.x - pixelPivot.x : pixelPivot.x,
+        uFlip.y ? pixelSize.y - pixelPivot.y : pixelPivot.y
+    );
+}
+
+vec2 rotate(vec2 pos, float angle) {
+    return vec2(
+        cos(angle) * pos.x - sin(angle) * pos.y,
+        sin(angle) * pos.x + cos(angle) * pos.y
+    );
+}
+
 void main() {
-    gl_Position = vec4(aPosition, 0, 1);
-    vTexCoord = aTexCoord;
+    ivec2 pixelSize = uPixelRect.zw;
+    vec2 pixelPos = aPosition * pixelSize - flippedPixelPivot(pixelSize, uPixelPivot);
+    vec2 rotatedPos = rotate(pixelPos / uPixelsPerUnit, uRotation);
+    gl_Position = uMatrix * vec4(uPosition + rotatedPos, 0, 1);
+    vec2 offset = vec2(uPixelRect.xy) / uTexturePixelSize;
+    vec2 size = vec2(pixelSize) / uTexturePixelSize;
+    vTexCoord = offset + size * flippedTexCoord(aTexCoord);
     vColor = aColor;
 }
 )GLSL", R"GLSL(
@@ -36,4 +76,39 @@ void main() {
     fColor = texture(uTexture, vTexCoord) * vColor;
 }
 )GLSL") {
+    texturePixelSizeLocation = glGetUniformLocation(program, "uTexturePixelSize");
+    pixelRectLocation = glGetUniformLocation(program, "uPixelRect");
+    pixelPivotLocation = glGetUniformLocation(program, "uPixelPivot");
+    pixelsPerUnitLocation = glGetUniformLocation(program, "uPixelsPerUnit");
+    positionLocation = glGetUniformLocation(program, "uPosition");
+    rotationLocation = glGetUniformLocation(program, "uRotation");
+    flipLocation = glGetUniformLocation(program, "uFlip");
+}
+
+void SpriteShader::setTexturePixelSize(const glm::ivec2 &size) {
+    glProgramUniform2iv(program, texturePixelSizeLocation, 1, glm::value_ptr(size));
+}
+
+void SpriteShader::setPixelRect(const glm::ivec4 &rect) {
+    glProgramUniform4iv(program, pixelRectLocation, 1, glm::value_ptr(rect));
+}
+
+void SpriteShader::setPixelPivot(const glm::ivec2 &pivot) {
+    glProgramUniform2iv(program, pixelPivotLocation, 1, glm::value_ptr(pivot));
+}
+
+void SpriteShader::setPixelsPerUnit(int pixelsPerUnit) {
+    glProgramUniform1i(program, pixelsPerUnitLocation, pixelsPerUnit);
+}
+
+void SpriteShader::setPosition(float x, float y) {
+    glProgramUniform2f(program, positionLocation, x, y);
+}
+
+void SpriteShader::setRotation(float rotation) {
+    glProgramUniform1f(program, rotationLocation, rotation);
+}
+
+void SpriteShader::setFlip(bool flipX, bool flipY) {
+    glProgramUniform2i(program, flipLocation, flipX, flipY);
 }
