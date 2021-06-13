@@ -34,7 +34,7 @@ Renderer::Renderer() {
             GL_STATIC_DRAW
     );
 
-    texture.loadFromFile("test.png", true);
+    texture = Texture::load("test.png", true);
 }
 
 void Renderer::update() {
@@ -132,7 +132,7 @@ void Renderer::drawLine(float x0, float y0, float x1, float y1, float width) {
 
 void Renderer::test() {
     spriteShader.use();
-    texture.bind(0);
+    texture->bind(0);
     spriteVao.bindAndDraw(GL_TRIANGLE_STRIP);
     glBindVertexArray(0);
     glBindTextureUnit(0, 0);

@@ -57,7 +57,7 @@ private:
     VertexArray dynamicDrawVao;
     VertexArray spriteVao;
 
-    Texture texture;
+    std::shared_ptr<Texture> texture;
 };
 
 #endif //HARUJION_RENDERER_H

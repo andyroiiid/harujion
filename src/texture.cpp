@@ -5,14 +5,9 @@
 #include "texture.h"
 
 #include "image.h"
+#include "texture_loader.h"
 
-Texture::~Texture() {
-    release();
-}
-
-void Texture::loadFromFile(const std::string &filename, bool filter, bool clamp, bool mipmap) {
-    release();
-
+Texture::Texture(const std::string &filename, bool filter, bool clamp, bool mipmap) {
     Image image(filename);
 
     _size = image.size();
@@ -47,10 +42,14 @@ void Texture::loadFromFile(const std::string &filename, bool filter, bool clamp,
     }
 }
 
+Texture::~Texture() {
+    glDeleteTextures(1, &texture);
+}
+
 void Texture::bind(GLuint unit) { // NOLINT(readability-make-member-function-const)
     glBindTextureUnit(unit, texture);
 }
 
-void Texture::release() {
-    glDeleteTextures(1, &texture);
+std::shared_ptr<Texture> Texture::load(const std::string &filename, bool filter, bool clamp, bool mipmap) {
+    return TextureLoader::getInstance().load(filename, filter, clamp, mipmap);
 }

@@ -9,6 +9,7 @@ add_executable(${PROJECT_NAME}
         image.cpp
         sprite_shader.cpp
         texture.cpp
+        texture_loader.cpp
         renderer.cpp
         engine.cpp
         main.cpp)
