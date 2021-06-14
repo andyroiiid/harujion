@@ -4,6 +4,7 @@ a lua 2d game engine (or framework?)
 
 ## Dependencies
 
+- [fmod](https://fmod.com/) (headers and prebuilt binaries included, 64bit msvc only)
 - [glad](https://github.com/Dav1dde/glad/tree/glad2) (version 2, source included)
 - [glfw](https://github.com/glfw/glfw)
 - [glm](https://github.com/g-truc/glm)
@@ -42,6 +43,7 @@ a lua 2d game engine (or framework?)
      - src
      - ...
 3. You should be able to build the project with cmake.
+4. The `fmod.dll` and `fmodstudio.dll` can be found in `dependencies/fmod/lib`.
 
 > Here is a link to [the CMake official tutorial.](https://cmake.org/cmake/help/latest/guide/tutorial/index.html#build-and-test)
 
