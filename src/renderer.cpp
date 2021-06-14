@@ -77,6 +77,7 @@ sol::table Renderer::getLuaTable(sol::state &lua) {
     sol::usertype<Sprite> sprite = table.new_usertype<Sprite>(
             "Sprite",
             sol::constructors<Sprite(const std::string &, int)>());
+    sprite["setFlip"] = &Sprite::setFlip;
     sprite["draw"] = &Sprite::draw;
 
     return table;

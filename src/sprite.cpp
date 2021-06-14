@@ -11,6 +11,11 @@ Sprite::Sprite(const std::string &filename, int pixelsPerUnit) : pixelsPerUnit(p
     pixelPivot = textureSize / 2;
 }
 
+void Sprite::setFlip(bool x, bool y) {
+    flipX = x;
+    flipY = y;
+}
+
 void Sprite::draw(float x, float y, float rotation) {
     if (!texture) return;
 

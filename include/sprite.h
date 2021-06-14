@@ -14,6 +14,8 @@ class Sprite : NonCopyable {
 public:
     Sprite(const std::string &filename, int pixelsPerUnit);
 
+    void setFlip(bool x, bool y);
+
     void draw(float x, float y, float rotation);
 
 private:

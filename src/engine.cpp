@@ -17,7 +17,7 @@ Engine::Engine() {
 }
 
 void Engine::initEnv() {
-    lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::math);
+    lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string, sol::lib::math, sol::lib::table);
     lua.add_package_loader(Physfs::luaPackageLoader);
 
     haru = lua.create_table("haru");
