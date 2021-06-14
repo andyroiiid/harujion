@@ -16,4 +16,31 @@ a lua 2d game engine (or framework?)
 
 ## Build Instructions
 
-> TODO
+1. Download the release source code from [glfw](https://github.com/glfw/glfw), [glm](https://github.com/g-truc/glm), [physfs](https://www.icculus.org/physfs/), [spdlog](https://github.com/gabime/spdlog).
+2. Extract them to the dependencies folder.
+   - harujion
+     - assets
+     - dependencies
+       - glad
+       - **glfw**
+         - CMakeLists.txt
+         - ...
+       - **glm**
+         - CMakeLists.txt
+         - ...
+       - imgui
+       - lua
+       - **physfs**
+         - CMakeLists.txt
+         - ...
+       - sol2
+       - **spdlog**
+         - CMakeLists.txt
+         - ...
+       - stb
+     - include
+     - src
+     - ...
+3. You should be able to build the project with cmake.
+
+> Here is a link to [the CMake official tutorial.](https://cmake.org/cmake/help/latest/guide/tutorial/index.html#build-and-test)
