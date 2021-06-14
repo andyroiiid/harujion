@@ -21,8 +21,8 @@ void Engine::initEnv() {
     lua.add_package_loader(Physfs::luaPackageLoader);
 
     haru = lua.create_table("haru");
+    haru["window"] = window.getLuaTable(lua);
     haru["renderer"] = renderer.getLuaTable(lua);
-    haru.set_function("setTitle", [this](const char *title) { window.setTitle(title); });
 }
 
 void Engine::checkLua(const sol::protected_function_result &result, bool abortOnError) {

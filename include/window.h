@@ -5,6 +5,8 @@
 #ifndef HARUJION_WINDOW_H
 #define HARUJION_WINDOW_H
 
+#include <sol/forward.hpp>
+
 #include "non_copyable.h"
 
 struct GLFWwindow;
@@ -19,7 +21,11 @@ public:
 
     void getFramebufferSize(int *w, int *h);
 
+    sol::table getLuaTable(sol::state &lua);
+
     void setTitle(const char *title);
+
+    bool isKeyPressed(int key);
 
 private:
     Window();

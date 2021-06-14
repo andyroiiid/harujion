@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
 #include <spdlog/spdlog.h>
+#include <sol/sol.hpp>
 
 Window &Window::getInstance() {
     static Window instance;
@@ -65,6 +66,23 @@ void Window::getFramebufferSize(int *w, int *h) {
     glfwGetFramebufferSize(window, w, h);
 }
 
+sol::table Window::getLuaTable(sol::state &lua) {
+    sol::table table = lua.create_table();
+    table.set_function(
+            "setTitle",
+            [this](const char *title) { setTitle(title); }
+    );
+    table.set_function(
+            "isKeyPressed",
+            [this](int key) { return isKeyPressed(key); }
+    );
+    return table;
+}
+
 void Window::setTitle(const char *title) {
     glfwSetWindowTitle(window, title);
+}
+
+bool Window::isKeyPressed(int key) {
+    return glfwGetKey(window, key);
 }
