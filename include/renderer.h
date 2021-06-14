@@ -11,9 +11,8 @@
 #include "window.h"
 #include "shader_globals.h"
 #include "dynamic_draw_shader.h"
-#include "sprite_shader.h"
 #include "vertex_array.h"
-#include "texture.h"
+#include "sprite.h"
 
 class Renderer : NonCopyable {
 public:
@@ -51,15 +50,13 @@ private:
     Window &window = Window::getInstance();
     ShaderGlobals &shaderGlobals = ShaderGlobals::getInstance();
     DynamicDrawShader &dynamicDrawShader = DynamicDrawShader::getInstance();
-    SpriteShader &spriteShader = SpriteShader::getInstance();
 
     glm::vec4 clearColor = {0.2f, 0.2f, 0.2f, 1.0f};
     glm::vec4 drawColor = {1.0f, 1.0f, 1.0f, 1.0f};
 
     VertexArray dynamicDrawVao;
-    VertexArray spriteVao;
 
-    std::shared_ptr<Texture> texture;
+    Sprite sprite;
 };
 
 #endif //HARUJION_RENDERER_H

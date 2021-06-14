@@ -16,7 +16,7 @@ public:
 
     ~Image();
 
-    [[nodiscard]] inline glm::ivec2 size() const { return _size; }
+    [[nodiscard]] inline const glm::ivec2 &size() const { return _size; }
 
     [[nodiscard]] inline const unsigned char *data() const { return _data; }
 

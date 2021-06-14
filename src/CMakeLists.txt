@@ -9,6 +9,8 @@ add_executable(${PROJECT_NAME}
         vertex_array.cpp
         image.cpp
         sprite_shader.cpp
+        sprite_vertices.cpp
+        sprite.cpp
         texture.cpp
         texture_loader.cpp
         renderer.cpp

@@ -23,18 +23,6 @@ Renderer::Renderer() {
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    spriteVao.setData(
-            {
-                    {glm::vec2{0.0f, 0.0f}, glm::vec2{0.0f, 0.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
-                    {glm::vec2{1.0f, 0.0f}, glm::vec2{1.0f, 0.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
-                    {glm::vec2{0.0f, 1.0f}, glm::vec2{0.0f, 1.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}},
-                    {glm::vec2{1.0f, 1.0f}, glm::vec2{1.0f, 1.0f}, glm::vec4{1.0f, 1.0f, 1.0f, 1.0f}}
-            },
-            GL_STATIC_DRAW
-    );
-
-    texture = Texture::load("test.png", true);
 }
 
 void Renderer::update() {
@@ -136,19 +124,5 @@ void Renderer::drawLine(float x0, float y0, float x1, float y1, float width) {
 }
 
 void Renderer::test() {
-    spriteShader.use();
-
-    spriteShader.setTexturePixelSize({1200, 1200});
-    spriteShader.setPixelRect({0, 0, 600, 600});
-    spriteShader.setPixelPivot({300, 300});
-    spriteShader.setPixelsPerUnit(600);
-    spriteShader.setPosition(0, 0);
-    spriteShader.setRotation(0);
-    spriteShader.setFlip(false, false);
-
-    texture->bind(0);
-    spriteVao.bindAndDraw(GL_TRIANGLE_STRIP);
-    glBindVertexArray(0);
-    glBindTextureUnit(0, 0);
-    glUseProgram(0);
+    sprite.draw(0, 0, 0);
 }

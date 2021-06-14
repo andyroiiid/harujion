@@ -20,7 +20,7 @@ public:
 
     void bind(GLuint unit);
 
-    [[nodiscard]] inline glm::ivec2 size() const { return _size; }
+    [[nodiscard]] inline const glm::ivec2 &size() const { return _size; }
 
     static std::shared_ptr<Texture> load(const std::string &filename,
                                          bool filter = false, bool clamp = false, bool mipmap = false);
