@@ -6,6 +6,7 @@ function haru.init()
     haru.renderer.setCameraHalfHeight(5.0)
 
     background = haru.renderer.Sprite.new("background-day.png", 32)
+    message = haru.renderer.Sprite.new("message.png", 32)
 
     soundEvents = {
         die = haru.audio.getEventDescription("event:/die"),
@@ -25,6 +26,7 @@ function haru.shutdown()
 end
 
 function reset()
+    waiting = true
     prevPressed = false
     prevOpening = false
     scores = 0
@@ -36,10 +38,19 @@ end
 function haru.update(deltaTime)
     local pressed = haru.window.isKeyPressed(32)
     if pressed and not prevPressed then
-        haru.audio.fireOneShotEvent(soundEvents.wing)
-        player:jump()
+        if waiting then
+            haru.audio.fireOneShotEvent(soundEvents.swoosh)
+            waiting = false
+        else
+            haru.audio.fireOneShotEvent(soundEvents.wing)
+            player:jump()
+        end
     end
     prevPressed = pressed
+
+    if waiting then
+        return
+    end
 
     pipes:update(deltaTime)
     player:update(deltaTime)
@@ -72,6 +83,11 @@ function haru.draw()
     background:draw(9.0, 0.0, 0.0)
     background:draw(0.0, 0.0, 0.0)
     background:draw(-9.0, 0.0, 0.0)
-    pipes:draw()
-    player:draw();
+
+    if waiting then
+        message:draw(0.0, 0.0, 0.0)
+    else
+        pipes:draw()
+        player:draw()
+    end
 end
