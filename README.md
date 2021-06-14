@@ -17,7 +17,7 @@ a lua 2d game engine (or framework?)
 ## Build Instructions
 
 1. Download the release source code from [glfw](https://github.com/glfw/glfw), [glm](https://github.com/g-truc/glm), [physfs](https://www.icculus.org/physfs/), [spdlog](https://github.com/gabime/spdlog).
-2. Extract them to the dependencies folder.
+2. Extract them to the `dependencies` folder.
    - harujion
      - assets
      - dependencies
@@ -44,3 +44,9 @@ a lua 2d game engine (or framework?)
 3. You should be able to build the project with cmake.
 
 > Here is a link to [the CMake official tutorial.](https://cmake.org/cmake/help/latest/guide/tutorial/index.html#build-and-test)
+
+## Sample Game
+
+A sample game (flappy bird) is included in the `assets` folder.
+
+Run the engine excutable from the project root directory to play the game.
