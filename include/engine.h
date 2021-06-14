@@ -11,6 +11,7 @@
 #include "physfs.h"
 #include "window.h"
 #include "renderer.h"
+#include "fmod_audio.h"
 
 class Engine : NonCopyable {
 public:
@@ -34,6 +35,7 @@ private:
     Physfs &physfs = Physfs::getInstance();
     Window &window = Window::getInstance();
     Renderer &renderer = Renderer::getInstance();
+    FmodAudio &fmodAudio = FmodAudio::getInstance();
 
     sol::state lua;
     sol::table haru;

@@ -23,6 +23,7 @@ void Engine::initEnv() {
     haru = lua.create_table("haru");
     haru["window"] = window.getLuaTable(lua);
     haru["renderer"] = renderer.getLuaTable(lua);
+    haru["audio"] = fmodAudio.getLuaTable(lua);
 }
 
 void Engine::checkLua(const sol::protected_function_result &result, bool abortOnError) {
@@ -55,6 +56,7 @@ void Engine::mainLoop() {
 }
 
 void Engine::update(float deltaTime) {
+    fmodAudio.update();
     glfwPollEvents();
     checkLua(haru["update"](deltaTime));
     renderer.update();

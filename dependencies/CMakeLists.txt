@@ -1,5 +1,7 @@
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
+add_subdirectory(fmod EXCLUDE_FROM_ALL)
+
 add_subdirectory(glad EXCLUDE_FROM_ALL)
 
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)

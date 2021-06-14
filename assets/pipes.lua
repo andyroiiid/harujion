@@ -1,6 +1,6 @@
-Object = require("classic.lua")
+local Object = require("classic.lua")
 
-Pipes = Object:extend()
+local Pipes = Object:extend()
 
 function getRandomOpeningHeight()
     return math.random() * 5.0 - 2.5
@@ -61,4 +61,4 @@ function Pipes:draw()
     end
 end
 
-pipes = Pipes()
+return Pipes

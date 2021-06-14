@@ -1,6 +1,6 @@
-Object = require("classic.lua")
+local Object = require("classic.lua")
 
-Player = Object:extend()
+local Player = Object:extend()
 
 function Player:new()
     self.sprites = {
@@ -42,4 +42,4 @@ function Player:draw()
     self.sprites[self.sprite_idx]:draw(0.0, self.y, self.v * 0.1)
 end
 
-player = Player()
+return Player
