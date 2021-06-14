@@ -31,7 +31,6 @@ void Renderer::update() {
     glViewport(0, 0, width, height);
 
     float screenRatio = static_cast<float>(width) / static_cast<float>(height);
-    float cameraHalfHeight = 1.0f;
     float cameraHalfWidth = screenRatio * cameraHalfHeight;
     shaderGlobals.setMatrix(glm::ortho(-cameraHalfWidth, cameraHalfWidth, -cameraHalfHeight, cameraHalfHeight));
 }
@@ -55,6 +54,10 @@ sol::table Renderer::getLuaTable(sol::state &lua) {
                     [this](float r, float g, float b) { setDrawColor(r, g, b); },
                     [this](float r, float g, float b, float a) { setDrawColor(r, g, b, a); }
             )
+    );
+    table.set_function(
+            "setCameraHalfHeight",
+            [this](float halfHeight) { setCameraHalfHeight(halfHeight); }
     );
     table.set_function(
             "drawPoint",
@@ -85,6 +88,10 @@ void Renderer::setClearColor(float r, float g, float b, float a) {
 
 void Renderer::setDrawColor(float r, float g, float b, float a) {
     drawColor = {r, g, b, a};
+}
+
+void Renderer::setCameraHalfHeight(float halfHeight) {
+    cameraHalfHeight = halfHeight;
 }
 
 void Renderer::dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode) {

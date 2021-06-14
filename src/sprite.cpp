@@ -5,7 +5,7 @@
 #include "sprite.h"
 
 Sprite::Sprite(const std::string &filename, int pixelsPerUnit) : pixelsPerUnit(pixelsPerUnit) {
-    texture = Texture::load(filename, true);
+    texture = Texture::load(filename);
     glm::ivec2 textureSize = texture->size();
     pixelRect = {0, 0, textureSize.x, textureSize.y};
     pixelPivot = textureSize / 2;

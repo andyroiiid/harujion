@@ -28,6 +28,8 @@ public:
 
     void setDrawColor(float r, float g, float b, float a = 1.0f);
 
+    void setCameraHalfHeight(float halfHeight);
+
     void drawPoint(float x, float y);
 
     void drawPoint(float x, float y, float size);
@@ -51,6 +53,7 @@ private:
 
     glm::vec4 clearColor = {0.2f, 0.2f, 0.2f, 1.0f};
     glm::vec4 drawColor = {1.0f, 1.0f, 1.0f, 1.0f};
+    float cameraHalfHeight = 1.0f;
 
     VertexArray dynamicDrawVao;
 };
