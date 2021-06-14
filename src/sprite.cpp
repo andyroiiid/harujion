@@ -4,11 +4,11 @@
 
 #include "sprite.h"
 
-Sprite::Sprite() {
-    texture = Texture::load("test.png", true);
-    pixelRect = {0, 0, 600, 600};
-    pixelPivot = {300, 300};
-    pixelsPerUnit = 600;
+Sprite::Sprite(const std::string &filename, int pixelsPerUnit) : pixelsPerUnit(pixelsPerUnit) {
+    texture = Texture::load(filename, true);
+    glm::ivec2 textureSize = texture->size();
+    pixelRect = {0, 0, textureSize.x, textureSize.y};
+    pixelPivot = textureSize / 2;
 }
 
 void Sprite::draw(float x, float y, float rotation) {

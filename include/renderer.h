@@ -36,8 +36,6 @@ public:
 
     void drawLine(float x0, float y0, float x1, float y1, float width);
 
-    void test();
-
 private:
     Renderer();
 
@@ -55,8 +53,6 @@ private:
     glm::vec4 drawColor = {1.0f, 1.0f, 1.0f, 1.0f};
 
     VertexArray dynamicDrawVao;
-
-    Sprite sprite;
 };
 
 #endif //HARUJION_RENDERER_H

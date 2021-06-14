@@ -70,7 +70,12 @@ sol::table Renderer::getLuaTable(sol::state &lua) {
                     [this](float x0, float y0, float x1, float y1, float width) { drawLine(x0, y0, x1, y1, width); }
             )
     );
-    table.set_function("test", [this]() { test(); });
+
+    sol::usertype<Sprite> sprite = table.new_usertype<Sprite>(
+            "Sprite",
+            sol::constructors<Sprite(const std::string &, int)>());
+    sprite["draw"] = &Sprite::draw;
+
     return table;
 }
 
@@ -121,8 +126,4 @@ void Renderer::drawLine(float x0, float y0, float x1, float y1, float width) {
     glLineWidth(width);
     drawLine(x0, y0, x1, y1);
     glLineWidth(1.0f);
-}
-
-void Renderer::test() {
-    sprite.draw(0, 0, 0);
 }

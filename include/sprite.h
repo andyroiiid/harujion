@@ -12,7 +12,7 @@
 
 class Sprite : NonCopyable {
 public:
-    Sprite();
+    Sprite(const std::string &filename, int pixelsPerUnit);
 
     void draw(float x, float y, float rotation);
 
