@@ -25,7 +25,10 @@ FmodAudio::FmodAudio() {
     if (system == nullptr) {
         exit(EXIT_FAILURE);
     }
-    spdlog::info("fmod version {0:08x} created", FMOD_VERSION);
+    int product = FMOD_VERSION >> 16;
+    int major = (FMOD_VERSION >> 8) & 0xFF;
+    int minor = FMOD_VERSION & 0xFF;
+    spdlog::info("fmod version {:x}.{:02x}.{:02x} created", product, major, minor);
     checkFmod(system->initialize(512, FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, nullptr),
               "failed to initialize fmod system");
     loadBank("Master.bank");
