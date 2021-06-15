@@ -9,7 +9,7 @@ a lua 2d game engine (or framework?)
 - [glfw](https://github.com/glfw/glfw)
 - [glm](https://github.com/g-truc/glm)
 - [imgui](https://github.com/ocornut/imgui) (source included but not used yet)
-- [lua](http://www.lua.org/home.html) (source included)
+- [luajit](https://luajit.org/) (headers and prebuilt binaries included, 64bit msvc only)
 - [physfs](https://www.icculus.org/physfs/)
 - [sol2](https://github.com/ThePhD/sol2) (source included)
 - [spdlog](https://github.com/gabime/spdlog)
@@ -22,6 +22,7 @@ a lua 2d game engine (or framework?)
    - harujion
      - assets
      - dependencies
+       - fmod
        - glad
        - **glfw**
          - CMakeLists.txt
@@ -30,7 +31,7 @@ a lua 2d game engine (or framework?)
          - CMakeLists.txt
          - ...
        - imgui
-       - lua
+       - luajit
        - **physfs**
          - CMakeLists.txt
          - ...
@@ -44,6 +45,7 @@ a lua 2d game engine (or framework?)
      - ...
 3. You should be able to build the project with cmake.
 4. The `fmod.dll` and `fmodstudio.dll` can be found in `dependencies/fmod/lib`.
+5. The `lua51.dll` can be found in `dependencies/luajit/lib`.
 
 > Here is a link to [the CMake official tutorial.](https://cmake.org/cmake/help/latest/guide/tutorial/index.html#build-and-test)
 
