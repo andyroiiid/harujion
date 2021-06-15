@@ -136,8 +136,8 @@ void Engine::update(float deltaTime) {
     fmodAudio.update();
     input.update();
     glfwPollEvents();
-    camera.update();
     checkLua(haru["update"](deltaTime));
+    camera.update();
 }
 
 void Engine::draw() {
