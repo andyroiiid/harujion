@@ -51,6 +51,8 @@ void Engine::bindTypes() {
     sol::usertype<Sprite> sprite = haru.new_usertype<Sprite>(
             "Sprite",
             sol::constructors<Sprite(const std::string &, int)>());
+    sprite["setPixelRect"] = &Sprite::setPixelRect;
+    sprite["setPixelPivot"] = &Sprite::setPixelPivot;
     sprite["setFlip"] = &Sprite::setFlip;
     sprite["draw"] = &Sprite::draw;
 }
