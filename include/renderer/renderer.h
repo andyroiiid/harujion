@@ -9,9 +9,9 @@
 
 #include "non_copyable.h"
 #include "window.h"
-#include "shader_globals.h"
-#include "dynamic_draw_shader.h"
-#include "vertex_array.h"
+#include "renderer/shader_globals.h"
+#include "renderer/dynamic_draw_shader.h"
+#include "renderer/vertex_array.h"
 
 class Renderer : NonCopyable {
 public:

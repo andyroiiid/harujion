@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "dynamic_draw_shader.h"
+#include "renderer/dynamic_draw_shader.h"
 
 DynamicDrawShader &DynamicDrawShader::getInstance() {
     static DynamicDrawShader instance;

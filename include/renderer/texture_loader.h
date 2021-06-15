@@ -10,7 +10,7 @@
 #include <unordered_map>
 
 #include "non_copyable.h"
-#include "texture.h"
+#include "renderer/texture.h"
 
 class TextureLoader : NonCopyable {
 public:

@@ -5,7 +5,7 @@
 #ifndef HARUJION_DYNAMIC_DRAW_SHADER_H
 #define HARUJION_DYNAMIC_DRAW_SHADER_H
 
-#include "shader.h"
+#include "renderer/shader.h"
 
 class DynamicDrawShader : public Shader {
 public:

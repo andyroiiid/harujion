@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "shader_globals.h"
+#include "renderer/shader_globals.h"
 
 #include <glm/gtc/type_ptr.hpp>
 

@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "texture_loader.h"
+#include "renderer/texture_loader.h"
 
 #include <spdlog/spdlog.h>
 

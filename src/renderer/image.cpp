@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "image.h"
+#include "renderer/image.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 

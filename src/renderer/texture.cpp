@@ -2,10 +2,10 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "texture.h"
+#include "renderer/texture.h"
 
-#include "image.h"
-#include "texture_loader.h"
+#include "renderer/image.h"
+#include "renderer/texture_loader.h"
 
 Texture::Texture(const std::string &filename, bool filter, bool clamp, bool mipmap) {
     Image image(filename);

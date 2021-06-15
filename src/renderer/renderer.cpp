@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/13/2021.
 //
 
-#include "renderer.h"
+#include "renderer/renderer.h"
 
 #include <spdlog/spdlog.h>
 #include <sol/sol.hpp>

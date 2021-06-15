@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "vertex_array.h"
+#include "renderer/vertex_array.h"
 
 VertexArray::VertexArray() {
     glCreateBuffers(1, &vbo);

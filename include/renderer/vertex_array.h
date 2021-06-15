@@ -8,7 +8,7 @@
 #include <glad/gl.h>
 
 #include "non_copyable.h"
-#include "vertex.h"
+#include "renderer/vertex.h"
 
 class VertexArray : NonCopyable {
 public:

@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "shader.h"
+#include "renderer/shader.h"
 
 #include <spdlog/spdlog.h>
 

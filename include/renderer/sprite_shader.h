@@ -8,7 +8,7 @@
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
 
-#include "shader.h"
+#include "renderer/shader.h"
 
 class SpriteShader : public Shader {
 public:

@@ -10,7 +10,7 @@
 #include "non_copyable.h"
 #include "physfs.h"
 #include "window.h"
-#include "renderer.h"
+#include "renderer/renderer.h"
 #include "fmod_audio.h"
 
 class Engine : NonCopyable {

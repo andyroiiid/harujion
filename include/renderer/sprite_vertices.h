@@ -6,7 +6,7 @@
 #define HARUJION_SPRITE_VERTICES_H
 
 #include "non_copyable.h"
-#include "vertex_array.h"
+#include "renderer/vertex_array.h"
 
 class SpriteVertices {
 public:
