@@ -36,6 +36,8 @@ public:
 
     std::tuple<float, float> mouseWorldPosition();
 
+    void setCursor(bool enable);
+
 private:
     Input();
 

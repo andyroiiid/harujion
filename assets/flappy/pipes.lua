@@ -2,41 +2,28 @@ local Object = require("classic.lua")
 
 local Pipes = Object:extend()
 
-local function getRandomOpeningHeight()
+local function generateOpening()
     return math.random() * 5.0 - 2.5
 end
 
 function Pipes:new()
-    self.sprite = haru.Sprite.new("pipe-green.png", 32)
+    self.sprite = haru.Sprite.new("flappy/pipe-green.png", 32)
     self.sprite:setPixelPivot(26, 320)
-    self:reset()
-end
-
-function Pipes:reset()
-    self.xs = {
-        10.0,
-        20.0,
-        30.0,
-        40.0
-    }
-    self.ys = {
-        getRandomOpeningHeight(),
-        getRandomOpeningHeight(),
-        getRandomOpeningHeight(),
-        getRandomOpeningHeight()
-    }
+    self.xs = {10.0, 20.0, 30.0}
+    self.ys = {generateOpening(), generateOpening(), generateOpening()}
 end
 
 function Pipes:update(deltaTime)
     for i, x in ipairs(self.xs) do
         x = x - 5.0 * deltaTime
         if x < -10.0 then
+            -- reuse old array item instead of inserting & deleting
             if i == 1 then
-                self.xs[i] = self.xs[#self.xs] + 10.0
+                self.xs[i] = self.xs[3] + 10.0
             else
                 self.xs[i] = self.xs[i - 1] + 10.0
             end
-            self.ys[i] = getRandomOpeningHeight()
+            self.ys[i] = generateOpening()
         else
             self.xs[i] = x
         end

@@ -42,6 +42,7 @@ sol::table Input::getLuaTable(sol::state &lua) {
     table.set_function("mouseButtonJustReleased", [this](int button) { return mouseButtonJustReleased(button); });
     table.set_function("mousePosition", [this]() { return mousePosition(); });
     table.set_function("mouseWorldPosition", [this]() { return mouseWorldPosition(); });
+    table.set_function("setCursor", [this](bool enable) { return setCursor(enable); });
     return table;
 }
 
@@ -75,4 +76,8 @@ std::tuple<int, int> Input::mousePosition() {
 
 std::tuple<float, float> Input::mouseWorldPosition() {
     return camera.screenToWorld(mouseX, mouseY);
+}
+
+void Input::setCursor(bool enable) {
+    glfwSetInputMode(window.window, GLFW_CURSOR, enable ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
 }

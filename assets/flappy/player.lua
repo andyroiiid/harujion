@@ -4,19 +4,15 @@ local Player = Object:extend()
 
 function Player:new()
     self.sprites = {
-        haru.Sprite.new("yellowbird-midflap.png", 32),
-        haru.Sprite.new("yellowbird-downflap.png", 32),
-        haru.Sprite.new("yellowbird-midflap.png", 32),
-        haru.Sprite.new("yellowbird-upflap.png", 32)
+        haru.Sprite.new("flappy/yellowbird-midflap.png", 32),
+        haru.Sprite.new("flappy/yellowbird-downflap.png", 32),
+        haru.Sprite.new("flappy/yellowbird-midflap.png", 32),
+        haru.Sprite.new("flappy/yellowbird-upflap.png", 32)
     }
-    self:reset()
-end
-
-function Player:reset()
-    self.sprite_idx = 1
-    self.sprite_timer = 0.0
     self.v = 0.0
     self.y = 0.0
+    self.sprite_timer = 0.0
+    self.sprite_idx = 1
 end
 
 function Player:jump()
@@ -24,9 +20,11 @@ function Player:jump()
 end
 
 function Player:update(deltaTime)
+    -- only y movement
     self.v = self.v - 10 * deltaTime
     self.y = self.y + self.v * deltaTime
 
+    -- some primitive sprite frame animation
     self.sprite_timer = self.sprite_timer + deltaTime
     if self.sprite_timer > 0.1 then
         self.sprite_timer = self.sprite_timer - 0.1
