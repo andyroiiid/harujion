@@ -88,6 +88,10 @@ void Renderer::setCameraHalfHeight(float halfHeight) {
     cameraHalfHeight = halfHeight;
 }
 
+inline Vertex Renderer::dynamicDrawVertex(float x, float y) {
+    return Vertex{glm::vec2{x, y}, glm::vec2{0.0f, 0.0f}, drawColor};
+}
+
 void Renderer::dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode) {
     dynamicDrawShader.use();
     dynamicDrawVao.setData(vertices, GL_DYNAMIC_DRAW);

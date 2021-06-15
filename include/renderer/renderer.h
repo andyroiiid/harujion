@@ -40,9 +40,7 @@ public:
 private:
     Renderer();
 
-    inline Vertex dynamicDrawVertex(float x, float y) {
-        return Vertex{glm::vec2{x, y}, glm::vec2{0.0f, 0.0f}, drawColor};
-    }
+    Vertex dynamicDrawVertex(float x, float y);
 
     void dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode);
 
