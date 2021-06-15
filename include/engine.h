@@ -22,9 +22,15 @@ public:
 private:
     Engine();
 
-    void initEnv();
+    void createBindings();
+
+    void bindModules();
+
+    void bindTypes();
 
     static void checkLua(const sol::protected_function_result &result, bool abortOnError = false);
+
+    void loadStrictLua();
 
     void loadScript(const std::string &filename);
 

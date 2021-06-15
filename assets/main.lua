@@ -1,33 +1,25 @@
 local Player = require("player.lua")
 local Pipes = require("pipes.lua")
 
-function haru.init()
-    print(jit.version)
+local background = haru.Sprite.new("background-day.png", 32)
+local message = haru.Sprite.new("message.png", 32)
 
-    haru.window.setTitle("Flappy Bird")
-    haru.renderer.setCameraHalfHeight(5.0)
+local soundEvents = {
+    die = haru.audio.getEventDescription("event:/die"),
+    hit = haru.audio.getEventDescription("event:/hit"),
+    point = haru.audio.getEventDescription("event:/point"),
+    swoosh = haru.audio.getEventDescription("event:/swoosh"),
+    wing = haru.audio.getEventDescription("event:/wing")
+}
 
-    background = haru.renderer.Sprite.new("background-day.png", 32)
-    message = haru.renderer.Sprite.new("message.png", 32)
+local player = Player()
+local pipes = Pipes()
+local waiting = true
+local prevPressed = false
+local prevOpening = false
+local scores = 0
 
-    soundEvents = {
-        die = haru.audio.getEventDescription("event:/die"),
-        hit = haru.audio.getEventDescription("event:/hit"),
-        point = haru.audio.getEventDescription("event:/point"),
-        swoosh = haru.audio.getEventDescription("event:/swoosh"),
-        wing = haru.audio.getEventDescription("event:/wing")
-    }
-
-    player = Player()
-    pipes = Pipes()
-
-    reset()
-end
-
-function haru.shutdown()
-end
-
-function reset()
+local function reset()
     waiting = true
     prevPressed = false
     prevOpening = false
@@ -35,6 +27,14 @@ function reset()
 
     pipes:reset()
     player:reset()
+end
+
+function haru.init()
+    haru.renderer.setCameraHalfHeight(5.0)
+    reset()
+end
+
+function haru.shutdown()
 end
 
 function haru.update(deltaTime)

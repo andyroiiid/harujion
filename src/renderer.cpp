@@ -73,13 +73,6 @@ sol::table Renderer::getLuaTable(sol::state &lua) {
                     [this](float x0, float y0, float x1, float y1, float width) { drawLine(x0, y0, x1, y1, width); }
             )
     );
-
-    sol::usertype<Sprite> sprite = table.new_usertype<Sprite>(
-            "Sprite",
-            sol::constructors<Sprite(const std::string &, int)>());
-    sprite["setFlip"] = &Sprite::setFlip;
-    sprite["draw"] = &Sprite::draw;
-
     return table;
 }
 

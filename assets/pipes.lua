@@ -2,12 +2,12 @@ local Object = require("classic.lua")
 
 local Pipes = Object:extend()
 
-function getRandomOpeningHeight()
+local function getRandomOpeningHeight()
     return math.random() * 5.0 - 2.5
 end
 
 function Pipes:new()
-    self.sprite = haru.renderer.Sprite.new("pipe-green.png", 32)
+    self.sprite = haru.Sprite.new("pipe-green.png", 32)
     self:reset()
 end
 

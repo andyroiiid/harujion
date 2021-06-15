@@ -4,10 +4,10 @@ local Player = Object:extend()
 
 function Player:new()
     self.sprites = {
-        haru.renderer.Sprite.new("yellowbird-midflap.png", 32),
-        haru.renderer.Sprite.new("yellowbird-downflap.png", 32),
-        haru.renderer.Sprite.new("yellowbird-midflap.png", 32),
-        haru.renderer.Sprite.new("yellowbird-upflap.png", 32)
+        haru.Sprite.new("yellowbird-midflap.png", 32),
+        haru.Sprite.new("yellowbird-downflap.png", 32),
+        haru.Sprite.new("yellowbird-midflap.png", 32),
+        haru.Sprite.new("yellowbird-upflap.png", 32)
     }
     self:reset()
 end

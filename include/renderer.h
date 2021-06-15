@@ -12,7 +12,6 @@
 #include "shader_globals.h"
 #include "dynamic_draw_shader.h"
 #include "vertex_array.h"
-#include "sprite.h"
 
 class Renderer : NonCopyable {
 public:
