@@ -7,7 +7,7 @@
 #include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
 
-#include "renderer/sprite.h"
+#include "renderer/sprite/sprite.h"
 
 Engine &Engine::getInstance() {
     static Engine instance;

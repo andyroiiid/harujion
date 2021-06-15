@@ -6,8 +6,8 @@
 #define HARUJION_SPRITE_H
 
 #include "non_copyable.h"
-#include "renderer/sprite_shader.h"
-#include "renderer/sprite_vertices.h"
+#include "renderer/sprite/sprite_shader.h"
+#include "renderer/sprite/sprite_vertices.h"
 #include "renderer/texture.h"
 
 class Sprite : NonCopyable {

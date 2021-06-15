@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "renderer/sprite_vertices.h"
+#include "renderer/sprite/sprite_vertices.h"
 
 SpriteVertices &SpriteVertices::getInstance() {
     static SpriteVertices instance;

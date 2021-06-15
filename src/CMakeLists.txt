@@ -8,11 +8,11 @@ add_executable(${PROJECT_NAME}
         renderer/dynamic_draw_shader.cpp
         renderer/vertex_array.cpp
         renderer/image.cpp
-        renderer/sprite_shader.cpp
-        renderer/sprite_vertices.cpp
-        renderer/sprite.cpp
         renderer/texture.cpp
         renderer/texture_loader.cpp
+        renderer/sprite/sprite_shader.cpp
+        renderer/sprite/sprite_vertices.cpp
+        renderer/sprite/sprite.cpp
         renderer/renderer.cpp
         fmod_audio.cpp
         engine.cpp

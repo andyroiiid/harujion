@@ -2,7 +2,7 @@
 // Created by andyroiiid on 6/14/2021.
 //
 
-#include "renderer/sprite.h"
+#include "renderer/sprite/sprite.h"
 
 Sprite::Sprite(const std::string &filename, int pixelsPerUnit) : pixelsPerUnit(pixelsPerUnit) {
     texture = Texture::load(filename);
