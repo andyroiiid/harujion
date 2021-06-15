@@ -25,15 +25,26 @@ public:
 
     bool keyJustReleased(int key);
 
+    bool mouseButtonPressed(int button);
+
+    bool mouseButtonJustPressed(int button);
+
+    bool mouseButtonJustReleased(int button);
+
 private:
     Input();
 
     static void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
 
+    static void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
+
     Window &window = Window::getInstance();
 
     std::array<bool, GLFW_KEY_LAST + 1> prevKeyState{false};
     std::array<bool, GLFW_KEY_LAST + 1> currKeyState{false};
+
+    std::array<bool, GLFW_MOUSE_BUTTON_LAST + 1> prevMouseButtonState{false};
+    std::array<bool, GLFW_MOUSE_BUTTON_LAST + 1> currMouseButtonState{false};
 };
 
 #endif //HARUJION_INPUT_H

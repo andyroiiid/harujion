@@ -36,7 +36,7 @@ function haru.shutdown()
 end
 
 function haru.update(deltaTime)
-    if haru.input.keyJustPressed(32) then
+    if haru.input.keyJustPressed(32) or haru.input.mouseButtonJustPressed(0) then
         if waiting then
             haru.audio.fireOneShotEvent(soundEvents.swoosh)
             waiting = false
