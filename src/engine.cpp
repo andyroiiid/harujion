@@ -17,7 +17,21 @@ Engine::Engine() {
 }
 
 void Engine::initEnv() {
-    lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::string, sol::lib::math, sol::lib::table);
+    lua.open_libraries(
+            sol::lib::base,
+            sol::lib::package,
+            sol::lib::coroutine,
+            sol::lib::string,
+            sol::lib::os,
+            sol::lib::math,
+            sol::lib::table,
+            sol::lib::debug,
+            sol::lib::bit32,
+            sol::lib::io,
+            sol::lib::ffi,
+            sol::lib::jit,
+            sol::lib::utf8
+    );
     lua.add_package_loader(Physfs::luaPackageLoader);
 
     haru = lua.create_table("haru");

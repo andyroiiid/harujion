@@ -2,6 +2,8 @@ local Player = require("player.lua")
 local Pipes = require("pipes.lua")
 
 function haru.init()
+    print(jit.version)
+
     haru.window.setTitle("Flappy Bird")
     haru.renderer.setCameraHalfHeight(5.0)
 

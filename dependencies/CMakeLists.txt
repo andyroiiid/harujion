@@ -14,7 +14,7 @@ add_subdirectory(glm EXCLUDE_FROM_ALL)
 
 add_subdirectory(imgui EXCLUDE_FROM_ALL)
 
-add_subdirectory(lua EXCLUDE_FROM_ALL)
+add_subdirectory(luajit EXCLUDE_FROM_ALL)
 
 set(PHYSFS_ARCHIVE_GRP FALSE CACHE BOOL "" FORCE)
 set(PHYSFS_ARCHIVE_WAD FALSE CACHE BOOL "" FORCE)

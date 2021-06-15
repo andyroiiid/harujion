@@ -18,6 +18,6 @@ add_executable(${PROJECT_NAME}
         engine.cpp
         main.cpp)
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE GLFW_INCLUDE_NONE SOL_ALL_SAFETIES_ON=1)
+target_compile_definitions(${PROJECT_NAME} PRIVATE GLFW_INCLUDE_NONE SOL_ALL_SAFETIES_ON=1 SOL_LUAJIT=1)
 
-target_link_libraries(${PROJECT_NAME} glad glfw glm imgui lua physfs-static sol2 spdlog stb fmodstudio)
+target_link_libraries(${PROJECT_NAME} glad glfw glm imgui luajit physfs-static sol2 spdlog stb fmodstudio)
