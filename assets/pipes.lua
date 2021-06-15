@@ -8,6 +8,7 @@ end
 
 function Pipes:new()
     self.sprite = haru.Sprite.new("pipe-green.png", 32)
+    self.sprite:setPixelPivot(26, 320)
     self:reset()
 end
 
@@ -55,9 +56,9 @@ function Pipes:draw()
     for i, x in ipairs(self.xs) do
         local y = self.ys[i]
         self.sprite:setFlip(false, false)
-        self.sprite:draw(x, -7.0 + y, 0.0)
+        self.sprite:draw(x, -2.0 + y, 0.0)
         self.sprite:setFlip(true, false)
-        self.sprite:draw(x, 7.0 + y, math.pi)
+        self.sprite:draw(x, 2.0 + y, math.pi)
     end
 end
 
