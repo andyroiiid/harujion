@@ -3,7 +3,6 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(${PROJECT_NAME}
         physfs.cpp
         window.cpp
-        input.cpp
         renderer/camera.cpp
         renderer/shader.cpp
         renderer/shader_globals.cpp
@@ -16,6 +15,7 @@ add_executable(${PROJECT_NAME}
         renderer/sprite/sprite_vertices.cpp
         renderer/sprite/sprite.cpp
         renderer/renderer.cpp
+        input.cpp
         fmod_audio.cpp
         engine.cpp
         main.cpp)

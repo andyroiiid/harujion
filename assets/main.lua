@@ -29,8 +29,8 @@ end
 
 function haru.init()
     haru.window.setTitle("Flappy Bird")
-    haru.renderer.setClearColor(78.0 / 255.0, 192.0 / 255.0, 202.0 / 255.0)
     haru.camera.setHalfHeight(5.0)
+    haru.renderer.setClearColor(78.0 / 255.0, 192.0 / 255.0, 202.0 / 255.0)
     reset()
 end
 
