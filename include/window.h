@@ -5,11 +5,10 @@
 #ifndef HARUJION_WINDOW_H
 #define HARUJION_WINDOW_H
 
+#include <GLFW/glfw3.h>
 #include <sol/forward.hpp>
 
 #include "non_copyable.h"
-
-struct GLFWwindow;
 
 class Window : NonCopyable {
 public:
@@ -25,12 +24,12 @@ public:
 
     void setTitle(const char *title);
 
-    bool isKeyPressed(int key);
-
 private:
     Window();
 
     ~Window();
+
+    friend class Input;
 
     GLFWwindow *window = nullptr;
 };

@@ -4,7 +4,6 @@
 
 #include "window.h"
 
-#include <GLFW/glfw3.h>
 #include <glad/gl.h>
 #include <spdlog/spdlog.h>
 #include <sol/sol.hpp>
@@ -72,17 +71,9 @@ sol::table Window::getLuaTable(sol::state &lua) {
             "setTitle",
             [this](const char *title) { setTitle(title); }
     );
-    table.set_function(
-            "isKeyPressed",
-            [this](int key) { return isKeyPressed(key); }
-    );
     return table;
 }
 
 void Window::setTitle(const char *title) {
     glfwSetWindowTitle(window, title);
-}
-
-bool Window::isKeyPressed(int key) {
-    return glfwGetKey(window, key);
 }

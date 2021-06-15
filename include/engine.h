@@ -10,6 +10,7 @@
 #include "non_copyable.h"
 #include "physfs.h"
 #include "window.h"
+#include "input.h"
 #include "renderer/renderer.h"
 #include "fmod_audio.h"
 
@@ -40,6 +41,7 @@ private:
 
     Physfs &physfs = Physfs::getInstance();
     Window &window = Window::getInstance();
+    Input &input = Input::getInstance();
     Renderer &renderer = Renderer::getInstance();
     FmodAudio &fmodAudio = FmodAudio::getInstance();
 

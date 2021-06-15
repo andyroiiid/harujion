@@ -15,13 +15,11 @@ local soundEvents = {
 local player = Player()
 local pipes = Pipes()
 local waiting = true
-local prevPressed = false
 local prevOpening = false
 local scores = 0
 
 local function reset()
     waiting = true
-    prevPressed = false
     prevOpening = false
     scores = 0
 
@@ -38,8 +36,7 @@ function haru.shutdown()
 end
 
 function haru.update(deltaTime)
-    local pressed = haru.window.isKeyPressed(32)
-    if pressed and not prevPressed then
+    if haru.input.keyJustPressed(32) then
         if waiting then
             haru.audio.fireOneShotEvent(soundEvents.swoosh)
             waiting = false
@@ -48,7 +45,6 @@ function haru.update(deltaTime)
             player:jump()
         end
     end
-    prevPressed = pressed
 
     if waiting then
         return

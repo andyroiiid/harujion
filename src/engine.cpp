@@ -4,7 +4,6 @@
 
 #include "engine.h"
 
-#include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
 
 #include "renderer/sprite/sprite.h"
@@ -43,6 +42,7 @@ void Engine::createBindings() {
 
 void Engine::bindModules() {
     haru["window"] = window.getLuaTable(lua);
+    haru["input"] = input.getLuaTable(lua);
     haru["renderer"] = renderer.getLuaTable(lua);
     haru["audio"] = fmodAudio.getLuaTable(lua);
 }
@@ -131,7 +131,7 @@ void Engine::mainLoop() {
 
 void Engine::update(float deltaTime) {
     fmodAudio.update();
-    glfwPollEvents();
+    input.update();
     checkLua(haru["update"](deltaTime));
     renderer.update();
 }
