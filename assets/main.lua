@@ -28,6 +28,7 @@ local function reset()
 end
 
 function haru.init()
+    haru.window.setTitle("Flappy Bird")
     haru.renderer.setClearColor(78.0 / 255.0, 192.0 / 255.0, 202.0 / 255.0)
     haru.camera.setHalfHeight(5.0)
     reset()
@@ -71,11 +72,10 @@ function haru.update(deltaTime)
         if prevOpening then
             haru.audio.fireOneShotEvent(soundEvents.point)
             scores = scores + 1
+            haru.window.setTitle("scores = " .. scores)
         end
         prevOpening = false
     end
-
-    haru.window.setTitle("scores = " .. scores)
 
     haru.camera.setCenter(0.0, player.y * 0.2)
 end
@@ -91,4 +91,7 @@ function haru.draw()
         pipes:draw()
         player:draw()
     end
+
+    local mouseX, mouseY = haru.input.mouseWorldPosition()
+    haru.renderer.drawPoint(mouseX, mouseY, 10.0)
 end

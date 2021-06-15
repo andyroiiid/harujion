@@ -20,12 +20,16 @@ Input::Input() {
         auto &input = Input::getInstance();
         input.currMouseButtonState[button] = action;
     });
+    glfwSetCursorPosCallback(window.window, [](GLFWwindow *_, double xPos, double yPos) {
+        auto &input = Input::getInstance();
+        input.mouseX = static_cast<int>(xPos);
+        input.mouseY = static_cast<int>(yPos);
+    });
 }
 
 void Input::update() {
     std::copy(currKeyState.begin(), currKeyState.end(), prevKeyState.begin());
     std::copy(currMouseButtonState.begin(), currMouseButtonState.end(), prevMouseButtonState.begin());
-    glfwPollEvents();
 }
 
 sol::table Input::getLuaTable(sol::state &lua) {
@@ -36,6 +40,8 @@ sol::table Input::getLuaTable(sol::state &lua) {
     table.set_function("mouseButtonPressed", [this](int button) { return mouseButtonPressed(button); });
     table.set_function("mouseButtonJustPressed", [this](int button) { return mouseButtonJustPressed(button); });
     table.set_function("mouseButtonJustReleased", [this](int button) { return mouseButtonJustReleased(button); });
+    table.set_function("mousePosition", [this]() { return mousePosition(); });
+    table.set_function("mouseWorldPosition", [this]() { return mouseWorldPosition(); });
     return table;
 }
 
@@ -61,4 +67,12 @@ bool Input::mouseButtonJustPressed(int button) {
 
 bool Input::mouseButtonJustReleased(int button) {
     return !currMouseButtonState[button] && prevMouseButtonState[button];
+}
+
+std::tuple<int, int> Input::mousePosition() {
+    return std::make_tuple(mouseX, mouseY);
+}
+
+std::tuple<float, float> Input::mouseWorldPosition() {
+    return camera.screenToWorld(mouseX, mouseY);
 }

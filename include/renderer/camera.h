@@ -24,12 +24,17 @@ public:
 
     void setCenter(float x, float y);
 
+    std::tuple<float, float> screenToWorld(int x, int y) const;
+
 private:
     Camera() = default;
 
     ShaderGlobals &shaderGlobals = ShaderGlobals::getInstance();
 
-    float screenRatio = 1.0f;
+    float screenWidth = 1.0f;
+    float screenHeight = 1.0f;
+
+    float halfWidth = 1.0f;
     float halfHeight = 1.0f;
 
     glm::vec2 center = {0.0f, 0.0f};

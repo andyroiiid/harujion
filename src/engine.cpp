@@ -42,8 +42,8 @@ void Engine::createBindings() {
 
 void Engine::bindModules() {
     haru["window"] = window.getLuaTable(lua);
-    haru["input"] = input.getLuaTable(lua);
     haru["camera"] = camera.getLuaTable(lua);
+    haru["input"] = input.getLuaTable(lua);
     haru["renderer"] = renderer.getLuaTable(lua);
     haru["audio"] = fmodAudio.getLuaTable(lua);
 }
@@ -135,8 +135,9 @@ void Engine::mainLoop() {
 void Engine::update(float deltaTime) {
     fmodAudio.update();
     input.update();
-    checkLua(haru["update"](deltaTime));
+    glfwPollEvents();
     camera.update();
+    checkLua(haru["update"](deltaTime));
 }
 
 void Engine::draw() {

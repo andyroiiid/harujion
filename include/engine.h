@@ -42,8 +42,8 @@ private:
 
     Physfs &physfs = Physfs::getInstance();
     Window &window = Window::getInstance();
-    Input &input = Input::getInstance();
     Camera &camera = Camera::getInstance();
+    Input &input = Input::getInstance();
     Renderer &renderer = Renderer::getInstance();
     FmodAudio &fmodAudio = FmodAudio::getInstance();
 
