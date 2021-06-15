@@ -43,6 +43,7 @@ void Engine::createBindings() {
 void Engine::bindModules() {
     haru["window"] = window.getLuaTable(lua);
     haru["input"] = input.getLuaTable(lua);
+    haru["camera"] = camera.getLuaTable(lua);
     haru["renderer"] = renderer.getLuaTable(lua);
     haru["audio"] = fmodAudio.getLuaTable(lua);
 }
@@ -135,7 +136,7 @@ void Engine::update(float deltaTime) {
     fmodAudio.update();
     input.update();
     checkLua(haru["update"](deltaTime));
-    renderer.update();
+    camera.update();
 }
 
 void Engine::draw() {

@@ -28,7 +28,8 @@ local function reset()
 end
 
 function haru.init()
-    haru.renderer.setCameraHalfHeight(5.0)
+    haru.renderer.setClearColor(78.0 / 255.0, 192.0 / 255.0, 202.0 / 255.0)
+    haru.camera.setHalfHeight(5.0)
     reset()
 end
 
@@ -53,7 +54,7 @@ function haru.update(deltaTime)
     pipes:update(deltaTime)
     player:update(deltaTime)
 
-    if player.y <= -5.0 then
+    if player.y <= -6.0 then
         haru.audio.fireOneShotEvent(soundEvents.die)
         reset()
     end
@@ -75,6 +76,8 @@ function haru.update(deltaTime)
     end
 
     haru.window.setTitle("scores = " .. scores)
+
+    haru.camera.setCenter(0.0, player.y * 0.2)
 end
 
 function haru.draw()

@@ -11,6 +11,7 @@
 #include "physfs.h"
 #include "window.h"
 #include "input.h"
+#include "renderer/camera.h"
 #include "renderer/renderer.h"
 #include "fmod_audio.h"
 
@@ -42,6 +43,7 @@ private:
     Physfs &physfs = Physfs::getInstance();
     Window &window = Window::getInstance();
     Input &input = Input::getInstance();
+    Camera &camera = Camera::getInstance();
     Renderer &renderer = Renderer::getInstance();
     FmodAudio &fmodAudio = FmodAudio::getInstance();
 

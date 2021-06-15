@@ -5,10 +5,42 @@
 #include "renderer/camera.h"
 
 #include <glm/ext/matrix_clip_space.hpp>
+#include <sol/sol.hpp>
+
+Camera &Camera::getInstance() {
+    static Camera instance;
+    return instance;
+}
 
 void Camera::framebufferResize(int width, int height) {
     screenRatio = static_cast<float>(width) / static_cast<float>(height);
     matrixDirty = true;
+}
+
+void Camera::update() {
+    if (matrixDirty) {
+        float halfWidth = screenRatio * halfHeight;
+        shaderGlobals.setMatrix(glm::ortho(
+                center.x - halfWidth,
+                center.x + halfWidth,
+                center.y - halfHeight,
+                center.y + halfHeight
+        ));
+        matrixDirty = false;
+    }
+}
+
+sol::table Camera::getLuaTable(sol::state &lua) {
+    sol::table table = lua.create_table();
+    table.set_function(
+            "setHalfHeight",
+            [this](float newHalfHeight) { setHalfHeight(newHalfHeight); }
+    );
+    table.set_function(
+            "setCenter",
+            [this](float x, float y) { setCenter(x, y); }
+    );
+    return table;
 }
 
 void Camera::setHalfHeight(float newHalfHeight) {
@@ -16,11 +48,7 @@ void Camera::setHalfHeight(float newHalfHeight) {
     matrixDirty = true;
 }
 
-const glm::mat4 &Camera::getMatrix() const {
-    if (matrixDirty) {
-        float halfWidth = screenRatio * halfHeight;
-        matrix = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight);
-        matrixDirty = false;
-    }
-    return matrix;
+void Camera::setCenter(float x, float y) {
+    center = {x, y};
+    matrixDirty = true;
 }

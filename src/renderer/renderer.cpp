@@ -40,10 +40,6 @@ void Renderer::framebufferResize(int width, int height) {
     camera.framebufferResize(width, height);
 }
 
-void Renderer::update() {
-    shaderGlobals.setMatrix(camera.getMatrix());
-}
-
 void Renderer::clear() {
     glClearBufferfv(GL_COLOR, 0, glm::value_ptr(clearColor));
 }
@@ -63,10 +59,6 @@ sol::table Renderer::getLuaTable(sol::state &lua) {
                     [this](float r, float g, float b) { setDrawColor(r, g, b); },
                     [this](float r, float g, float b, float a) { setDrawColor(r, g, b, a); }
             )
-    );
-    table.set_function(
-            "setCameraHalfHeight",
-            [this](float halfHeight) { camera.setHalfHeight(halfHeight); }
     );
     table.set_function(
             "drawPoint",

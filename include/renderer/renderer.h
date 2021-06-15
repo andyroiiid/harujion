@@ -18,8 +18,6 @@ class Renderer : NonCopyable {
 public:
     static Renderer &getInstance();
 
-    void update();
-
     void clear();
 
     sol::table getLuaTable(sol::state &lua);
@@ -46,12 +44,11 @@ private:
     void dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode);
 
     Window &window = Window::getInstance();
-    ShaderGlobals &shaderGlobals = ShaderGlobals::getInstance();
+    Camera &camera = Camera::getInstance();
     DynamicDrawShader &dynamicDrawShader = DynamicDrawShader::getInstance();
 
     glm::vec4 clearColor = {0.2f, 0.2f, 0.2f, 1.0f};
     glm::vec4 drawColor = {1.0f, 1.0f, 1.0f, 1.0f};
-    Camera camera;
 
     VertexArray dynamicDrawVao;
 };
