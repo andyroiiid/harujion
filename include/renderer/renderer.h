@@ -39,8 +39,6 @@ public:
 private:
     Renderer();
 
-    static void framebufferSizeCallback(GLFWwindow *window, int width, int height);
-
     void framebufferResize(int width, int height);
 
     Vertex dynamicDrawVertex(float x, float y);

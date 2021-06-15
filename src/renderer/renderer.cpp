@@ -24,17 +24,15 @@ Renderer::Renderer() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glfwSetFramebufferSizeCallback(window.window, framebufferSizeCallback);
+    glfwSetFramebufferSizeCallback(window.window, [](GLFWwindow *_, int width, int height) {
+        auto &renderer = Renderer::getInstance();
+        renderer.framebufferResize(width, height);
+    });
     {
         int width, height;
         window.getFramebufferSize(&width, &height);
         framebufferResize(width, height);
     }
-}
-
-void Renderer::framebufferSizeCallback(GLFWwindow *window, int width, int height) {
-    auto &renderer = Renderer::getInstance();
-    renderer.framebufferResize(width, height);
 }
 
 void Renderer::framebufferResize(int width, int height) {

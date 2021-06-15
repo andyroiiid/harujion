@@ -12,18 +12,14 @@ Input &Input::getInstance() {
 }
 
 Input::Input() {
-    glfwSetKeyCallback(window.window, keyCallback);
-    glfwSetMouseButtonCallback(window.window, mouseButtonCallback);
-}
-
-void Input::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods) {
-    auto &input = Input::getInstance();
-    input.currKeyState[key] = action;
-}
-
-void Input::mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
-    auto &input = Input::getInstance();
-    input.currMouseButtonState[button] = action;
+    glfwSetKeyCallback(window.window, [](GLFWwindow *_, int key, int scancode, int action, int mods) {
+        auto &input = Input::getInstance();
+        input.currKeyState[key] = action;
+    });
+    glfwSetMouseButtonCallback(window.window, [](GLFWwindow *_, int button, int action, int mods) {
+        auto &input = Input::getInstance();
+        input.currMouseButtonState[button] = action;
+    });
 }
 
 void Input::update() {
