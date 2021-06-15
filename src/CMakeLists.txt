@@ -4,6 +4,7 @@ add_executable(${PROJECT_NAME}
         physfs.cpp
         window.cpp
         input.cpp
+        renderer/camera.cpp
         renderer/shader.cpp
         renderer/shader_globals.cpp
         renderer/dynamic_draw_shader.cpp

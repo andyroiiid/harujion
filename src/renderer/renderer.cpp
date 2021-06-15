@@ -23,16 +23,27 @@ Renderer::Renderer() {
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glfwSetFramebufferSizeCallback(window.window, framebufferSizeCallback);
+    {
+        int width, height;
+        window.getFramebufferSize(&width, &height);
+        framebufferResize(width, height);
+    }
+}
+
+void Renderer::framebufferSizeCallback(GLFWwindow *window, int width, int height) {
+    auto &renderer = Renderer::getInstance();
+    renderer.framebufferResize(width, height);
+}
+
+void Renderer::framebufferResize(int width, int height) {
+    glViewport(0, 0, width, height);
+    camera.framebufferResize(width, height);
 }
 
 void Renderer::update() {
-    int width = 0, height = 0;
-    window.getFramebufferSize(&width, &height);
-    glViewport(0, 0, width, height);
-
-    float screenRatio = static_cast<float>(width) / static_cast<float>(height);
-    float cameraHalfWidth = screenRatio * cameraHalfHeight;
-    shaderGlobals.setMatrix(glm::ortho(-cameraHalfWidth, cameraHalfWidth, -cameraHalfHeight, cameraHalfHeight));
+    shaderGlobals.setMatrix(camera.getMatrix());
 }
 
 void Renderer::clear() {
@@ -57,7 +68,7 @@ sol::table Renderer::getLuaTable(sol::state &lua) {
     );
     table.set_function(
             "setCameraHalfHeight",
-            [this](float halfHeight) { setCameraHalfHeight(halfHeight); }
+            [this](float halfHeight) { camera.setHalfHeight(halfHeight); }
     );
     table.set_function(
             "drawPoint",
@@ -82,10 +93,6 @@ void Renderer::setClearColor(float r, float g, float b, float a) {
 
 void Renderer::setDrawColor(float r, float g, float b, float a) {
     drawColor = {r, g, b, a};
-}
-
-void Renderer::setCameraHalfHeight(float halfHeight) {
-    cameraHalfHeight = halfHeight;
 }
 
 inline Vertex Renderer::dynamicDrawVertex(float x, float y) {

@@ -31,6 +31,8 @@ private:
 
     friend class Input;
 
+    friend class Renderer;
+
     GLFWwindow *window = nullptr;
 };
 

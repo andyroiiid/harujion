@@ -9,6 +9,7 @@
 
 #include "non_copyable.h"
 #include "window.h"
+#include "renderer/camera.h"
 #include "renderer/shader_globals.h"
 #include "renderer/dynamic_draw_shader.h"
 #include "renderer/vertex_array.h"
@@ -27,8 +28,6 @@ public:
 
     void setDrawColor(float r, float g, float b, float a = 1.0f);
 
-    void setCameraHalfHeight(float halfHeight);
-
     void drawPoint(float x, float y);
 
     void drawPoint(float x, float y, float size);
@@ -40,6 +39,10 @@ public:
 private:
     Renderer();
 
+    static void framebufferSizeCallback(GLFWwindow *window, int width, int height);
+
+    void framebufferResize(int width, int height);
+
     Vertex dynamicDrawVertex(float x, float y);
 
     void dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode);
@@ -50,7 +53,7 @@ private:
 
     glm::vec4 clearColor = {0.2f, 0.2f, 0.2f, 1.0f};
     glm::vec4 drawColor = {1.0f, 1.0f, 1.0f, 1.0f};
-    float cameraHalfHeight = 1.0f;
+    Camera camera;
 
     VertexArray dynamicDrawVao;
 };
