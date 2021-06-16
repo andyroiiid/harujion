@@ -18,7 +18,7 @@ public:
 
     void setPixelRect(const glm::ivec4 &rect);
 
-    void setPixelPivot(const glm::ivec2 &pivot);
+    void setPixelPivot(const glm::vec2 &pivot);
 
     void setPixelsPerUnit(int pixelsPerUnit);
 

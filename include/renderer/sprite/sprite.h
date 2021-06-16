@@ -16,7 +16,7 @@ public:
 
     void setPixelRect(int x, int y, int w, int h);
 
-    void setPixelPivot(int x, int y);
+    void setPixelPivot(float x, float y);
 
     void setFlip(bool x, bool y);
 
@@ -28,7 +28,7 @@ private:
 
     std::shared_ptr<Texture> texture;
     glm::ivec4 pixelRect{0, 0, 0, 0};
-    glm::ivec2 pixelPivot{0, 0};
+    glm::vec2 pixelPivot{0, 0};
     int pixelsPerUnit = 1;
     bool flipX = false;
     bool flipY = false;

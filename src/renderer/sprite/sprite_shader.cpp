@@ -22,7 +22,7 @@ layout(location = 1) out vec4 vColor;
 
 layout(location = 0) uniform ivec2 uTexturePixelSize;
 layout(location = 1) uniform ivec4 uPixelRect;
-layout(location = 2) uniform ivec2 uPixelPivot;
+layout(location = 2) uniform vec2 uPixelPivot;
 layout(location = 3) uniform int uPixelsPerUnit;
 layout(location = 4) uniform vec2 uPosition;
 layout(location = 5) uniform float uRotation;
@@ -39,8 +39,8 @@ vec2 flippedTexCoord(vec2 texCoord) {
     );
 }
 
-ivec2 flippedPixelPivot(ivec2 pixelSize, ivec2 pixelPivot) {
-    return ivec2(
+vec2 flippedPixelPivot(ivec2 pixelSize, vec2 pixelPivot) {
+    return vec2(
         uFlip.x ? pixelSize.x - pixelPivot.x : pixelPivot.x,
         uFlip.y ? pixelSize.y - pixelPivot.y : pixelPivot.y
     );
@@ -93,8 +93,8 @@ void SpriteShader::setPixelRect(const glm::ivec4 &rect) {
     glProgramUniform4iv(program, pixelRectLocation, 1, glm::value_ptr(rect));
 }
 
-void SpriteShader::setPixelPivot(const glm::ivec2 &pivot) {
-    glProgramUniform2iv(program, pixelPivotLocation, 1, glm::value_ptr(pivot));
+void SpriteShader::setPixelPivot(const glm::vec2 &pivot) {
+    glProgramUniform2fv(program, pixelPivotLocation, 1, glm::value_ptr(pivot));
 }
 
 void SpriteShader::setPixelsPerUnit(int pixelsPerUnit) {

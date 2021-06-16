@@ -6,6 +6,8 @@ local SFX = require("flappy/sfx.lua")
 
 local Flappy = Object:extend()
 
+local KEY_SPACE = 32
+
 function Flappy:new()
     haru.camera.setHalfHeight(5.0)
     haru.renderer.setClearColor(78.0 / 255.0, 192.0 / 255.0, 202.0 / 255.0)
@@ -26,7 +28,7 @@ end
 
 function Flappy:update(deltaTime)
     -- handle input
-    if haru.input.keyJustPressed(32) or haru.input.mouseButtonJustPressed(0) then
+    if haru.input.keyJustPressed(KEY_SPACE) or haru.input.mouseButtonJustPressed(0) then
         if self.waiting then
             haru.audio.fireOneShotEvent(SFX.SWOOSH)
             self.waiting = false

@@ -8,14 +8,14 @@ Sprite::Sprite(const std::string &filename, int pixelsPerUnit) : pixelsPerUnit(p
     texture = Texture::load(filename);
     glm::ivec2 textureSize = texture->size();
     pixelRect = {0, 0, textureSize.x, textureSize.y};
-    pixelPivot = textureSize / 2;
+    pixelPivot = glm::vec2(textureSize) / 2.0f;
 }
 
 void Sprite::setPixelRect(int x, int y, int w, int h) {
     pixelRect = {x, y, w, h};
 }
 
-void Sprite::setPixelPivot(int x, int y) {
+void Sprite::setPixelPivot(float x, float y) {
     pixelPivot = {x, y};
 }
 

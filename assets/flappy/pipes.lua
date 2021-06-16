@@ -8,7 +8,7 @@ end
 
 function Pipes:new()
     self.sprite = haru.Sprite.new("flappy/pipe-green.png", 32)
-    self.sprite:setPixelPivot(26, 320)
+    self.sprite:setPixelPivot(26.0, 320.0)
     self.xs = {10.0, 20.0, 30.0}
     self.ys = {generateOpening(), generateOpening(), generateOpening()}
 end
