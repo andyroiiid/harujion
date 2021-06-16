@@ -1,6 +1,7 @@
 local Object = require("classic.lua")
 
 local Player = require("topdown/player.lua")
+local Enemy = require("topdown/enemy.lua")
 local BulletManager = require("topdown/bullet_manager.lua")
 
 local TopDown = Object:extend()
@@ -11,6 +12,7 @@ function TopDown:new()
     haru.input.setCursor(false)
 
     self.player = Player()
+    self.enemy = Enemy(3.0, 4.0)
     self.bullets = BulletManager()
     self.crosshair = haru.Sprite.new("topdown/crosshair010.png", 32)
 end
@@ -22,6 +24,7 @@ function TopDown:update(deltaTime)
     end
 
     self.player:update(deltaTime)
+    self.enemy:update(deltaTime, self.player)
     self.bullets:update(deltaTime)
 end
 
@@ -32,6 +35,7 @@ function TopDown:draw()
     haru.renderer.drawLine(0.0, 0.0, 0.0, 5.0)
 
     self.player:draw()
+    self.enemy:draw()
     self.bullets:draw()
 
     local mouseX, mouseY = haru.input.mouseWorldPosition()

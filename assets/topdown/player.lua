@@ -9,6 +9,10 @@ local KEY_D = 68
 local KEY_S = 83
 local KEY_W = 87
 
+local SPEED = 10.0
+local BARREL_X = 33.5 / 32.0
+local BARREL_Y = -9.5 / 32.0
+
 function Player:new()
     self.sprite = haru.Sprite.new("topdown/survivor1_gun.png", 32)
     self.sprite:setPixelPivot(16.5, 21.5)
@@ -18,7 +22,7 @@ function Player:new()
 end
 
 function Player:getBarrelPos()
-    local x, y = vec2.rotate(33.5 / 32.0, -9.5 / 32.0, self.rotation)
+    local x, y = vec2.rotate(BARREL_X, BARREL_Y, self.rotation)
     return self.x + x, self.y + y
 end
 
@@ -43,8 +47,8 @@ end
 function Player:update(deltaTime)
     local horizontal, vertical = getInputVector()
 
-    self.x = self.x + 10.0 * horizontal * deltaTime
-    self.y = self.y + 10.0 * vertical * deltaTime
+    self.x = self.x + SPEED * horizontal * deltaTime
+    self.y = self.y + SPEED * vertical * deltaTime
 
     local mouseX, mouseY = haru.input.mouseWorldPosition()
     self.rotation = math.atan2(mouseY - self.y, mouseX - self.x)
