@@ -34,6 +34,12 @@ public:
 
     void drawLine(float x0, float y0, float x1, float y1, float width);
 
+    void drawRect(float x0, float y0, float x1, float y1);
+
+    void drawRect(float x0, float y0, float x1, float y1, float width);
+
+    void fillRect(float x0, float y0, float x1, float y1);
+
 private:
     Renderer();
 

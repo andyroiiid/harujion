@@ -74,6 +74,17 @@ sol::table Renderer::getLuaTable(sol::state &lua) {
                     [this](float x0, float y0, float x1, float y1, float width) { drawLine(x0, y0, x1, y1, width); }
             )
     );
+    table.set_function(
+            "drawRect",
+            sol::overload(
+                    [this](float x0, float y0, float x1, float y1) { drawRect(x0, y0, x1, y1); },
+                    [this](float x0, float y0, float x1, float y1, float width) { drawRect(x0, y0, x1, y1, width); }
+            )
+    );
+    table.set_function(
+            "fillRect",
+            [this](float x0, float y0, float x1, float y1) { fillRect(x0, y0, x1, y1); }
+    );
     return table;
 }
 
@@ -98,7 +109,6 @@ void Renderer::dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode) 
 }
 
 void Renderer::drawPoint(float x, float y) {
-    static constexpr glm::vec2 texCoord{0.0f, 0.0f};
     dynamicDraw(
             {
                     dynamicDrawVertex(x, y)
@@ -114,7 +124,6 @@ void Renderer::drawPoint(float x, float y, float size) {
 }
 
 void Renderer::drawLine(float x0, float y0, float x1, float y1) {
-    static constexpr glm::vec2 texCoord{0.0f, 0.0f};
     dynamicDraw(
             {
                     dynamicDrawVertex(x0, y0),
@@ -128,4 +137,34 @@ void Renderer::drawLine(float x0, float y0, float x1, float y1, float width) {
     glLineWidth(width);
     drawLine(x0, y0, x1, y1);
     glLineWidth(1.0f);
+}
+
+void Renderer::drawRect(float x0, float y0, float x1, float y1) {
+    dynamicDraw(
+            {
+                    dynamicDrawVertex(x0, y0),
+                    dynamicDrawVertex(x1, y0),
+                    dynamicDrawVertex(x1, y1),
+                    dynamicDrawVertex(x0, y1)
+            },
+            GL_LINE_LOOP
+    );
+}
+
+void Renderer::drawRect(float x0, float y0, float x1, float y1, float width) {
+    glLineWidth(width);
+    drawRect(x0, y0, x1, y1);
+    glLineWidth(1.0f);
+}
+
+void Renderer::fillRect(float x0, float y0, float x1, float y1) {
+    dynamicDraw(
+            {
+                    dynamicDrawVertex(x0, y0),
+                    dynamicDrawVertex(x1, y0),
+                    dynamicDrawVertex(x0, y1),
+                    dynamicDrawVertex(x1, y1)
+            },
+            GL_TRIANGLE_STRIP
+    );
 }
