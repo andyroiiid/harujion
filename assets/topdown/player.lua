@@ -26,7 +26,7 @@ function Player:getBarrelPos()
     return self.x + x, self.y + y
 end
 
-local function normalizeVector(x, y)
+local function normalize(x, y)
     if x == 0 and y == 0 then
         return 0, 0
     end
@@ -49,7 +49,7 @@ local function getInputVector()
     if haru.input.keyPressed(KEY_A) then
         horizontal = horizontal - 1.0
     end
-    return normalizeVector(horizontal, vertical)
+    return normalize(horizontal, vertical)
 end
 
 function Player:update(deltaTime)

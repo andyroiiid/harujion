@@ -10,18 +10,18 @@ function Bullet:new(x, y, direction)
     self.x = x
     self.y = y
     self.direction = direction
-    self.age = 0.0
+    self.ttl = LIFETIME
 end
 
 function Bullet:update(deltaTime)
     local distance = SPEED * deltaTime
     self.x = self.x + math.cos(self.direction) * distance
     self.y = self.y + math.sin(self.direction) * distance
-    self.age = self.age + deltaTime
+    self.ttl = self.ttl - deltaTime
 end
 
 function Bullet:dying()
-    return self.age > LIFETIME
+    return self.ttl <= 0
 end
 
 function Bullet:draw()
