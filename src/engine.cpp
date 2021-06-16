@@ -7,6 +7,7 @@
 #include <spdlog/spdlog.h>
 
 #include "renderer/sprite/sprite.h"
+#include "renderer/sprite/sprite_font.h"
 
 Engine &Engine::getInstance() {
     static Engine instance;
@@ -56,6 +57,11 @@ void Engine::bindTypes() {
     sprite["setPixelPivot"] = &Sprite::setPixelPivot;
     sprite["setFlip"] = &Sprite::setFlip;
     sprite["draw"] = &Sprite::draw;
+
+    sol::usertype<SpriteFont> spriteFont = haru.new_usertype<SpriteFont>(
+            "SpriteFont",
+            sol::constructors<SpriteFont(const std::string &, int)>());
+    spriteFont["draw"] = &SpriteFont::draw;
 }
 
 void Engine::checkLua(const sol::protected_function_result &result, bool abortOnError) {

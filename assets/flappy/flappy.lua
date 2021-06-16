@@ -6,9 +6,12 @@ local SFX = require("flappy/sfx.lua")
 
 local Flappy = Object:extend()
 
+local font = haru.SpriteFont.new("monogram.png", 16)
+
 local KEY_SPACE = 32
 
 function Flappy:new()
+    haru.window.setTitle("Flappy")
     haru.camera.setHalfHeight(5.0)
     haru.renderer.setClearColor(78.0 / 255.0, 192.0 / 255.0, 202.0 / 255.0)
     self.background = haru.Sprite.new("flappy/background-day.png", 32)
@@ -23,7 +26,6 @@ function Flappy:reset()
     haru.input.setCursor(true)
     self.prevOpening = false
     self.scores = 0
-    haru.window.setTitle("scores = " .. self.scores)
 end
 
 function Flappy:update(deltaTime)
@@ -68,7 +70,6 @@ function Flappy:update(deltaTime)
             -- just passed an opening
             haru.audio.fireOneShotEvent(SFX.POINT)
             self.scores = self.scores + 1
-            haru.window.setTitle("scores = " .. self.scores)
         end
         self.prevOpening = false
     end
@@ -92,6 +93,8 @@ function Flappy:draw()
         local mouseX, mouseY = haru.input.mouseWorldPosition()
         haru.renderer.setDrawColor(1.0, 1.0, 1.0)
         haru.renderer.drawPoint(mouseX, mouseY, 10.0)
+
+        font:draw(0.0, self.player.y + 1.0, "Scores=" .. self.scores)
     end
 end
 

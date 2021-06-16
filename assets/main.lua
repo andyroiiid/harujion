@@ -2,10 +2,12 @@ local Button = require("button.lua")
 local Flappy = require("flappy/flappy.lua")
 local TopDown = require("topdown/topdown.lua")
 
+local font = haru.SpriteFont.new("monogram.png", 32)
+
 local KEY_ESCAPE = 256
 
-local flappyButton = Button(0.0, 1.0)
-local topDownButton = Button(0.0, -1.0)
+local flappyButton = Button(0.0, 1.25, "Flappy", "SPACE or LEFT CLICK to jump")
+local topDownButton = Button(0.0, -1.25, "TopDown", "WASD to move, aim with MOUSE")
 local game
 
 local function reset()
@@ -47,6 +49,7 @@ function haru.draw()
     if not game then
         flappyButton:draw()
         topDownButton:draw()
+        font:draw(-3.0, 2.0, "ESCAPE to return to menu")
     else
         game:draw()
     end
