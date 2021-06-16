@@ -26,6 +26,11 @@ function TopDown:update(deltaTime)
     self.player:update(deltaTime)
     self.enemy:update(deltaTime, self.player)
     self.bullets:update(deltaTime)
+
+    local bullet = self.bullets:hitTest(self.enemy:getBounds())
+    if bullet then
+        self.enemy:hit()
+    end
 end
 
 function TopDown:draw()
