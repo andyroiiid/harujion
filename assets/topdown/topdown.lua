@@ -1,7 +1,7 @@
 local Object = require("classic.lua")
 
 local Player = require("topdown/player.lua")
-local Bullet = require("topdown/bullet.lua")
+local BulletManager = require("topdown/bullet_manager.lua")
 
 local TopDown = Object:extend()
 
@@ -9,30 +9,20 @@ function TopDown:new()
     haru.window.setTitle("TopDown")
     haru.camera.setHalfHeight(10.0)
     haru.input.setCursor(false)
-    self.crosshair = haru.Sprite.new("topdown/crosshair010.png", 32)
+
     self.player = Player()
-    self.bullets = {}
+    self.bullets = BulletManager()
+    self.crosshair = haru.Sprite.new("topdown/crosshair010.png", 32)
 end
 
 function TopDown:update(deltaTime)
     if haru.input.mouseButtonJustPressed(0) then
         local bulletX, bulletY = self.player:getBarrelPos()
-        local bullet = Bullet(bulletX, bulletY, self.player.rotation)
-        table.insert(self.bullets, bullet)
+        self.bullets:spawn(bulletX, bulletY, self.player.rotation)
     end
 
     self.player:update(deltaTime)
-
-    local dyingBullets = {}
-    for i, v in ipairs(self.bullets) do
-        if v:update(deltaTime) then
-            table.insert(dyingBullets, i)
-        end
-    end
-
-    for i = #dyingBullets, 1, -1 do
-        table.remove(self.bullets, dyingBullets[i])
-    end
+    self.bullets:update(deltaTime)
 end
 
 function TopDown:draw()
@@ -42,10 +32,7 @@ function TopDown:draw()
     haru.renderer.drawLine(0.0, 0.0, 0.0, 5.0)
 
     self.player:draw()
-
-    for i, v in ipairs(self.bullets) do
-        v:draw()
-    end
+    self.bullets:draw()
 
     local mouseX, mouseY = haru.input.mouseWorldPosition()
     self.crosshair:draw(mouseX, mouseY, 0.0)

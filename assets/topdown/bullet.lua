@@ -18,6 +18,9 @@ function Bullet:update(deltaTime)
     self.x = self.x + math.cos(self.direction) * distance
     self.y = self.y + math.sin(self.direction) * distance
     self.age = self.age + deltaTime
+end
+
+function Bullet:dying()
     return self.age > LIFETIME
 end
 
