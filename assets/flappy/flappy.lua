@@ -90,6 +90,7 @@ function Flappy:draw()
 
         -- draw mouse position, just for testing
         local mouseX, mouseY = haru.input.mouseWorldPosition()
+        haru.renderer.setDrawColor(1.0, 1.0, 1.0)
         haru.renderer.drawPoint(mouseX, mouseY, 10.0)
     end
 end

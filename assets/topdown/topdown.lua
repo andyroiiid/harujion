@@ -7,6 +7,7 @@ local TopDown = Object:extend()
 function TopDown:new()
     haru.window.setTitle("TopDown")
     haru.camera.setHalfHeight(10.0)
+    haru.input.setCursor(false)
     self.crosshair = haru.Sprite.new("topdown/crosshair010.png", 32)
     self.player = Player()
 end
