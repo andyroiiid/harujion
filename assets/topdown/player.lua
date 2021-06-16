@@ -15,6 +15,17 @@ function Player:new()
     self.rotation = 0.0
 end
 
+local function rotate(x, y, angle)
+    local c = math.cos(angle)
+    local s = math.sin(angle)
+    return c * x - s * y, s * x + c * y
+end
+
+function Player:getBarrelPos()
+    local x, y = rotate(33.5 / 32.0, -9.5 / 32.0, self.rotation)
+    return self.x + x, self.y + y
+end
+
 local function normalizeVector(x, y)
     if x == 0 and y == 0 then
         return 0, 0
