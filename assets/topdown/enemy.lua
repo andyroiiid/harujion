@@ -13,6 +13,7 @@ function Enemy:new(x, y)
     self.x = x
     self.y = y
     self.rotation = 0.0
+    self.hp = 100
 end
 
 function Enemy:update(deltaTime, player)
@@ -29,16 +30,17 @@ function Enemy:getBounds()
     return self.x - 0.5, self.y - 0.5, self.x + 0.5, self.y + 0.5
 end
 
-function Enemy:draw()
-    self.sprite:draw(self.x, self.y, self.rotation)
---     haru.renderer.setDrawColor(1.0, 1.0, 1.0, 0.5)
---     haru.renderer.fillRect(self:getBounds())
---     haru.renderer.setDrawColor(1.0, 1.0, 1.0)
---     haru.renderer.drawRect(self:getBounds())
-end
-
 function Enemy:hit()
     self.speed = 0.0
+    self.hp = self.hp - 25
+end
+
+function Enemy:dying()
+    return self.hp <= 0
+end
+
+function Enemy:draw()
+    self.sprite:draw(self.x, self.y, self.rotation)
 end
 
 return Enemy
