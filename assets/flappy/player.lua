@@ -2,12 +2,16 @@ local Object = require("classic.lua")
 
 local Player = Object:extend()
 
+local midFlapTexture = haru.Texture.load("flappy/yellowbird-midflap.png", false, false, false)
+local downFlapTexture = haru.Texture.load("flappy/yellowbird-downflap.png", false, false, false)
+local upFlapTexture = haru.Texture.load("flappy/yellowbird-upflap.png", false, false, false)
+
 function Player:new()
     self.sprites = {
-        haru.Sprite.new("flappy/yellowbird-midflap.png", 32),
-        haru.Sprite.new("flappy/yellowbird-downflap.png", 32),
-        haru.Sprite.new("flappy/yellowbird-midflap.png", 32),
-        haru.Sprite.new("flappy/yellowbird-upflap.png", 32)
+        haru.Sprite.new(midFlapTexture, 32),
+        haru.Sprite.new(downFlapTexture, 32),
+        haru.Sprite.new(midFlapTexture, 32),
+        haru.Sprite.new(upFlapTexture, 32)
     }
     self.v = 0.0
     self.y = 0.0

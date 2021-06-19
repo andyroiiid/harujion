@@ -6,6 +6,8 @@ local EnemyManager = require("topdown/enemy_manager.lua")
 
 local TopDown = Object:extend()
 
+local crosshairTexture = haru.Texture.load("topdown/crosshair010.png", false, false, false)
+
 function TopDown:new()
     haru.window.setTitle("TopDown")
     haru.camera.setHalfHeight(10.0)
@@ -14,7 +16,7 @@ function TopDown:new()
     self.player = Player()
     self.bullets = BulletManager()
     self.enemies = EnemyManager(self.bullets)
-    self.crosshair = haru.Sprite.new("topdown/crosshair010.png", 32)
+    self.crosshair = haru.Sprite.new(crosshairTexture, 32)
     self.spawnTimer = 2.0
 end
 

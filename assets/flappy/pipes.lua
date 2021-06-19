@@ -2,12 +2,14 @@ local Object = require("classic.lua")
 
 local Pipes = Object:extend()
 
+local texture = haru.Texture.load("flappy/pipe-green.png", false, false, false)
+
 local function generateOpening()
     return math.random() * 5.0 - 2.5
 end
 
 function Pipes:new()
-    self.sprite = haru.Sprite.new("flappy/pipe-green.png", 32)
+    self.sprite = haru.Sprite.new(texture, 32)
     self.sprite:setPixelPivot(26.0, 320.0)
     self.xs = {10.0, 20.0, 30.0}
     self.ys = {generateOpening(), generateOpening(), generateOpening()}

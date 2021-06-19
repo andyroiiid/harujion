@@ -3,8 +3,10 @@ local Object = require("classic.lua")
 local Button = Object:extend()
 
 local font = haru.SpriteFont.new("monogram.png", 32)
-local sprite = haru.Sprite.new("blue.png", 32)
-local pressedSprite = haru.Sprite.new("blue_pressed.png", 32)
+local texture = haru.Texture.load("blue.png", false, false, false)
+local sprite = haru.Sprite.new(texture, 32)
+local pressedTexture = haru.Texture.load("blue_pressed.png", false, false, false)
+local pressedSprite = haru.Sprite.new(pressedTexture, 32)
 
 function Button:new(x, y, text, description)
     self.x = x

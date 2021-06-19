@@ -7,6 +7,8 @@ local SFX = require("flappy/sfx.lua")
 local Flappy = Object:extend()
 
 local font = haru.SpriteFont.new("monogram.png", 16)
+local backgroundTexture = haru.Texture.load("flappy/background-day.png", false, false, false)
+local messageTexture = haru.Texture.load("flappy/message.png", false, false, false)
 
 local KEY_SPACE = 32
 
@@ -14,8 +16,8 @@ function Flappy:new()
     haru.window.setTitle("Flappy")
     haru.camera.setHalfHeight(5.0)
     haru.renderer.setClearColor(78.0 / 255.0, 192.0 / 255.0, 202.0 / 255.0)
-    self.background = haru.Sprite.new("flappy/background-day.png", 32)
-    self.message = haru.Sprite.new("flappy/message.png", 32)
+    self.background = haru.Sprite.new(backgroundTexture, 32)
+    self.message = haru.Sprite.new(messageTexture, 32)
     self:reset()
 end
 
