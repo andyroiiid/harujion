@@ -23,9 +23,9 @@ layout(location = 1) out vec4 vColor;
 layout(location = 0) uniform ivec2 uTexturePixelSize;
 layout(location = 1) uniform ivec4 uPixelRect;
 layout(location = 2) uniform vec2 uPixelPivot;
-layout(location = 3) uniform int uPixelsPerUnit;
-layout(location = 4) uniform vec2 uPosition;
-layout(location = 5) uniform float uRotation;
+layout(location = 3) uniform vec2 uPosition;
+layout(location = 4) uniform float uRotation;
+layout(location = 5) uniform vec2 uScale;
 layout(location = 6) uniform bvec2 uFlip;
 
 layout(std140, binding = 0) uniform ShaderGlobalData {
@@ -56,8 +56,8 @@ vec2 rotate(vec2 pos, float angle) {
 void main() {
     ivec2 pixelSize = uPixelRect.zw;
     vec2 pixelPos = aPosition * pixelSize - flippedPixelPivot(pixelSize, uPixelPivot);
-    vec2 rotatedPos = rotate(pixelPos / uPixelsPerUnit, uRotation);
-    gl_Position = uMatrix * vec4(uPosition + rotatedPos, 0, 1);
+    vec2 worldPos = uPosition + rotate(uScale * pixelPos, uRotation);
+    gl_Position = uMatrix * vec4(worldPos, 0, 1);
     vec2 offset = vec2(uPixelRect.xy) / uTexturePixelSize;
     vec2 size = vec2(pixelSize) / uTexturePixelSize;
     vTexCoord = offset + size * flippedTexCoord(aTexCoord);
@@ -79,9 +79,9 @@ void main() {
     texturePixelSizeLocation = glGetUniformLocation(program, "uTexturePixelSize");
     pixelRectLocation = glGetUniformLocation(program, "uPixelRect");
     pixelPivotLocation = glGetUniformLocation(program, "uPixelPivot");
-    pixelsPerUnitLocation = glGetUniformLocation(program, "uPixelsPerUnit");
     positionLocation = glGetUniformLocation(program, "uPosition");
     rotationLocation = glGetUniformLocation(program, "uRotation");
+    scaleLocation = glGetUniformLocation(program, "uScale");
     flipLocation = glGetUniformLocation(program, "uFlip");
 }
 
@@ -97,16 +97,16 @@ void SpriteShader::setPixelPivot(const glm::vec2 &pivot) {
     glProgramUniform2fv(program, pixelPivotLocation, 1, glm::value_ptr(pivot));
 }
 
-void SpriteShader::setPixelsPerUnit(int pixelsPerUnit) {
-    glProgramUniform1i(program, pixelsPerUnitLocation, pixelsPerUnit);
-}
-
 void SpriteShader::setPosition(float x, float y) {
     glProgramUniform2f(program, positionLocation, x, y);
 }
 
 void SpriteShader::setRotation(float rotation) {
     glProgramUniform1f(program, rotationLocation, rotation);
+}
+
+void SpriteShader::setScale(float x, float y) {
+    glProgramUniform2f(program, scaleLocation, x, y);
 }
 
 void SpriteShader::setFlip(bool flipX, bool flipY) {

@@ -20,11 +20,11 @@ public:
 
     void setPixelPivot(const glm::vec2 &pivot);
 
-    void setPixelsPerUnit(int pixelsPerUnit);
-
     void setPosition(float x, float y);
 
     void setRotation(float rotation);
+
+    void setScale(float x, float y);
 
     void setFlip(bool flipX, bool flipY);
 
@@ -34,9 +34,9 @@ private:
     GLint texturePixelSizeLocation = 0;
     GLint pixelRectLocation = 0;
     GLint pixelPivotLocation = 0;
-    GLint pixelsPerUnitLocation = 0;
     GLint positionLocation = 0;
     GLint rotationLocation = 0;
+    GLint scaleLocation = 0;
     GLint flipLocation = 0;
 };
 

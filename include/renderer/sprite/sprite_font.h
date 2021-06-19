@@ -24,7 +24,7 @@ private:
 
     std::shared_ptr<Texture> texture;
     glm::ivec2 glyphPixelSize{0, 0};
-    int pixelsPerUnit = 1;
+    float scale = 1.0f;
 };
 
 #endif //HARUJION_SPRITE_FONT_H

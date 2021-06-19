@@ -29,9 +29,9 @@ private:
     std::shared_ptr<Texture> texture;
     glm::ivec4 pixelRect{0, 0, 0, 0};
     glm::vec2 pixelPivot{0, 0};
-    int pixelsPerUnit = 1;
     bool flipX = false;
     bool flipY = false;
+    float scale = 1.0f;
 };
 
 #endif //HARUJION_SPRITE_H
