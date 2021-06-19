@@ -45,16 +45,14 @@ void FmodAudio::update() {
     checkFmod(system->update(), "failed to update fmod system");
 }
 
-sol::table FmodAudio::getLuaTable(sol::state &lua) {
-    sol::table table = lua.create_table();
-    table.set_function("loadBank", [this](const std::string &filename) { loadBank(filename); });
-    table.set_function("setVolume", [this](float volume) { setVolume(volume); });
-    table.set_function(
-            "getEventDescription",
-            [this](const std::string &eventPath) { return getEventDescription(eventPath); }
+void FmodAudio::bindFunctions(sol::table &haru) {
+    haru.create_named(
+            "audio",
+            "loadBank", [this](const std::string &filename) { loadBank(filename); },
+            "setVolume", [this](float volume) { setVolume(volume); },
+            "getEventDescription", [this](const std::string &eventPath) { return getEventDescription(eventPath); },
+            "fireOneShotEvent", &FmodAudio::fireOneShotEvent
     );
-    table.set_function("fireOneShotEvent", &FmodAudio::fireOneShotEvent);
-    return table;
 }
 
 void FmodAudio::loadBank(const std::string &filename) {

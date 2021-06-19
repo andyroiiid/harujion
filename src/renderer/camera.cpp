@@ -31,21 +31,13 @@ void Camera::update() {
     }
 }
 
-sol::table Camera::getLuaTable(sol::state &lua) {
-    sol::table table = lua.create_table();
-    table.set_function(
-            "setHalfHeight",
-            [this](float newHalfHeight) { setHalfHeight(newHalfHeight); }
+void Camera::bindFunctions(sol::table &haru) {
+    haru.create_named(
+            "camera",
+            "setHalfHeight", [this](float newHalfHeight) { setHalfHeight(newHalfHeight); },
+            "setCenter", [this](float x, float y) { setCenter(x, y); },
+            "screenToWorld", [this](int x, int y) { return screenToWorld(x, y); }
     );
-    table.set_function(
-            "setCenter",
-            [this](float x, float y) { setCenter(x, y); }
-    );
-    table.set_function(
-            "screenToWorld",
-            [this](int x, int y) { return screenToWorld(x, y); }
-    );
-    return table;
 }
 
 void Camera::setHalfHeight(float newHalfHeight) {

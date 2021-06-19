@@ -32,18 +32,19 @@ void Input::update() {
     std::copy(currMouseButtonState.begin(), currMouseButtonState.end(), prevMouseButtonState.begin());
 }
 
-sol::table Input::getLuaTable(sol::state &lua) {
-    sol::table table = lua.create_table();
-    table.set_function("keyPressed", [this](int key) { return keyPressed(key); });
-    table.set_function("keyJustPressed", [this](int key) { return keyJustPressed(key); });
-    table.set_function("keyJustReleased", [this](int key) { return keyJustReleased(key); });
-    table.set_function("mouseButtonPressed", [this](int button) { return mouseButtonPressed(button); });
-    table.set_function("mouseButtonJustPressed", [this](int button) { return mouseButtonJustPressed(button); });
-    table.set_function("mouseButtonJustReleased", [this](int button) { return mouseButtonJustReleased(button); });
-    table.set_function("mousePosition", [this]() { return mousePosition(); });
-    table.set_function("mouseWorldPosition", [this]() { return mouseWorldPosition(); });
-    table.set_function("setCursor", [this](bool enable) { return setCursor(enable); });
-    return table;
+void Input::bindFunctions(sol::table &haru) {
+    haru.create_named(
+            "input",
+            "keyPressed", [this](int key) { return keyPressed(key); },
+            "keyJustPressed", [this](int key) { return keyJustPressed(key); },
+            "keyJustReleased", [this](int key) { return keyJustReleased(key); },
+            "mouseButtonPressed", [this](int button) { return mouseButtonPressed(button); },
+            "mouseButtonJustPressed", [this](int button) { return mouseButtonJustPressed(button); },
+            "mouseButtonJustReleased", [this](int button) { return mouseButtonJustReleased(button); },
+            "mousePosition", [this]() { return mousePosition(); },
+            "mouseWorldPosition", [this]() { return mouseWorldPosition(); },
+            "setCursor", [this](bool enable) { return setCursor(enable); }
+    );
 }
 
 bool Input::keyPressed(int key) {

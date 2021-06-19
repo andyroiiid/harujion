@@ -20,7 +20,7 @@ public:
 
     void clear();
 
-    sol::table getLuaTable(sol::state &lua);
+    void bindFunctions(sol::table &haru);
 
     void setClearColor(float r, float g, float b, float a = 1.0f);
 

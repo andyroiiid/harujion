@@ -18,7 +18,7 @@ public:
 
     void update();
 
-    sol::table getLuaTable(sol::state &lua);
+    void bindFunctions(sol::table &haru);
 
     void setHalfHeight(float newHalfHeight);
 

@@ -65,13 +65,11 @@ void Window::getFramebufferSize(int *w, int *h) {
     glfwGetFramebufferSize(window, w, h);
 }
 
-sol::table Window::getLuaTable(sol::state &lua) {
-    sol::table table = lua.create_table();
-    table.set_function(
-            "setTitle",
-            [this](const char *title) { setTitle(title); }
+void Window::bindFunctions(sol::table &haru) {
+    sol::table table = haru.create_named(
+            "window",
+            "setTitle", [this](const char *title) { setTitle(title); }
     );
-    return table;
 }
 
 void Window::setTitle(const char *title) {

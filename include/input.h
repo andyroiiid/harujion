@@ -18,7 +18,7 @@ public:
 
     void update();
 
-    sol::table getLuaTable(sol::state &lua);
+    void bindFunctions(sol::table &haru);
 
     bool keyPressed(int key);
 

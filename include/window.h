@@ -20,7 +20,7 @@ public:
 
     void getFramebufferSize(int *w, int *h);
 
-    sol::table getLuaTable(sol::state &lua);
+    void bindFunctions(sol::table &haru);
 
     void setTitle(const char *title);
 

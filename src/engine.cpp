@@ -38,16 +38,12 @@ Engine::Engine() {
 
 void Engine::createBindings() {
     haru = lua.create_table("haru");
-    bindModules();
+    window.bindFunctions(haru);
+    camera.bindFunctions(haru);
+    input.bindFunctions(haru);
+    renderer.bindFunctions(haru);
+    fmodAudio.bindFunctions(haru);
     bindTypes();
-}
-
-void Engine::bindModules() {
-    haru["window"] = window.getLuaTable(lua);
-    haru["camera"] = camera.getLuaTable(lua);
-    haru["input"] = input.getLuaTable(lua);
-    haru["renderer"] = renderer.getLuaTable(lua);
-    haru["audio"] = fmodAudio.getLuaTable(lua);
 }
 
 void Engine::bindTypes() {
