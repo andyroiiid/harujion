@@ -45,7 +45,7 @@ function Pipes:draw()
     for i, x in ipairs(self.xs) do
         local y = self.ys[i]
         self.sprite:setFlip(false, false)
-        self.sprite:draw(x, -2.0 + y, 0.0)
+        self.sprite:draw(x, -2.0 + y)
         self.sprite:setFlip(true, false)
         self.sprite:draw(x, 2.0 + y, math.pi)
     end

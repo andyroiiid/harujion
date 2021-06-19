@@ -27,7 +27,7 @@ function Bullet:dying()
 end
 
 function Bullet:draw()
-    self.sprite:draw(self.x, self.y, 0.0)
+    self.sprite:draw(self.x, self.y)
 end
 
 return Bullet

@@ -22,9 +22,9 @@ public:
 
     void setPosition(float x, float y);
 
-    void setRotation(float rotation);
+    void setRotation(float r);
 
-    void setScale(float x, float y);
+    void setScale(float sx, float sy);
 
     void setFlip(bool flipX, bool flipY);
 

@@ -20,7 +20,7 @@ public:
 
     void setFlip(bool x, bool y);
 
-    void draw(float x, float y, float rotation);
+    void draw(float x, float y, float r);
 
 private:
     SpriteShader &shader = SpriteShader::getInstance();

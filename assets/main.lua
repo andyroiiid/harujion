@@ -1,13 +1,16 @@
-local renderer = haru.renderer
-
-function renderer.setClearColor(r, g, b, a)
+function haru.renderer.setClearColor(r, g, b, a)
     a = a or 1.0
-    renderer._setClearColor(r, g, b, a)
+    haru.renderer._setClearColor(r, g, b, a)
 end
 
-function renderer.setDrawColor(r, g, b, a)
+function haru.renderer.setDrawColor(r, g, b, a)
     a = a or 1.0
-    renderer._setDrawColor(r, g, b, a)
+    haru.renderer._setDrawColor(r, g, b, a)
+end
+
+function haru.Sprite:draw(x, y, r)
+    r = r or 0.0
+    self:_draw(x, y, r)
 end
 
 local Button = require("button.lua")

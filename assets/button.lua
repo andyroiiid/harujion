@@ -30,10 +30,10 @@ end
 
 function Button:draw()
     if self.pressed then
-        pressedSprite:draw(self.x, self.y, 0.0)
+        pressedSprite:draw(self.x, self.y)
         font:draw(self.x - 1.0, self.y - 0.3125, self.text)
     else
-        sprite:draw(self.x, self.y, 0.0)
+        sprite:draw(self.x, self.y)
         font:draw(self.x - 1.0, self.y - 0.25, self.text)
     end
 

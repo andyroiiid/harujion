@@ -101,12 +101,12 @@ void SpriteShader::setPosition(float x, float y) {
     glProgramUniform2f(program, positionLocation, x, y);
 }
 
-void SpriteShader::setRotation(float rotation) {
-    glProgramUniform1f(program, rotationLocation, rotation);
+void SpriteShader::setRotation(float r) {
+    glProgramUniform1f(program, rotationLocation, r);
 }
 
-void SpriteShader::setScale(float x, float y) {
-    glProgramUniform2f(program, scaleLocation, x, y);
+void SpriteShader::setScale(float sx, float sy) {
+    glProgramUniform2f(program, scaleLocation, sx, sy);
 }
 
 void SpriteShader::setFlip(bool flipX, bool flipY) {

@@ -64,7 +64,7 @@ void Engine::bindTypes() {
     sprite["setPixelRect"] = &Sprite::setPixelRect;
     sprite["setPixelPivot"] = &Sprite::setPixelPivot;
     sprite["setFlip"] = &Sprite::setFlip;
-    sprite["draw"] = &Sprite::draw;
+    sprite["_draw"] = &Sprite::draw;
 
     sol::usertype<SpriteFont> spriteFont = haru.new_usertype<SpriteFont>(
             "SpriteFont",

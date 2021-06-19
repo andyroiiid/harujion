@@ -81,12 +81,12 @@ function Flappy:update(deltaTime)
 end
 
 function Flappy:draw()
-    self.background:draw(9.0, 0.0, 0.0)
-    self.background:draw(0.0, 0.0, 0.0)
-    self.background:draw(-9.0, 0.0, 0.0)
+    self.background:draw(9.0, 0.0)
+    self.background:draw(0.0, 0.0)
+    self.background:draw(-9.0, 0.0)
 
     if self.waiting then
-        self.message:draw(0.0, 0.0, 0.0)
+        self.message:draw(0.0, 0.0)
     else
         self.pipes:draw()
         self.player:draw()

@@ -25,7 +25,7 @@ void Sprite::setFlip(bool x, bool y) {
     flipY = y;
 }
 
-void Sprite::draw(float x, float y, float rotation) {
+void Sprite::draw(float x, float y, float r) {
     if (!texture) return;
 
     shader.use();
@@ -33,7 +33,7 @@ void Sprite::draw(float x, float y, float rotation) {
     shader.setPixelRect(pixelRect);
     shader.setPixelPivot(pixelPivot);
     shader.setPosition(x, y);
-    shader.setRotation(rotation);
+    shader.setRotation(r);
     shader.setScale(scale, scale);
     shader.setFlip(flipX, flipY);
     texture->bind(0);
