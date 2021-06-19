@@ -31,16 +31,16 @@ end
 local function getInputVector()
     local horizontal = 0
     local vertical = 0
-    if haru.input.keyPressed(KEY_W) then
+    if haru.keyboard.pressed(KEY_W) then
         vertical = vertical + 1
     end
-    if haru.input.keyPressed(KEY_S) then
+    if haru.keyboard.pressed(KEY_S) then
         vertical = vertical - 1
     end
-    if haru.input.keyPressed(KEY_D) then
+    if haru.keyboard.pressed(KEY_D) then
         horizontal = horizontal + 1
     end
-    if haru.input.keyPressed(KEY_A) then
+    if haru.keyboard.pressed(KEY_A) then
         horizontal = horizontal - 1
     end
     return vec2.normalize(horizontal, vertical)
@@ -52,7 +52,7 @@ function Player:update(deltaTime)
     self.x = self.x + SPEED * horizontal * deltaTime
     self.y = self.y + SPEED * vertical * deltaTime
 
-    local mouseX, mouseY = haru.input.mouseWorldPosition()
+    local mouseX, mouseY = haru.mouse.worldPosition()
     self.r = math.atan2(mouseY - self.y, mouseX - self.x)
 
     haru.camera.setCenter(self.x, self.y)

@@ -20,8 +20,8 @@ function Button:update(mouseX, mouseY)
     if mouseX < self.x - 48 or mouseX > self.x + 48 or mouseY < self.y - 24 or mouseY > self.y + 24 then
         self.pressed = false
     else
-        self.pressed = haru.input.mouseButtonPressed(0)
-        if haru.input.mouseButtonJustReleased(0) then
+        self.pressed = haru.mouse.pressed(0)
+        if haru.mouse.justReleased(0) then
             return true
         end
     end

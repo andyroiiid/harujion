@@ -29,7 +29,9 @@ private:
 
     ~Window();
 
-    friend class Input;
+    friend class Keyboard;
+
+    friend class Mouse;
 
     friend class Renderer;
 

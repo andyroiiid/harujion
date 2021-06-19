@@ -40,7 +40,8 @@ void Engine::createBindings() {
     haru = lua.create_table("haru");
     window.bindFunctions(haru);
     camera.bindFunctions(haru);
-    input.bindFunctions(haru);
+    keyboard.bindFunctions(haru);
+    mouse.bindFunctions(haru);
     renderer.bindFunctions(haru);
     fmodAudio.bindFunctions(haru);
     bindTypes();
@@ -128,7 +129,8 @@ void Engine::mainLoop() {
 
 void Engine::update(float deltaTime) {
     fmodAudio.update();
-    input.update();
+    keyboard.update();
+    mouse.update();
     glfwPollEvents();
     checkLua(haru["update"](deltaTime));
     camera.update();

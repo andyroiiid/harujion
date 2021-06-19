@@ -10,7 +10,8 @@
 #include "non_copyable.h"
 #include "physfs.h"
 #include "window.h"
-#include "input.h"
+#include "keyboard.h"
+#include "mouse.h"
 #include "renderer/camera.h"
 #include "renderer/renderer.h"
 #include "fmod_audio.h"
@@ -41,7 +42,8 @@ private:
     Physfs &physfs = Physfs::getInstance();
     Window &window = Window::getInstance();
     Camera &camera = Camera::getInstance();
-    Input &input = Input::getInstance();
+    Keyboard &keyboard = Keyboard::getInstance();
+    Mouse &mouse = Mouse::getInstance();
     Renderer &renderer = Renderer::getInstance();
     FmodAudio &fmodAudio = FmodAudio::getInstance();
 

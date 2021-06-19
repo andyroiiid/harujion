@@ -11,7 +11,7 @@ local crosshairTexture = haru.Texture.load("topdown/crosshair010.png")
 function TopDown:new()
     haru.window.setTitle("TopDown")
     haru.camera.setHalfHeight(320)
-    haru.input.setCursor(false)
+    haru.mouse.setCursor(false)
 
     self.player = Player()
     self.bullets = BulletManager()
@@ -30,7 +30,7 @@ function TopDown:update(deltaTime)
         )
     end
 
-    if haru.input.mouseButtonJustPressed(0) then
+    if haru.mouse.justPressed(0) then
         local bulletX, bulletY = self.player:getBarrelPos()
         self.bullets:spawn(bulletX, bulletY, self.player.r)
     end
@@ -50,7 +50,7 @@ function TopDown:draw()
     self.bullets:draw()
     self.enemies:draw()
 
-    local mouseX, mouseY = haru.input.mouseWorldPosition()
+    local mouseX, mouseY = haru.mouse.worldPosition()
     self.crosshair:draw(mouseX, mouseY, 0.0)
 end
 

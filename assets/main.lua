@@ -18,7 +18,7 @@ local function reset()
     haru.window.setTitle("Sample Games")
     haru.camera.setHalfHeight(96)
     haru.camera.setCenter(0.0, 0.0)
-    haru.input.setCursor(true)
+    haru.mouse.setCursor(true)
     haru.renderer.setClearColor(0.0, 0.0, 0.0)
 end
 
@@ -31,7 +31,7 @@ end
 
 function haru.update(deltaTime)
     if not game then
-        local mouseX, mouseY = haru.input.mouseWorldPosition()
+        local mouseX, mouseY = haru.mouse.worldPosition()
         if flappyButton:update(mouseX, mouseY) then
             game = Flappy()
         end
@@ -39,7 +39,7 @@ function haru.update(deltaTime)
             game = TopDown()
         end
     else
-        if haru.input.keyJustPressed(KEY_ESCAPE) then
+        if haru.keyboard.justPressed(KEY_ESCAPE) then
             reset()
         else
             game:update(deltaTime)

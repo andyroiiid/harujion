@@ -16,7 +16,8 @@ add_executable(${PROJECT_NAME}
         renderer/sprite/sprite.cpp
         renderer/sprite/sprite_font.cpp
         renderer/renderer.cpp
-        input.cpp
+        keyboard.cpp
+        mouse.cpp
         fmod_audio.cpp
         engine.cpp
         main.cpp)

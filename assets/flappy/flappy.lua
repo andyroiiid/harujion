@@ -25,18 +25,18 @@ function Flappy:reset()
     self.player = Player()
     self.pipes = Pipes()
     self.waiting = true
-    haru.input.setCursor(true)
+    haru.mouse.setCursor(true)
     self.prevOpening = false
     self.scores = 0
 end
 
 function Flappy:update(deltaTime)
     -- handle input
-    if haru.input.keyJustPressed(KEY_SPACE) or haru.input.mouseButtonJustPressed(0) then
+    if haru.keyboard.justPressed(KEY_SPACE) or haru.mouse.justPressed(0) then
         if self.waiting then
             haru.audio.fireOneShotEvent(SFX.SWOOSH)
             self.waiting = false
-            haru.input.setCursor(false)
+            haru.mouse.setCursor(false)
         else
             haru.audio.fireOneShotEvent(SFX.WING)
             self.player:jump()
@@ -92,7 +92,7 @@ function Flappy:draw()
         self.player:draw()
 
         -- draw mouse position, just for testing
-        local mouseX, mouseY = haru.input.mouseWorldPosition()
+        local mouseX, mouseY = haru.mouse.worldPosition()
         haru.renderer.setDrawColor(1.0, 1.0, 1.0)
         haru.renderer.drawPoint(mouseX, mouseY, 10.0)
 

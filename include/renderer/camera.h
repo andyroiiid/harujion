@@ -18,13 +18,15 @@ public:
 
     void update();
 
+    std::tuple<float, float> screenToCanvas(int x, int y) const;
+
+    std::tuple<float, float> screenToWorld(int x, int y) const;
+
     void bindFunctions(sol::table &haru);
 
     void setHalfHeight(float newHalfHeight);
 
     void setCenter(float x, float y);
-
-    std::tuple<float, float> screenToWorld(int x, int y) const;
 
 private:
     Camera() = default;

@@ -31,12 +31,27 @@ void Camera::update() {
     }
 }
 
+std::tuple<float, float> Camera::screenToCanvas(int x, int y) const {
+    return std::tuple<float, float>(
+            static_cast<float>(x),
+            screenHeight - static_cast<float>(y)
+    );
+}
+
+std::tuple<float, float> Camera::screenToWorld(int x, int y) const {
+    float normalizedX = static_cast<float>(x) / screenWidth * 2.0f - 1.0f;
+    float normalizedY = 1.0f - static_cast<float>(y) / screenHeight * 2.0f;
+    return std::make_tuple(
+            center.x + normalizedX * halfWidth,
+            center.y + normalizedY * halfHeight
+    );
+}
+
 void Camera::bindFunctions(sol::table &haru) {
     haru.create_named(
             "camera",
             "setHalfHeight", [this](float newHalfHeight) { setHalfHeight(newHalfHeight); },
-            "setCenter", [this](float x, float y) { setCenter(x, y); },
-            "screenToWorld", [this](int x, int y) { return screenToWorld(x, y); }
+            "setCenter", [this](float x, float y) { setCenter(x, y); }
     );
 }
 
@@ -48,13 +63,4 @@ void Camera::setHalfHeight(float newHalfHeight) {
 void Camera::setCenter(float x, float y) {
     center = {x, y};
     matrixDirty = true;
-}
-
-std::tuple<float, float> Camera::screenToWorld(int x, int y) const {
-    float normalizedX = static_cast<float>(x) / screenWidth * 2.0f - 1.0f;
-    float normalizedY = 1.0f - static_cast<float>(y) / screenHeight * 2.0f;
-    return std::make_tuple(
-            center.x + normalizedX * halfWidth,
-            center.y + normalizedY * halfHeight
-    );
 }
