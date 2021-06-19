@@ -30,10 +30,10 @@ void Sprite::draw(float x, float y, float r, float sx, float sy) {
     shader.setTexturePixelSize(texture->size());
     shader.setPixelRect(pixelRect);
     shader.setPixelPivot(pixelPivot);
+    shader.setFlip(flipX, flipY);
     shader.setPosition(x, y);
     shader.setRotation(r);
     shader.setScale(sx, sy);
-    shader.setFlip(flipX, flipY);
     texture->bind(0);
     vertices.bindAndDraw();
     glBindVertexArray(0);

@@ -17,9 +17,9 @@ void SpriteFont::draw(float x, float y, const std::string &string) {
     texture->bind(0);
     shader.setTexturePixelSize(texture->size());
     shader.setPixelPivot({0.0f, 0.0f});
+    shader.setFlip(false, false);
     shader.setRotation(0.0f);
     shader.setScale(1.0f, 1.0f);
-    shader.setFlip(false, false);
     auto deltaX = static_cast<float>(glyphPixelSize.x);
     for (int i = 0; i < string.size(); i++) {
         shader.setPixelRect(getGlyphRect(string[i]));
