@@ -33,7 +33,7 @@ Engine::Engine() {
     );
     lua.add_package_loader(Physfs::luaPackageLoader);
     createBindings();
-    loadStrictLua();
+    loadPrelude();
 }
 
 void Engine::createBindings() {
@@ -79,49 +79,33 @@ void Engine::checkLua(const sol::protected_function_result &result, bool abortOn
     }
 }
 
-void Engine::loadStrictLua() {
-    static const char *STRICT_LUA = R"LUA(
--- strict.lua
--- checks uses of undeclared global variables
--- All global variables must be 'declared' through a regular assignment
--- (even assigning nil will do) in a main chunk before being used
--- anywhere or assigned to inside a function.
---
--- modified for better compatibility with LuaJIT, see:
--- http://www.freelists.org/post/luajit/strictlua-with-stripped-bytecode
-
-local getinfo, error, rawset, rawget = debug.getinfo, error, rawset, rawget
-
-local mt = getmetatable(_G)
-if mt == nil then
-  mt = {}
-  setmetatable(_G, mt)
+void Engine::loadPrelude() {
+    static const char *PRELUDE_LUA = R"LUA(
+function haru.renderer.setClearColor(r, g, b, a)
+    a = a or 1.0
+    return haru.renderer._setClearColor(r, g, b, a)
 end
 
-mt.__declared = {}
-
-mt.__newindex = function (t, n, v)
-  if not mt.__declared[n] then
-    local info = getinfo(2, "S")
-    if info and info.linedefined > 0 then
-      error("assign to undeclared variable '"..n.."'", 2)
-    end
-    mt.__declared[n] = true
-  end
-  rawset(t, n, v)
+function haru.renderer.setDrawColor(r, g, b, a)
+    a = a or 1.0
+    return haru.renderer._setDrawColor(r, g, b, a)
 end
 
-mt.__index = function (t, n)
-  if not mt.__declared[n] then
-    local info = getinfo(2, "S")
-    if info and info.linedefined > 0 then
-      error("variable '"..n.."' is not declared", 2)
-    end
-  end
-  return rawget(t, n)
+function haru.Texture.load(filename, filter, clamp, mipmap)
+    filter = filter or false
+    clamp = clamp or false
+    mipmap = mipmap or false
+    return haru.Texture._load(filename, filter, clamp, mipmap)
+end
+
+function haru.Sprite:draw(x, y, r, sx, sy)
+    r = r or 0.0
+    sx = sx or 1.0
+    sy = sy or 1.0
+    return self:_draw(x, y, r, sx, sy)
 end
 )LUA";
-    checkLua(lua.script(STRICT_LUA, "strict.lua"), true);
+    checkLua(lua.script(PRELUDE_LUA, "prelude.lua"), true);
 }
 
 void Engine::loadScript(const std::string &filename) {

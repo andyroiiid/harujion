@@ -30,7 +30,7 @@ private:
 
     static void checkLua(const sol::protected_function_result &result, bool abortOnError = false);
 
-    void loadStrictLua();
+    void loadPrelude();
 
     void loadScript(const std::string &filename);
 
