@@ -1,3 +1,15 @@
+local renderer = haru.renderer
+
+function renderer.setClearColor(r, g, b, a)
+    a = a or 1.0
+    renderer._setClearColor(r, g, b, a)
+end
+
+function renderer.setDrawColor(r, g, b, a)
+    a = a or 1.0
+    renderer._setDrawColor(r, g, b, a)
+end
+
 local Button = require("button.lua")
 local Flappy = require("flappy/flappy.lua")
 local TopDown = require("topdown/topdown.lua")

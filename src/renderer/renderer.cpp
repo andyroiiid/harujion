@@ -47,18 +47,12 @@ void Renderer::clear() {
 sol::table Renderer::getLuaTable(sol::state &lua) {
     sol::table table = lua.create_table();
     table.set_function(
-            "setClearColor",
-            sol::overload(
-                    [this](float r, float g, float b) { setClearColor(r, g, b); },
-                    [this](float r, float g, float b, float a) { setClearColor(r, g, b, a); }
-            )
+            "_setClearColor",
+            [this](float r, float g, float b, float a) { setClearColor(r, g, b, a); }
     );
     table.set_function(
-            "setDrawColor",
-            sol::overload(
-                    [this](float r, float g, float b) { setDrawColor(r, g, b); },
-                    [this](float r, float g, float b, float a) { setDrawColor(r, g, b, a); }
-            )
+            "_setDrawColor",
+            [this](float r, float g, float b, float a) { setDrawColor(r, g, b, a); }
     );
     table.set_function(
             "drawPoint",
