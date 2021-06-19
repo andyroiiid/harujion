@@ -4,12 +4,10 @@
 
 #include "renderer/sprite/sprite.h"
 
-Sprite::Sprite(std::shared_ptr<Texture> &texture, int pixelsPerUnit)
-        : texture(texture) {
-    glm::ivec2 textureSize = texture->size();
+Sprite::Sprite(std::shared_ptr<Texture> &texture) : texture(texture) {
+    const glm::ivec2 &textureSize = texture->size();
     pixelRect = {0, 0, textureSize.x, textureSize.y};
     pixelPivot = glm::vec2(textureSize) / 2.0f;
-    scale = 1.0f / static_cast<float>(pixelsPerUnit);
 }
 
 void Sprite::setPixelRect(int x, int y, int w, int h) {
@@ -25,7 +23,7 @@ void Sprite::setFlip(bool x, bool y) {
     flipY = y;
 }
 
-void Sprite::draw(float x, float y, float r) {
+void Sprite::draw(float x, float y, float r, float sx, float sy) {
     if (!texture) return;
 
     shader.use();
@@ -34,7 +32,7 @@ void Sprite::draw(float x, float y, float r) {
     shader.setPixelPivot(pixelPivot);
     shader.setPosition(x, y);
     shader.setRotation(r);
-    shader.setScale(scale, scale);
+    shader.setScale(sx, sy);
     shader.setFlip(flipX, flipY);
     texture->bind(0);
     vertices.bindAndDraw();

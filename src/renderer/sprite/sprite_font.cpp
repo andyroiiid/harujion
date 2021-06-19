@@ -4,11 +4,10 @@
 
 #include "renderer/sprite/sprite_font.h"
 
-SpriteFont::SpriteFont(const std::string &filename, int pixelsPerUnit) {
+SpriteFont::SpriteFont(const std::string &filename) {
     texture = Texture::load(filename, false, false, false);
     glm::ivec2 textureSize = texture->size();
     glyphPixelSize = {textureSize.x / 16, textureSize.y / 8};
-    scale = 1.0f / static_cast<float>(pixelsPerUnit);
 }
 
 void SpriteFont::draw(float x, float y, const std::string &string) {
@@ -19,9 +18,9 @@ void SpriteFont::draw(float x, float y, const std::string &string) {
     shader.setTexturePixelSize(texture->size());
     shader.setPixelPivot({0.0f, 0.0f});
     shader.setRotation(0.0f);
-    shader.setScale(scale, scale);
+    shader.setScale(1.0f, 1.0f);
     shader.setFlip(false, false);
-    float deltaX = static_cast<float>(glyphPixelSize.x) * scale;
+    auto deltaX = static_cast<float>(glyphPixelSize.x);
     for (int i = 0; i < string.size(); i++) {
         shader.setPixelRect(getGlyphRect(string[i]));
         shader.setPosition(x + static_cast<float>(i) * deltaX, y);

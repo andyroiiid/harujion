@@ -7,14 +7,14 @@ local Enemy = Object:extend()
 
 local texture = haru.Texture.load("topdown/zombie1_hold.png", true, true, true)
 
-local SPEED = 5.0
+local SPEED = 160
 
 function Enemy:new(x, y)
-    self.sprite = haru.Sprite.new(texture, 32)
-    self.speed = 0.0
+    self.sprite = haru.Sprite.new(texture)
+    self.speed = 0
     self.x = x
     self.y = y
-    self.rotation = 0.0
+    self.r = 0
     self.hp = 100
 end
 
@@ -25,11 +25,11 @@ function Enemy:update(deltaTime, player)
     dx, dy = vec2.normalize(dx, dy)
     self.x = self.x + self.speed * dx * deltaTime
     self.y = self.y + self.speed * dy * deltaTime
-    self.rotation = math.atan2(dy, dx)
+    self.r = math.atan2(dy, dx)
 end
 
 function Enemy:getBounds()
-    return self.x - 0.5, self.y - 0.5, self.x + 0.5, self.y + 0.5
+    return self.x - 16, self.y - 16, self.x + 16, self.y + 16
 end
 
 function Enemy:hit()
@@ -42,7 +42,7 @@ function Enemy:dying()
 end
 
 function Enemy:draw()
-    self.sprite:draw(self.x, self.y, self.rotation)
+    self.sprite:draw(self.x, self.y, self.r)
 end
 
 return Enemy

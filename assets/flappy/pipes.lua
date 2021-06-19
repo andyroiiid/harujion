@@ -2,28 +2,28 @@ local Object = require("classic.lua")
 
 local Pipes = Object:extend()
 
-local texture = haru.Texture.load("flappy/pipe-green.png", false, false, false)
+local texture = haru.Texture.load("flappy/pipe-green.png")
 
 local function generateOpening()
-    return math.random() * 5.0 - 2.5
+    return math.random() * 160 - 80
 end
 
 function Pipes:new()
-    self.sprite = haru.Sprite.new(texture, 32)
-    self.sprite:setPixelPivot(26.0, 320.0)
-    self.xs = {10.0, 20.0, 30.0}
+    self.sprite = haru.Sprite.new(texture)
+    self.sprite:setPixelPivot(26, 320)
+    self.xs = {320, 640, 960}
     self.ys = {generateOpening(), generateOpening(), generateOpening()}
 end
 
 function Pipes:update(deltaTime)
     for i, x in ipairs(self.xs) do
-        x = x - 5.0 * deltaTime
-        if x < -10.0 then
+        x = x - 160 * deltaTime
+        if x < -320 then
             -- reuse old array item instead of inserting & deleting
             if i == 1 then
-                self.xs[i] = self.xs[3] + 10.0
+                self.xs[i] = self.xs[3] + 320
             else
-                self.xs[i] = self.xs[i - 1] + 10.0
+                self.xs[i] = self.xs[i - 1] + 320
             end
             self.ys[i] = generateOpening()
         else
@@ -34,7 +34,7 @@ end
 
 function Pipes:getCurrentOpening()
     for i, x in ipairs(self.xs) do
-        if x > -0.8125 and x < 0.8125 then
+        if x > -26 and x < 26 then
             return self.ys[i]
         end
     end
@@ -45,9 +45,9 @@ function Pipes:draw()
     for i, x in ipairs(self.xs) do
         local y = self.ys[i]
         self.sprite:setFlip(false, false)
-        self.sprite:draw(x, -2.0 + y)
+        self.sprite:draw(x, y - 64)
         self.sprite:setFlip(true, false)
-        self.sprite:draw(x, 2.0 + y, math.pi)
+        self.sprite:draw(x, y + 64, math.pi)
     end
 end
 

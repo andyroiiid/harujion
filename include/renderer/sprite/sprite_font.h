@@ -12,7 +12,7 @@
 
 class SpriteFont {
 public:
-    SpriteFont(const std::string &filename, int pixelsPerUnit);
+    explicit SpriteFont(const std::string &filename);
 
     void draw(float x, float y, const std::string &string);
 
@@ -24,7 +24,6 @@ private:
 
     std::shared_ptr<Texture> texture;
     glm::ivec2 glyphPixelSize{0, 0};
-    float scale = 1.0f;
 };
 
 #endif //HARUJION_SPRITE_FONT_H

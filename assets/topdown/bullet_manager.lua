@@ -8,8 +8,8 @@ function BulletManager:new()
     self.bullets = {}
 end
 
-function BulletManager:spawn(x, y, direction)
-    local bullet = Bullet(x, y, direction)
+function BulletManager:spawn(x, y, r)
+    local bullet = Bullet(x, y, r)
     table.insert(self.bullets, bullet)
 end
 

@@ -6,18 +6,18 @@ local SFX = require("flappy/sfx.lua")
 
 local Flappy = Object:extend()
 
-local font = haru.SpriteFont.new("monogram.png", 16)
-local backgroundTexture = haru.Texture.load("flappy/background-day.png", false, false, false)
-local messageTexture = haru.Texture.load("flappy/message.png", false, false, false)
+local font = haru.SpriteFont.new("monogram.png")
+local backgroundTexture = haru.Texture.load("flappy/background-day.png")
+local messageTexture = haru.Texture.load("flappy/message.png")
 
 local KEY_SPACE = 32
 
 function Flappy:new()
     haru.window.setTitle("Flappy")
-    haru.camera.setHalfHeight(5.0)
-    haru.renderer.setClearColor(78.0 / 255.0, 192.0 / 255.0, 202.0 / 255.0)
-    self.background = haru.Sprite.new(backgroundTexture, 32)
-    self.message = haru.Sprite.new(messageTexture, 32)
+    haru.camera.setHalfHeight(160)
+    haru.renderer.setClearColor(78 / 255, 192 / 255, 202 / 255)
+    self.background = haru.Sprite.new(backgroundTexture)
+    self.message = haru.Sprite.new(messageTexture)
     self:reset()
 end
 
@@ -52,7 +52,7 @@ function Flappy:update(deltaTime)
     self.player:update(deltaTime)
 
     -- check falling death
-    if self.player.y <= -6.0 then
+    if self.player.y <= -192 then
         haru.audio.fireOneShotEvent(SFX.DIE)
         self:reset()
     end
@@ -60,7 +60,7 @@ function Flappy:update(deltaTime)
     -- check passing openings
     local opening = self.pipes:getCurrentOpening()
     if opening then
-        if self.player.y <= opening - 2.0 or self.player.y >= opening + 2.0 then
+        if self.player.y <= opening - 64 or self.player.y >= opening + 64 then
             -- player hit pipes
             haru.audio.fireOneShotEvent(SFX.HIT)
             self:reset()
@@ -81,12 +81,12 @@ function Flappy:update(deltaTime)
 end
 
 function Flappy:draw()
-    self.background:draw(9.0, 0.0)
-    self.background:draw(0.0, 0.0)
-    self.background:draw(-9.0, 0.0)
+    self.background:draw(288, 0)
+    self.background:draw(0, 0)
+    self.background:draw(-288, 0)
 
     if self.waiting then
-        self.message:draw(0.0, 0.0)
+        self.message:draw(0, 0)
     else
         self.pipes:draw()
         self.player:draw()
@@ -96,7 +96,7 @@ function Flappy:draw()
         haru.renderer.setDrawColor(1.0, 1.0, 1.0)
         haru.renderer.drawPoint(mouseX, mouseY, 10.0)
 
-        font:draw(0.0, self.player.y + 1.0, "Scores=" .. self.scores)
+        font:draw(-32, self.player.y + 32, "Scores=" .. self.scores)
     end
 end
 

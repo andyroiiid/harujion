@@ -55,11 +55,11 @@ void Engine::bindTypes() {
             "Texture",
             sol::constructors<Texture(const std::string &, bool, bool, bool)>()
     );
-    texture.set_function("load", Texture::load);
+    texture.set_function("_load", Texture::load);
 
     sol::usertype<Sprite> sprite = haru.new_usertype<Sprite>(
             "Sprite",
-            sol::constructors<Sprite(std::shared_ptr<Texture> &, int)>()
+            sol::constructors<Sprite(std::shared_ptr<Texture> &)>()
     );
     sprite["setPixelRect"] = &Sprite::setPixelRect;
     sprite["setPixelPivot"] = &Sprite::setPixelPivot;
@@ -68,7 +68,7 @@ void Engine::bindTypes() {
 
     sol::usertype<SpriteFont> spriteFont = haru.new_usertype<SpriteFont>(
             "SpriteFont",
-            sol::constructors<SpriteFont(const std::string &, int)>());
+            sol::constructors<SpriteFont(const std::string &)>());
     spriteFont["draw"] = &SpriteFont::draw;
 }
 
