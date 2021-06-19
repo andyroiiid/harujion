@@ -12,6 +12,8 @@
 
 class Sprite : NonCopyable {
 public:
+    Sprite(std::shared_ptr<Texture> &texture, int pixelsPerUnit);
+
     Sprite(const std::string &filename, int pixelsPerUnit);
 
     void setPixelRect(int x, int y, int w, int h);

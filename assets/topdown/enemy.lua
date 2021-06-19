@@ -5,10 +5,12 @@ local Object = require("classic.lua")
 
 local Enemy = Object:extend()
 
+local texture = haru.Texture.load("topdown/zombie1_hold.png", true, true, true)
+
 local SPEED = 5.0
 
 function Enemy:new(x, y)
-    self.sprite = haru.Sprite.new("topdown/zombie1_hold.png", 32)
+    self.sprite = haru.Sprite.new(texture, 32)
     self.speed = 0.0
     self.x = x
     self.y = y

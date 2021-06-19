@@ -6,6 +6,7 @@
 
 #include <spdlog/spdlog.h>
 
+#include "renderer/texture.h"
 #include "renderer/sprite/sprite.h"
 #include "renderer/sprite/sprite_font.h"
 
@@ -50,9 +51,19 @@ void Engine::bindModules() {
 }
 
 void Engine::bindTypes() {
+    sol::usertype<Texture> texture = haru.new_usertype<Texture>(
+            "Texture",
+            sol::constructors<Texture(const std::string &, bool, bool, bool)>()
+    );
+    texture.set_function("load", Texture::load);
+
     sol::usertype<Sprite> sprite = haru.new_usertype<Sprite>(
             "Sprite",
-            sol::constructors<Sprite(const std::string &, int)>());
+            sol::constructors<
+                    Sprite(std::shared_ptr<Texture> &, int),
+                    Sprite(const std::string &, int)
+            >()
+    );
     sprite["setPixelRect"] = &Sprite::setPixelRect;
     sprite["setPixelPivot"] = &Sprite::setPixelPivot;
     sprite["setFlip"] = &Sprite::setFlip;

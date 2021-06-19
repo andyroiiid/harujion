@@ -5,7 +5,7 @@
 #include "renderer/sprite/sprite_font.h"
 
 SpriteFont::SpriteFont(const std::string &filename, int pixelsPerUnit) : pixelsPerUnit(pixelsPerUnit) {
-    texture = Texture::load(filename);
+    texture = Texture::load(filename, false, false, false);
     glm::ivec2 textureSize = texture->size();
     glyphPixelSize = {textureSize.x / 16, textureSize.y / 8};
 }

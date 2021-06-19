@@ -4,6 +4,8 @@ local Object = require("classic.lua")
 
 local Player = Object:extend()
 
+local texture = haru.Texture.load("topdown/survivor1_gun.png", true, true, true)
+
 local KEY_A = 65
 local KEY_D = 68
 local KEY_S = 83
@@ -14,7 +16,7 @@ local BARREL_X = 33.5 / 32.0
 local BARREL_Y = -9.5 / 32.0
 
 function Player:new()
-    self.sprite = haru.Sprite.new("topdown/survivor1_gun.png", 32)
+    self.sprite = haru.Sprite.new(texture, 32)
     self.sprite:setPixelPivot(16.5, 21.5)
     self.x = 0.0
     self.y = 0.0

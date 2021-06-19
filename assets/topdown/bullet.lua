@@ -2,11 +2,13 @@ local Object = require("classic.lua")
 
 local Bullet = Object:extend()
 
+local texture = haru.Texture.load("topdown/bullet.png", true, true, true)
+
 local SPEED = 20.0
 local LIFETIME = 1.0
 
 function Bullet:new(x, y, direction)
-    self.sprite = haru.Sprite.new("topdown/bullet.png", 32)
+    self.sprite = haru.Sprite.new(texture, 32)
     self.x = x
     self.y = y
     self.direction = direction
