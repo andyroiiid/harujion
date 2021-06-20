@@ -5,7 +5,7 @@
 #ifndef HARUJION_CAMERA_H
 #define HARUJION_CAMERA_H
 
-#include <sol/forward.hpp>
+#include <tuple>
 
 #include "non_copyable.h"
 #include "renderer/shader_globals.h"
@@ -21,8 +21,6 @@ public:
     std::tuple<float, float> screenToCanvas(int x, int y) const;
 
     std::tuple<float, float> screenToWorld(int x, int y) const;
-
-    void bindFunctions(sol::table &haru);
 
     void setHalfHeight(float newHalfHeight);
 

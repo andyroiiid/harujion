@@ -5,7 +5,6 @@
 #include "renderer/renderer.h"
 
 #include <spdlog/spdlog.h>
-#include <sol/sol.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 Renderer &Renderer::getInstance() {
@@ -42,30 +41,6 @@ void Renderer::framebufferResize(int width, int height) {
 
 void Renderer::clear() {
     glClearBufferfv(GL_COLOR, 0, glm::value_ptr(clearColor));
-}
-
-void Renderer::bindFunctions(sol::table &haru) {
-    haru.create_named(
-            "renderer",
-            "_setClearColor", [this](float r, float g, float b, float a) { setClearColor(r, g, b, a); },
-            "_setDrawColor", [this](float r, float g, float b, float a) { setDrawColor(r, g, b, a); },
-            "drawPoint",
-            sol::overload(
-                    [this](float x, float y) { drawPoint(x, y); },
-                    [this](float x, float y, float size) { drawPoint(x, y, size); }
-            ),
-            "drawLine",
-            sol::overload(
-                    [this](float x0, float y0, float x1, float y1) { drawLine(x0, y0, x1, y1); },
-                    [this](float x0, float y0, float x1, float y1, float width) { drawLine(x0, y0, x1, y1, width); }
-            ),
-            "drawRect",
-            sol::overload(
-                    [this](float x0, float y0, float x1, float y1) { drawRect(x0, y0, x1, y1); },
-                    [this](float x0, float y0, float x1, float y1, float width) { drawRect(x0, y0, x1, y1, width); }
-            ),
-            "fillRect", [this](float x0, float y0, float x1, float y1) { fillRect(x0, y0, x1, y1); }
-    );
 }
 
 void Renderer::setClearColor(float r, float g, float b, float a) {

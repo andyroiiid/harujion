@@ -6,7 +6,6 @@
 
 #include <glad/gl.h>
 #include <spdlog/spdlog.h>
-#include <sol/sol.hpp>
 
 Window &Window::getInstance() {
     static Window instance;
@@ -63,13 +62,6 @@ void Window::swapBuffers() {
 
 void Window::getFramebufferSize(int *w, int *h) {
     glfwGetFramebufferSize(window, w, h);
-}
-
-void Window::bindFunctions(sol::table &haru) {
-    sol::table table = haru.create_named(
-            "window",
-            "setTitle", [this](const char *title) { setTitle(title); }
-    );
 }
 
 void Window::setTitle(const char *title) {

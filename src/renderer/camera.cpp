@@ -5,7 +5,6 @@
 #include "renderer/camera.h"
 
 #include <glm/ext/matrix_clip_space.hpp>
-#include <sol/sol.hpp>
 
 Camera &Camera::getInstance() {
     static Camera instance;
@@ -44,14 +43,6 @@ std::tuple<float, float> Camera::screenToWorld(int x, int y) const {
     return std::make_tuple(
             center.x + normalizedX * halfWidth,
             center.y + normalizedY * halfHeight
-    );
-}
-
-void Camera::bindFunctions(sol::table &haru) {
-    haru.create_named(
-            "camera",
-            "setHalfHeight", [this](float newHalfHeight) { setHalfHeight(newHalfHeight); },
-            "setCenter", [this](float x, float y) { setCenter(x, y); }
     );
 }
 

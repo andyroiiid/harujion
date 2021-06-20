@@ -45,16 +45,6 @@ void FmodAudio::update() {
     checkFmod(system->update(), "failed to update fmod system");
 }
 
-void FmodAudio::bindFunctions(sol::table &haru) {
-    haru.create_named(
-            "audio",
-            "loadBank", [this](const std::string &filename) { loadBank(filename); },
-            "setVolume", [this](float volume) { setVolume(volume); },
-            "getEventDescription", [this](const std::string &eventPath) { return getEventDescription(eventPath); },
-            "fireOneShotEvent", &FmodAudio::fireOneShotEvent
-    );
-}
-
 void FmodAudio::loadBank(const std::string &filename) {
     spdlog::info("loading bank {}", filename);
     auto bytes = physfs.readFile(filename);

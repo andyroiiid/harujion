@@ -38,16 +38,117 @@ Engine::Engine() {
 
 void Engine::createBindings() {
     haru = lua.create_table("haru");
-    window.bindFunctions(haru);
-    camera.bindFunctions(haru);
-    keyboard.bindFunctions(haru);
-    mouse.bindFunctions(haru);
-    renderer.bindFunctions(haru);
-    fmodAudio.bindFunctions(haru);
-    bindTypes();
-}
 
-void Engine::bindTypes() {
+    haru.create_named(
+            "window",
+            "setTitle", [this](const char *title) {
+                window.setTitle(title);
+            }
+    );
+
+    haru.create_named(
+            "camera",
+            "setHalfHeight", [this](float newHalfHeight) {
+                camera.setHalfHeight(newHalfHeight);
+            },
+            "setCenter", [this](float x, float y) {
+                camera.setCenter(x, y);
+            }
+    );
+
+    haru.create_named(
+            "keyboard",
+            "pressed", [this](int key) {
+                return keyboard.pressed(key);
+            },
+            "justPressed", [this](int key) {
+                return keyboard.justPressed(key);
+            },
+            "justReleased", [this](int key) {
+                return keyboard.justReleased(key);
+            }
+    );
+
+    haru.create_named(
+            "mouse",
+            "pressed", [this](int button) {
+                return mouse.pressed(button);
+            },
+            "justPressed", [this](int button) {
+                return mouse.justPressed(button);
+            },
+            "justReleased", [this](int button) {
+                return mouse.justReleased(button);
+            },
+            "canvasPosition", [this]() {
+                return mouse.canvasPosition();
+            },
+            "worldPosition", [this]() {
+                return mouse.worldPosition();
+            },
+            "setCursor", [this](bool enable) {
+                return mouse.setCursor(enable);
+            }
+    );
+
+    haru.create_named(
+            "renderer",
+            "_setClearColor", [this](float r, float g, float b, float a) {
+                renderer.setClearColor(r, g, b, a);
+            },
+            "_setDrawColor", [this](float r, float g, float b, float a) {
+                renderer.setDrawColor(r, g, b, a);
+            },
+            "drawPoint",
+            sol::overload(
+                    [this](float x, float y) {
+                        renderer.drawPoint(x, y);
+                    },
+                    [this](float x, float y, float size) {
+                        renderer.drawPoint(x, y, size);
+                    }
+            ),
+            "drawLine",
+            sol::overload(
+                    [this](float x0, float y0, float x1, float y1) {
+                        renderer.drawLine(x0, y0, x1, y1);
+                    },
+                    [this](float x0, float y0, float x1, float y1, float width) {
+                        renderer.drawLine(x0, y0, x1, y1, width);
+                    }
+            ),
+            "drawRect",
+            sol::overload(
+                    [this](float x0, float y0, float x1, float y1) {
+                        renderer.drawRect(x0, y0, x1, y1);
+                    },
+                    [this](float x0, float y0, float x1, float y1, float width) {
+                        renderer.drawRect(x0, y0, x1, y1, width);
+                    }
+            ),
+            "fillRect", [this](float x0, float y0, float x1, float y1) {
+                renderer.fillRect(x0, y0, x1, y1);
+            }
+    );
+
+    haru.create_named(
+            "audio",
+            "loadBank",
+            [this](const std::string &filename) {
+                fmodAudio.loadBank(filename);
+            },
+            "setVolume",
+            [this](float volume) {
+                fmodAudio.setVolume(volume);
+            },
+            "getEventDescription",
+            [this](const std::string &eventPath) {
+                return fmodAudio.getEventDescription(eventPath);
+            },
+            "fireOneShotEvent",
+            &FmodAudio::fireOneShotEvent
+    );
+
     sol::usertype<Texture> texture = haru.new_usertype<Texture>(
             "Texture",
             sol::constructors<Texture(const std::string &, bool, bool, bool)>()
@@ -65,7 +166,8 @@ void Engine::bindTypes() {
 
     sol::usertype<SpriteFont> spriteFont = haru.new_usertype<SpriteFont>(
             "SpriteFont",
-            sol::constructors<SpriteFont(const std::string &)>());
+            sol::constructors<SpriteFont(const std::string &)>()
+    );
     spriteFont["draw"] = &SpriteFont::draw;
 }
 

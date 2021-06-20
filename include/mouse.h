@@ -6,7 +6,6 @@
 #define HARUJION_MOUSE_H
 
 #include <array>
-#include <sol/forward.hpp>
 
 #include "non_copyable.h"
 #include "window.h"
@@ -17,8 +16,6 @@ public:
     static Mouse &getInstance();
 
     void update();
-
-    void bindFunctions(sol::table &haru);
 
     bool pressed(int button);
 

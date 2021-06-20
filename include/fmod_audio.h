@@ -7,7 +7,6 @@
 
 #include <string>
 #include <fmod_studio.hpp>
-#include <sol/sol.hpp>
 
 #include "non_copyable.h"
 #include "physfs.h"
@@ -17,8 +16,6 @@ public:
     static FmodAudio &getInstance();
 
     void update();
-
-    void bindFunctions(sol::table &haru);
 
     void loadBank(const std::string &filename);
 

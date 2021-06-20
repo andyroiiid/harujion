@@ -4,8 +4,6 @@
 
 #include "keyboard.h"
 
-#include <sol/sol.hpp>
-
 Keyboard &Keyboard::getInstance() {
     static Keyboard instance;
     return instance;
@@ -20,15 +18,6 @@ Keyboard::Keyboard() {
 
 void Keyboard::update() {
     std::copy(currState.begin(), currState.end(), prevState.begin());
-}
-
-void Keyboard::bindFunctions(sol::table &haru) {
-    haru.create_named(
-            "keyboard",
-            "pressed", [this](int key) { return pressed(key); },
-            "justPressed", [this](int key) { return justPressed(key); },
-            "justReleased", [this](int key) { return justReleased(key); }
-    );
 }
 
 bool Keyboard::pressed(int key) {

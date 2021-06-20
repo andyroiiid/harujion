@@ -27,8 +27,6 @@ private:
 
     void createBindings();
 
-    void bindTypes();
-
     static void checkLua(const sol::protected_function_result &result, bool abortOnError = false);
 
     void loadPrelude();

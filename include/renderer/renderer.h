@@ -5,8 +5,6 @@
 #ifndef HARUJION_RENDERER_H
 #define HARUJION_RENDERER_H
 
-#include <sol/forward.hpp>
-
 #include "non_copyable.h"
 #include "window.h"
 #include "renderer/camera.h"
@@ -19,8 +17,6 @@ public:
     static Renderer &getInstance();
 
     void clear();
-
-    void bindFunctions(sol::table &haru);
 
     void setClearColor(float r, float g, float b, float a = 1.0f);
 

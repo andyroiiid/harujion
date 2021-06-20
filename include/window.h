@@ -6,7 +6,6 @@
 #define HARUJION_WINDOW_H
 
 #include <GLFW/glfw3.h>
-#include <sol/forward.hpp>
 
 #include "non_copyable.h"
 
@@ -19,8 +18,6 @@ public:
     void swapBuffers();
 
     void getFramebufferSize(int *w, int *h);
-
-    void bindFunctions(sol::table &haru);
 
     void setTitle(const char *title);
 

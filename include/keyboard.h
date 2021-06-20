@@ -6,7 +6,6 @@
 #define HARUJION_KEYBOARD_H
 
 #include <array>
-#include <sol/forward.hpp>
 
 #include "non_copyable.h"
 #include "window.h"
@@ -16,8 +15,6 @@ public:
     static Keyboard &getInstance();
 
     void update();
-
-    void bindFunctions(sol::table &haru);
 
     bool pressed(int key);
 

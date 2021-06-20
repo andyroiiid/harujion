@@ -4,8 +4,6 @@
 
 #include "mouse.h"
 
-#include <sol/sol.hpp>
-
 Mouse &Mouse::getInstance() {
     static Mouse instance;
     return instance;
@@ -25,18 +23,6 @@ Mouse::Mouse() {
 
 void Mouse::update() {
     std::copy(currState.begin(), currState.end(), prevState.begin());
-}
-
-void Mouse::bindFunctions(sol::table &haru) {
-    haru.create_named(
-            "mouse",
-            "pressed", [this](int button) { return pressed(button); },
-            "justPressed", [this](int button) { return justPressed(button); },
-            "justReleased", [this](int button) { return justReleased(button); },
-            "canvasPosition", [this]() { return canvasPosition(); },
-            "worldPosition", [this]() { return worldPosition(); },
-            "setCursor", [this](bool enable) { return setCursor(enable); }
-    );
 }
 
 bool Mouse::pressed(int button) {
