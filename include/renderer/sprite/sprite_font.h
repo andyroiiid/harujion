@@ -14,7 +14,7 @@ class SpriteFont {
 public:
     explicit SpriteFont(const std::string &filename);
 
-    void draw(float x, float y, const std::string &string);
+    void draw(float x, float y, const std::string &text, float s);
 
 private:
     [[nodiscard]] glm::ivec4 getGlyphRect(char c) const;

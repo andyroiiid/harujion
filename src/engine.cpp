@@ -154,7 +154,7 @@ void Engine::createBindings() {
             "SpriteFont",
             sol::constructors<SpriteFont(const std::string &)>()
     );
-    spriteFont["draw"] = &SpriteFont::draw;
+    spriteFont["_draw"] = &SpriteFont::draw;
 }
 
 void Engine::checkLua(const sol::protected_function_result &result, bool abortOnError) {
@@ -192,6 +192,11 @@ function haru.Sprite:draw(x, y, r, sx, sy)
     sx = sx or 1.0
     sy = sy or 1.0
     return self:_draw(x, y, r, sx, sy)
+end
+
+function haru.SpriteFont:draw(x, y, text, s)
+    s = s or 1.0
+    return self:_draw(x, y, text, s)
 end
 )LUA";
     checkLua(lua.script(PRELUDE_LUA, "prelude.lua"), true);

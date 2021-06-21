@@ -96,7 +96,7 @@ function Flappy:draw()
         haru.renderer.setDrawColor(1.0, 1.0, 1.0)
         haru.renderer.drawPoint(mouseX, mouseY, 10.0)
 
-        font:draw(-32, self.player.y + 32, "Scores=" .. self.scores)
+        font:draw(-64, self.player.y + 32, "Scores=" .. self.scores, 2)
     end
 end
 

@@ -10,7 +10,7 @@ SpriteFont::SpriteFont(const std::string &filename) {
     glyphPixelSize = {textureSize.x / 16, textureSize.y / 8};
 }
 
-void SpriteFont::draw(float x, float y, const std::string &string) {
+void SpriteFont::draw(float x, float y, const std::string &text, float s) {
     if (!texture) return;
 
     shader.use();
@@ -19,10 +19,10 @@ void SpriteFont::draw(float x, float y, const std::string &string) {
     shader.setPixelPivot({0.0f, 0.0f});
     shader.setFlip(false, false);
     shader.setRotation(0.0f);
-    shader.setScale(1.0f, 1.0f);
-    auto deltaX = static_cast<float>(glyphPixelSize.x);
-    for (int i = 0; i < string.size(); i++) {
-        shader.setPixelRect(getGlyphRect(string[i]));
+    shader.setScale(s, s);
+    auto deltaX = static_cast<float>(glyphPixelSize.x) * s;
+    for (int i = 0; i < text.size(); i++) {
+        shader.setPixelRect(getGlyphRect(text[i]));
         shader.setPosition(x + static_cast<float>(i) * deltaX, y);
         vertices.bindAndDraw();
     }

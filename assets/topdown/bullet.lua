@@ -4,7 +4,7 @@ local Bullet = Object:extend()
 
 local texture = haru.Texture.load("topdown/bullet.png", true, true, true)
 
-local SPEED = 320
+local SPEED = 640
 local LIFETIME = 1.0
 
 function Bullet:new(x, y, r)
