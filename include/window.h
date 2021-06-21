@@ -18,6 +18,8 @@ public:
 
     void swapBuffers();
 
+    void close();
+
     std::tuple<int, int> getFramebufferSize();
 
     void setTitle(const char *title);

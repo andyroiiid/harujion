@@ -33,6 +33,10 @@ end
 function haru.update(deltaTime)
     camera:update()
     if not game then
+        if haru.keyboard.justPressed(KEY_ESCAPE) then
+            haru.window.close()
+        end
+
         local mouseX, mouseY = camera:getMousePosition()
         if flappyButton:update(mouseX, mouseY) then
             game = Flappy()

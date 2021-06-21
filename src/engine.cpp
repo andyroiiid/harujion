@@ -41,6 +41,9 @@ void Engine::createBindings() {
 
     haru.create_named(
             "window",
+            "close", [this]() {
+                window.close();
+            },
             "getFramebufferSize", [this]() {
                 return window.getFramebufferSize();
             },

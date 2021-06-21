@@ -60,6 +60,10 @@ void Window::swapBuffers() {
     glfwSwapBuffers(glfwWindow);
 }
 
+void Window::close() {
+    glfwSetWindowShouldClose(glfwWindow, true);
+}
+
 std::tuple<int, int> Window::getFramebufferSize() {
     int width, height;
     glfwGetFramebufferSize(glfwWindow, &width, &height);
