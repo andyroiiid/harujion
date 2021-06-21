@@ -10,7 +10,7 @@ local crosshairTexture = haru.Texture.load("topdown/crosshair010.png")
 
 function TopDown:new()
     haru.window.setTitle("TopDown")
-    haru.camera.setHalfHeight(320)
+    camera:setHalfHeight(320)
     haru.mouse.setCursor(false)
 
     self.player = Player()
@@ -50,7 +50,7 @@ function TopDown:draw()
     self.bullets:draw()
     self.enemies:draw()
 
-    local mouseX, mouseY = haru.mouse.worldPosition()
+    local mouseX, mouseY = camera:getMousePosition()
     self.crosshair:draw(mouseX, mouseY, 0.0)
 end
 

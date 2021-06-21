@@ -25,20 +25,20 @@ Window::Window() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    window = glfwCreateWindow(
+    glfwWindow = glfwCreateWindow(
             800,
             600,
             "harujion",
             nullptr,
             nullptr
     );
-    if (!window) {
+    if (!glfwWindow) {
         spdlog::error("failed to create window");
         return;
     }
-    glfwSetWindowSizeLimits(window, 320, 240, GLFW_DONT_CARE, GLFW_DONT_CARE);
+    glfwSetWindowSizeLimits(glfwWindow, 320, 240, GLFW_DONT_CARE, GLFW_DONT_CARE);
 
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(glfwWindow);
     glfwSwapInterval(1);
 
     if (!gladLoadGL(glfwGetProcAddress)) {
@@ -48,22 +48,24 @@ Window::Window() {
 }
 
 Window::~Window() {
-    glfwDestroyWindow(window);
+    glfwDestroyWindow(glfwWindow);
     glfwTerminate();
 }
 
 bool Window::shouldClose() {
-    return glfwWindowShouldClose(window);
+    return glfwWindowShouldClose(glfwWindow);
 }
 
 void Window::swapBuffers() {
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(glfwWindow);
 }
 
-void Window::getFramebufferSize(int *w, int *h) {
-    glfwGetFramebufferSize(window, w, h);
+std::tuple<int, int> Window::getFramebufferSize() {
+    int width, height;
+    glfwGetFramebufferSize(glfwWindow, &width, &height);
+    return std::make_tuple(width, height);
 }
 
 void Window::setTitle(const char *title) {
-    glfwSetWindowTitle(window, title);
+    glfwSetWindowTitle(glfwWindow, title);
 }

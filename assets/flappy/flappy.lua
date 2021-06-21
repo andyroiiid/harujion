@@ -14,7 +14,7 @@ local KEY_SPACE = 32
 
 function Flappy:new()
     haru.window.setTitle("Flappy")
-    haru.camera.setHalfHeight(160)
+    camera:setHalfHeight(160)
     haru.renderer.setClearColor(78 / 255, 192 / 255, 202 / 255)
     self.background = haru.Sprite.new(backgroundTexture)
     self.message = haru.Sprite.new(messageTexture)
@@ -77,7 +77,7 @@ function Flappy:update(deltaTime)
     end
 
     -- slightly move camera
-    haru.camera.setCenter(0.0, self.player.y * 0.2)
+    camera:setCenter(0.0, self.player.y * 0.2)
 end
 
 function Flappy:draw()
@@ -92,7 +92,7 @@ function Flappy:draw()
         self.player:draw()
 
         -- draw mouse position, just for testing
-        local mouseX, mouseY = haru.mouse.worldPosition()
+        local mouseX, mouseY = camera:getMousePosition()
         haru.renderer.setDrawColor(1.0, 1.0, 1.0)
         haru.renderer.drawPoint(mouseX, mouseY, 10.0)
 

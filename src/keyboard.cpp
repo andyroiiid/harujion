@@ -10,7 +10,7 @@ Keyboard &Keyboard::getInstance() {
 }
 
 Keyboard::Keyboard() {
-    glfwSetKeyCallback(window.window, [](GLFWwindow *_, int key, int scancode, int action, int mods) {
+    glfwSetKeyCallback(window.glfwWindow, [](GLFWwindow *_, int key, int scancode, int action, int mods) {
         auto &keyboard = Keyboard::getInstance();
         keyboard.currState[key] = action;
     });

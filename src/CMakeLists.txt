@@ -3,7 +3,6 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(${PROJECT_NAME}
         physfs.cpp
         window.cpp
-        renderer/camera.cpp
         renderer/shader.cpp
         renderer/shader_globals.cpp
         renderer/dynamic_draw_shader.cpp

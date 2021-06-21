@@ -41,18 +41,11 @@ void Engine::createBindings() {
 
     haru.create_named(
             "window",
+            "getFramebufferSize", [this]() {
+                return window.getFramebufferSize();
+            },
             "setTitle", [this](const char *title) {
                 window.setTitle(title);
-            }
-    );
-
-    haru.create_named(
-            "camera",
-            "setHalfHeight", [this](float newHalfHeight) {
-                camera.setHalfHeight(newHalfHeight);
-            },
-            "setCenter", [this](float x, float y) {
-                camera.setCenter(x, y);
             }
     );
 
@@ -80,11 +73,8 @@ void Engine::createBindings() {
             "justReleased", [this](int button) {
                 return mouse.justReleased(button);
             },
-            "canvasPosition", [this]() {
-                return mouse.canvasPosition();
-            },
-            "worldPosition", [this]() {
-                return mouse.worldPosition();
+            "normalizedPosition", [this]() {
+                return mouse.normalizedPosition();
             },
             "setCursor", [this](bool enable) {
                 return mouse.setCursor(enable);
@@ -93,14 +83,16 @@ void Engine::createBindings() {
 
     haru.create_named(
             "renderer",
+            "setMatrixOrtho", [this](float left, float right, float bottom, float top) {
+                renderer.setMatrixOrtho(left, right, bottom, top);
+            },
             "_setClearColor", [this](float r, float g, float b, float a) {
                 renderer.setClearColor(r, g, b, a);
             },
             "_setDrawColor", [this](float r, float g, float b, float a) {
                 renderer.setDrawColor(r, g, b, a);
             },
-            "drawPoint",
-            sol::overload(
+            "drawPoint", sol::overload(
                     [this](float x, float y) {
                         renderer.drawPoint(x, y);
                     },
@@ -108,8 +100,7 @@ void Engine::createBindings() {
                         renderer.drawPoint(x, y, size);
                     }
             ),
-            "drawLine",
-            sol::overload(
+            "drawLine", sol::overload(
                     [this](float x0, float y0, float x1, float y1) {
                         renderer.drawLine(x0, y0, x1, y1);
                     },
@@ -117,8 +108,7 @@ void Engine::createBindings() {
                         renderer.drawLine(x0, y0, x1, y1, width);
                     }
             ),
-            "drawRect",
-            sol::overload(
+            "drawRect", sol::overload(
                     [this](float x0, float y0, float x1, float y1) {
                         renderer.drawRect(x0, y0, x1, y1);
                     },
@@ -133,20 +123,16 @@ void Engine::createBindings() {
 
     haru.create_named(
             "audio",
-            "loadBank",
-            [this](const std::string &filename) {
+            "loadBank", [this](const std::string &filename) {
                 fmodAudio.loadBank(filename);
             },
-            "setVolume",
-            [this](float volume) {
+            "setVolume", [this](float volume) {
                 fmodAudio.setVolume(volume);
             },
-            "getEventDescription",
-            [this](const std::string &eventPath) {
+            "getEventDescription", [this](const std::string &eventPath) {
                 return fmodAudio.getEventDescription(eventPath);
             },
-            "fireOneShotEvent",
-            &FmodAudio::fireOneShotEvent
+            "fireOneShotEvent", &FmodAudio::fireOneShotEvent
     );
 
     sol::usertype<Texture> texture = haru.new_usertype<Texture>(
@@ -235,7 +221,6 @@ void Engine::update(float deltaTime) {
     mouse.update();
     glfwPollEvents();
     checkLua(haru["update"](deltaTime));
-    camera.update();
 }
 
 void Engine::draw() {

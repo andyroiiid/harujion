@@ -22,25 +22,16 @@ Renderer::Renderer() {
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    glfwSetFramebufferSizeCallback(window.window, [](GLFWwindow *_, int width, int height) {
-        auto &renderer = Renderer::getInstance();
-        renderer.framebufferResize(width, height);
-    });
-    {
-        int width, height;
-        window.getFramebufferSize(&width, &height);
-        framebufferResize(width, height);
-    }
-}
-
-void Renderer::framebufferResize(int width, int height) {
-    glViewport(0, 0, width, height);
-    camera.framebufferResize(width, height);
 }
 
 void Renderer::clear() {
+    auto[width, height] = window.getFramebufferSize();
+    glViewport(0, 0, width, height);
     glClearBufferfv(GL_COLOR, 0, glm::value_ptr(clearColor));
+}
+
+void Renderer::setMatrixOrtho(float left, float right, float bottom, float top) {
+    shaderGlobals.setMatrix(glm::ortho(left, right, bottom, top));
 }
 
 void Renderer::setClearColor(float r, float g, float b, float a) {

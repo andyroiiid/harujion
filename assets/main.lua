@@ -1,4 +1,5 @@
 require("strict.lua")
+require("camera.lua")
 
 local Button = require("button.lua")
 local Flappy = require("flappy/flappy.lua")
@@ -16,8 +17,8 @@ local function reset()
     game = nil
 
     haru.window.setTitle("Sample Games")
-    haru.camera.setHalfHeight(96)
-    haru.camera.setCenter(0.0, 0.0)
+    camera:setHalfHeight(96)
+    camera:setCenter(0.0, 0.0)
     haru.mouse.setCursor(true)
     haru.renderer.setClearColor(0.0, 0.0, 0.0)
 end
@@ -30,8 +31,9 @@ function haru.shutdown()
 end
 
 function haru.update(deltaTime)
+    camera:update()
     if not game then
-        local mouseX, mouseY = haru.mouse.worldPosition()
+        local mouseX, mouseY = camera:getMousePosition()
         if flappyButton:update(mouseX, mouseY) then
             game = Flappy()
         end
@@ -48,6 +50,7 @@ function haru.update(deltaTime)
 end
 
 function haru.draw()
+    camera:preDraw()
     if not game then
         flappyButton:draw()
         topDownButton:draw()

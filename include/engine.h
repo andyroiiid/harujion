@@ -12,7 +12,6 @@
 #include "window.h"
 #include "keyboard.h"
 #include "mouse.h"
-#include "renderer/camera.h"
 #include "renderer/renderer.h"
 #include "fmod_audio.h"
 
@@ -39,7 +38,6 @@ private:
 
     Physfs &physfs = Physfs::getInstance();
     Window &window = Window::getInstance();
-    Camera &camera = Camera::getInstance();
     Keyboard &keyboard = Keyboard::getInstance();
     Mouse &mouse = Mouse::getInstance();
     Renderer &renderer = Renderer::getInstance();

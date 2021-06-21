@@ -10,14 +10,14 @@ Mouse &Mouse::getInstance() {
 }
 
 Mouse::Mouse() {
-    glfwSetMouseButtonCallback(window.window, [](GLFWwindow *_, int button, int action, int mods) {
+    glfwSetMouseButtonCallback(window.glfwWindow, [](GLFWwindow *_, int button, int action, int mods) {
         auto &mouse = Mouse::getInstance();
         mouse.currState[button] = action;
     });
-    glfwSetCursorPosCallback(window.window, [](GLFWwindow *_, double xPos, double yPos) {
+    glfwSetCursorPosCallback(window.glfwWindow, [](GLFWwindow *_, double xPos, double yPos) {
         auto &mouse = Mouse::getInstance();
-        mouse.x = static_cast<int>(xPos);
-        mouse.y = static_cast<int>(yPos);
+        mouse.x = static_cast<float>(xPos);
+        mouse.y = static_cast<float>(yPos);
     });
 }
 
@@ -37,14 +37,11 @@ bool Mouse::justReleased(int button) {
     return !currState[button] && prevState[button];
 }
 
-std::tuple<float, float> Mouse::canvasPosition() {
-    return camera.screenToCanvas(x, y);
-}
-
-std::tuple<float, float> Mouse::worldPosition() {
-    return camera.screenToWorld(x, y);
+std::tuple<float, float> Mouse::normalizedPosition() {
+    auto[width, height] = window.getFramebufferSize();
+    return std::make_tuple(x / static_cast<float >(width), 1.0f - y / static_cast<float>(height));
 }
 
 void Mouse::setCursor(bool enable) {
-    glfwSetInputMode(window.window, GLFW_CURSOR, enable ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window.glfwWindow, GLFW_CURSOR, enable ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
 }

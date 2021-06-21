@@ -52,10 +52,10 @@ function Player:update(deltaTime)
     self.x = self.x + SPEED * horizontal * deltaTime
     self.y = self.y + SPEED * vertical * deltaTime
 
-    local mouseX, mouseY = haru.mouse.worldPosition()
+    local mouseX, mouseY = camera:getMousePosition()
     self.r = math.atan2(mouseY - self.y, mouseX - self.x)
 
-    haru.camera.setCenter(self.x, self.y)
+    camera:setCenter(self.x, self.y)
 end
 
 function Player:draw()

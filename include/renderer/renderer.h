@@ -7,7 +7,6 @@
 
 #include "non_copyable.h"
 #include "window.h"
-#include "renderer/camera.h"
 #include "renderer/shader_globals.h"
 #include "renderer/dynamic_draw_shader.h"
 #include "renderer/vertex_array.h"
@@ -17,6 +16,8 @@ public:
     static Renderer &getInstance();
 
     void clear();
+
+    void setMatrixOrtho(float left, float right, float bottom, float top);
 
     void setClearColor(float r, float g, float b, float a = 1.0f);
 
@@ -39,14 +40,12 @@ public:
 private:
     Renderer();
 
-    void framebufferResize(int width, int height);
-
     Vertex dynamicDrawVertex(float x, float y);
 
     void dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode);
 
     Window &window = Window::getInstance();
-    Camera &camera = Camera::getInstance();
+    ShaderGlobals &shaderGlobals = ShaderGlobals::getInstance();
     DynamicDrawShader &dynamicDrawShader = DynamicDrawShader::getInstance();
 
     glm::vec4 clearColor = {0.2f, 0.2f, 0.2f, 1.0f};
