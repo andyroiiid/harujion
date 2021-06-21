@@ -142,6 +142,10 @@ void Engine::createBindings() {
             "Texture",
             sol::constructors<Texture(const std::string &, bool, bool, bool)>()
     );
+    texture.set_function("getSize", [](const Texture &texture){
+        const auto &size = texture.size();
+        return std::make_tuple(size.x, size.y);
+    });
     texture.set_function("_load", Texture::load);
 
     sol::usertype<Sprite> sprite = haru.new_usertype<Sprite>(
