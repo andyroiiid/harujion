@@ -14,6 +14,10 @@ class SpriteFont {
 public:
     explicit SpriteFont(const std::string &filename);
 
+    [[nodiscard]] std::tuple<int, int> getGlyphPixelSize() const {
+        return std::make_tuple(glyphPixelSize.x, glyphPixelSize.y);
+    }
+
     void draw(float x, float y, const std::string &text, float s);
 
 private:

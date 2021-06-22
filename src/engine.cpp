@@ -161,6 +161,7 @@ void Engine::createBindings() {
             "SpriteFont",
             sol::constructors<SpriteFont(const std::string &)>()
     );
+    spriteFont["getGlyphPixelSize"] = &SpriteFont::getGlyphPixelSize;
     spriteFont["_draw"] = &SpriteFont::draw;
 }
 

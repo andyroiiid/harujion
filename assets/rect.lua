@@ -2,7 +2,7 @@ local Object = require("classic.lua")
 
 local Rect = Object:extend()
 
-function Rect:new(aMinX, aMinY, aMaxX, aMaxY, left, bottom, right, top)
+function Rect:new(aMinX, aMinY, aMaxX, aMaxY)
     self.aMinX = aMinX
     self.aMinY = aMinY
     self.aMaxX = aMaxX
