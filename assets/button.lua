@@ -21,6 +21,13 @@ function Button:new(aMinX, aMinY, aMaxX, aMaxY, left, bottom, right, top)
     self.state = NORMAL_STATE
 end
 
+function Button.fullRect(text, onPressed)
+    local button = Button(0, 0, 1, 1, 0, 0, 0, 0)
+    button.text = text
+    button.onPressed = onPressed
+    return button
+end
+
 function Button:updateLayout(x0, y0, x1, y1)
     self.x0, self.y0, self.x1, self.y1 = self.rect:layout(x0, y0, x1, y1)
 end
