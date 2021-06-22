@@ -2,7 +2,7 @@ local Object = require("classic.lua")
 
 local NinePatch = Object:extend()
 
-function NinePatch:new(texture, left, right, top, bottom)
+function NinePatch:new(texture, left, bottom, right, top)
     self.p0 = haru.Sprite.new(texture)
     self.p1 = haru.Sprite.new(texture)
     self.p2 = haru.Sprite.new(texture)
@@ -45,24 +45,24 @@ function NinePatch:new(texture, left, right, top, bottom)
     self.p8:setPixelPivot(0, 0)
 end
 
-function NinePatch:draw(x, y, w, h)
+function NinePatch:draw(x0, y0, x1, y1)
     local a = self.a
     local b = self.b
     local c = self.c
     local d = self.d
     local e = self.e
     local f = self.f
-    local sb = (w - a - c) / b
-    local se = (h - d - f) / e
-    self.p0:draw(x,         y,         0, 1,  1)
-    self.p1:draw(x + a,     y,         0, sb, 1)
-    self.p2:draw(x + w - c, y,         0, 1,  1)
-    self.p3:draw(x,         y + d,     0, 1,  se)
-    self.p4:draw(x + a,     y + d,     0, sb, se)
-    self.p5:draw(x + w - c, y + d,     0, 1,  se)
-    self.p6:draw(x,         y + h - f, 0, 1,  1)
-    self.p7:draw(x + a,     y + h - f, 0, sb, 1)
-    self.p8:draw(x + w - c, y + h - f, 0, 1,  1)
+    local sb = (x1 - x0 - a - c) / b
+    local se = (y1 - y0 - d - f) / e
+    self.p0:draw(x0,     y0,     0, 1,  1)
+    self.p1:draw(x0 + a, y0,     0, sb, 1)
+    self.p2:draw(x1 - c, y0,     0, 1,  1)
+    self.p3:draw(x0,     y0 + d, 0, 1,  se)
+    self.p4:draw(x0 + a, y0 + d, 0, sb, se)
+    self.p5:draw(x1 - c, y0 + d, 0, 1,  se)
+    self.p6:draw(x0,     y1 - f, 0, 1,  1)
+    self.p7:draw(x0 + a, y1 - f, 0, sb, 1)
+    self.p8:draw(x1 - c, y1 - f, 0, 1,  1)
 end
 
 return NinePatch
