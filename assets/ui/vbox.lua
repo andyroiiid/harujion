@@ -1,4 +1,4 @@
-local BoxLayout = require("box_layout.lua")
+local BoxLayout = require("ui/box_layout.lua")
 
 local VBox = BoxLayout:extend()
 

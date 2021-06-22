@@ -1,6 +1,6 @@
 local Object = require("classic.lua")
 
-local Rect = require("rect.lua")
+local Rect = require("ui/rect.lua")
 
 local BoxLayout = Object:extend()
 

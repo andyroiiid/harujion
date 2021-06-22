@@ -1,8 +1,8 @@
 require("strict.lua")
 
-local VBox = require("vbox.lua")
-local HBox = require("hbox.lua")
-local Button = require("button.lua")
+local VBox = require("ui/vbox.lua")
+local HBox = require("ui/hbox.lua")
+local Button = require("ui/button.lua")
 
 local leftVBox = VBox(0, 0, 0.5, 1, 32, 32, -16, -32, 32)
 leftVBox:addChild(Button.fullRect("left", function() print("left") end))
