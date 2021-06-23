@@ -6,8 +6,8 @@ local Tileset = require("tileset.lua")
 local HBox = require("ui/hbox.lua")
 local Button = require("ui/button.lua")
 
-local tileset = Tileset("test_tileset.lua")
-local tilemap = require("test_tilemap.lua")
+local tileset = Tileset("gameboy.png", 16, 16, 1, 136)
+local tilemap = require("testmap.lua")
 
 local hud = HBox(0, 0, 1, 0, 32, 32, -32, 96, 32)
 hud:addChild(Button.fullRect("attack", function() print("attack") end))
@@ -38,12 +38,11 @@ function haru.draw()
     camera:preDrawWorld()
 
     for i, layer in ipairs(tilemap.layers) do
-        for y = 0, layer.height - 1 do
-            local y_ = tilemap.height - 1 - y
-            for x = 0, layer.width - 1 do
-                local tileIdx = layer.data[x + y * layer.width + 1]
+        for y = 1, tilemap.height do
+            for x = 1, tilemap.width do
+                local tileIdx = layer[y][x]
                 if tileIdx ~= 0 then
-                    tileset:draw(tileIdx, x * tileset.tileWidth, y_ * tileset.tileHeight)
+                    tileset:draw(tileIdx, (x - 1) * tileset.tileWidth, (y - 1) * tileset.tileHeight)
                 end
             end
         end

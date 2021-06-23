@@ -2,14 +2,10 @@ local Object = require("classic.lua")
 
 local Tileset = Object:extend()
 
-function Tileset:new(path)
-    local tileset = require(path)
-    local tilesetTexture = haru.Texture.load(tileset.image)
+function Tileset:new(image, tileWidth, tileHeight, spacing, tileCount)
+    local tilesetTexture = haru.Texture.load(image)
     local textureWidth, textureHeight = tilesetTexture:getSize()
 
-    local tileWidth = tileset.tilewidth
-    local tileHeight = tileset.tileheight
-    local spacing = tileset.spacing
     self.tileWidth = tileWidth
     self.tileHeight = tileHeight
 
@@ -17,7 +13,7 @@ function Tileset:new(path)
     local rows = (textureHeight + spacing) / (tileHeight + spacing)
 
     self.tiles = {}
-    for i = 0, tileset.tilecount - 1, 1 do
+    for i = 0, tileCount - 1, 1 do
         local ix = i % columns
         local iy = rows - 1 - math.floor(i / columns)
         local sprite = haru.Sprite.new(tilesetTexture)
