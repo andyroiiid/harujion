@@ -4,7 +4,7 @@ local Rect = require("ui/rect.lua")
 
 local Button = Object:extend()
 
-local font = haru.SpriteFont.new("monogram_shadow.png")
+local font = haru.SpriteFont.new("ui/monogram_shadow.png")
 local fontWidth, fontHeight = font:getGlyphPixelSize()
 
 local NORMAL_STATE = 0

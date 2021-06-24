@@ -1,14 +1,14 @@
 require("strict.lua")
 require("camera.lua")
 
-local Tileset = require("tileset.lua")
-local Tilemap = require("tilemap.lua")
+local Tileset = require("tilemap/tileset.lua")
+local Tilemap = require("tilemap/tilemap.lua")
 
 local VBox = require("ui/vbox.lua")
 local Button = require("ui/button.lua")
 
-local tileset = Tileset("gameboy.png", 16, 16, 1, 136)
-local tilemap = Tilemap("testmap.lua", tileset)
+local tileset = Tileset("tilemap/gameboy.png", 16, 16, 1, 136)
+local tilemap = Tilemap("tilemap/testmap.lua", tileset)
 
 local hud = VBox(0.75, 0, 1, 1, 16, 16, -16, -16, 16)
 hud:addChild(Button.fullRect("attack", function() print("attack") end))
