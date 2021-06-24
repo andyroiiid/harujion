@@ -2,7 +2,6 @@ local Object = require("classic.lua")
 
 local Tileset = require("tilemap/tileset.lua")
 local Tilemap = require("tilemap/tilemap.lua")
-
 local VBox = require("ui/vbox.lua")
 local Button = require("ui/button.lua")
 
