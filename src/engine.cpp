@@ -9,6 +9,7 @@
 #include "renderer/texture.h"
 #include "renderer/sprite/sprite.h"
 #include "renderer/sprite/sprite_font.h"
+#include "renderer/tile/tileset.h"
 
 Engine &Engine::getInstance() {
     static Engine instance;
@@ -142,7 +143,7 @@ void Engine::createBindings() {
             "Texture",
             sol::constructors<Texture(const std::string &, bool, bool, bool)>()
     );
-    texture.set_function("getSize", [](const Texture &texture){
+    texture.set_function("getSize", [](const Texture &texture) {
         const auto &size = texture.size();
         return std::make_tuple(size.x, size.y);
     });
@@ -163,6 +164,13 @@ void Engine::createBindings() {
     );
     spriteFont["getGlyphPixelSize"] = &SpriteFont::getGlyphPixelSize;
     spriteFont["_draw"] = &SpriteFont::draw;
+
+    sol::usertype<Tileset> tileset = haru.new_usertype<Tileset>(
+            "Tileset",
+            sol::constructors<Tileset(std::shared_ptr<Texture> &, int, int, int, int)>()
+    );
+    tileset["getTileSize"] = &Tileset::getTileSize;
+    tileset["draw"] = &Tileset::draw;
 }
 
 void Engine::checkLua(const sol::protected_function_result &result, bool abortOnError) {

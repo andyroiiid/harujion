@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME}
         renderer/sprite/sprite_vertices.cpp
         renderer/sprite/sprite.cpp
         renderer/sprite/sprite_font.cpp
+        renderer/tile/tileset.cpp
         renderer/renderer.cpp
         keyboard.cpp
         mouse.cpp
