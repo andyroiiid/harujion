@@ -5,7 +5,7 @@ local VBox = require("ui/vbox.lua")
 local Button = require("ui/button.lua")
 
 local texture = haru.Texture.load("tilemap/gameboy.png")
-local tileset = haru.Tileset.new(texture, 16, 16, 1, 136)
+local tileset = haru.Tileset.new(texture, 16, 16, 1)
 local tilemap = Tilemap("tilemap/testmap.lua", tileset)
 
 local hud = VBox(0.75, 0, 1, 1, 16, 16, -16, -16, 16)

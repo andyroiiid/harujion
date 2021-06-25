@@ -167,7 +167,7 @@ void Engine::createBindings() {
 
     sol::usertype<Tileset> tileset = haru.new_usertype<Tileset>(
             "Tileset",
-            sol::constructors<Tileset(std::shared_ptr<Texture> &, int, int, int, int)>()
+            sol::constructors<Tileset(std::shared_ptr<Texture> &, int, int, int)>()
     );
     tileset["getTileSize"] = &Tileset::getTileSize;
     tileset["draw"] = &Tileset::draw;

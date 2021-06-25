@@ -4,20 +4,20 @@
 
 #include "renderer/tile/tileset.h"
 
-Tileset::Tileset(std::shared_ptr<Texture> &texture, int tileWidth, int tileHeight, int spacing, int tileCount)
+Tileset::Tileset(std::shared_ptr<Texture> &texture, int tileWidth, int tileHeight, int spacing)
         : texture(texture), tileWidth(tileWidth), tileHeight(tileHeight) {
     const glm::ivec2 &textureSize = texture->size();
     int columns = (textureSize.x + spacing) / (tileWidth + spacing);
     int rows = (textureSize.y + spacing) / (tileHeight + spacing);
-    for (int i = 0; i < tileCount; i++) {
-        int ix = i % columns;
-        int iy = rows - 1 - i / columns;
-        tiles.emplace_back(ix * (tileWidth + spacing), iy * (tileHeight + spacing), tileWidth, tileHeight);
+    for (int y = rows - 1; y >= 0; y--) {
+        for (int x = 0; x < columns; x++) {
+            tiles.emplace_back(x * (tileWidth + spacing), y * (tileHeight + spacing), tileWidth, tileHeight);
+        }
     }
 }
 
 void Tileset::draw(int idx, float x, float y) {
-    if (idx == 0 || !texture) return;
+    if (idx <= 0 || idx > tiles.size() || !texture) return;;
 
     shader.use();
     shader.setTexturePixelSize(texture->size());

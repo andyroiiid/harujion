@@ -14,7 +14,7 @@
 
 class Tileset : NonCopyable {
 public:
-    Tileset(std::shared_ptr<Texture> &texture, int tileWidth, int tileHeight, int spacing, int tileCount);
+    Tileset(std::shared_ptr<Texture> &texture, int tileWidth, int tileHeight, int spacing);
 
     [[nodiscard]] std::tuple<int, int> getTileSize() const { return std::make_tuple(tileWidth, tileHeight); }
 
