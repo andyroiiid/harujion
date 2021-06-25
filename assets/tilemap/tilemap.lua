@@ -11,14 +11,13 @@ function Tilemap:new(path, tileset)
 end
 
 function Tilemap:getMapSize()
-    local tileset = self.tileset
-    return tileset.tileWidth * self.width, tileset.tileHeight * self.height
+    local tileWidth, tileHeight = self.tileset:getTileSize()
+    return tileWidth * self.width, tileHeight * self.height
 end
 
 function Tilemap:drawLayer(idx)
     local tileset = self.tileset
-    local tileWidth = tileset.tileWidth
-    local tileHeight = tileset.tileHeight
+    local tileWidth, tileHeight = tileset:getTileSize()
     local layer = self.layers[idx]
     for y = 1, self.height do
         for x = 1, self.width do

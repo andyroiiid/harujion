@@ -23,6 +23,10 @@ function Tileset:new(image, tileWidth, tileHeight, spacing, tileCount)
     end
 end
 
+function Tileset:getTileSize()
+    return self.tileWidth, self.tileHeight
+end
+
 function Tileset:draw(idx, x, y)
     self.tiles[idx]:draw(x, y, 0, 1.0001, 1.0001) -- fill the gaps between tiles (due to non-integer coordinates)
 end
