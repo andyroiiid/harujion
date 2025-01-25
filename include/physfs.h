@@ -1,9 +1,6 @@
-//
-// Created by andyroiiid on 6/13/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_PHYSFS_H
-#define HARUJION_PHYSFS_H
+#pragma once
 
 #include <string>
 
@@ -11,7 +8,8 @@
 
 struct lua_State;
 
-class Physfs : NonCopyable {
+class Physfs : NonCopyable
+{
 public:
     static Physfs &getInstance();
 
@@ -26,5 +24,3 @@ private:
 
     ~Physfs();
 };
-
-#endif //HARUJION_PHYSFS_H

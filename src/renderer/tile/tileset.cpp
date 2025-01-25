@@ -1,23 +1,30 @@
-//
-// Created by andyroiiid on 6/25/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
 #include "renderer/tile/tileset.h"
 
 Tileset::Tileset(std::shared_ptr<Texture> &texture, int tileWidth, int tileHeight, int spacing)
-        : texture(texture), tileWidth(tileWidth), tileHeight(tileHeight) {
+    : texture(texture)
+    , tileWidth(tileWidth)
+    , tileHeight(tileHeight)
+{
     const glm::ivec2 &textureSize = texture->size();
-    int columns = (textureSize.x + spacing) / (tileWidth + spacing);
-    int rows = (textureSize.y + spacing) / (tileHeight + spacing);
-    for (int y = rows - 1; y >= 0; y--) {
-        for (int x = 0; x < columns; x++) {
+    int               columns     = (textureSize.x + spacing) / (tileWidth + spacing);
+    int               rows        = (textureSize.y + spacing) / (tileHeight + spacing);
+    for (int y = rows - 1; y >= 0; y--)
+    {
+        for (int x = 0; x < columns; x++)
+        {
             tiles.emplace_back(x * (tileWidth + spacing), y * (tileHeight + spacing), tileWidth, tileHeight);
         }
     }
 }
 
-void Tileset::draw(int idx, float x, float y) {
-    if (idx <= 0 || idx > tiles.size() || !texture) return;;
+void Tileset::draw(int idx, float x, float y)
+{
+    if (idx <= 0 || idx > tiles.size() || !texture)
+    {
+        return;
+    }
 
     shader.use();
     shader.setTexturePixelSize(texture->size());

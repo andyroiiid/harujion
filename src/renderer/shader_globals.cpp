@@ -1,36 +1,39 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
 #include "renderer/shader_globals.h"
 
 #include <glm/gtc/type_ptr.hpp>
 
-struct ShaderGlobalData {
+struct ShaderGlobalData
+{
     glm::mat4 uMatrix;
 };
 
-ShaderGlobals &ShaderGlobals::getInstance() {
+ShaderGlobals &ShaderGlobals::getInstance()
+{
     static ShaderGlobals instance;
     return instance;
 }
 
-ShaderGlobals::ShaderGlobals() {
+ShaderGlobals::ShaderGlobals()
+{
     glCreateBuffers(1, &dataBuffer);
     glNamedBufferData(dataBuffer, sizeof(ShaderGlobalData), nullptr, GL_DYNAMIC_DRAW);
     glBindBufferBase(GL_UNIFORM_BUFFER, 0, dataBuffer);
 }
 
-ShaderGlobals::~ShaderGlobals() {
+ShaderGlobals::~ShaderGlobals()
+{
     glDeleteBuffers(1, &dataBuffer);
 }
 
-ShaderGlobals &ShaderGlobals::setMatrix(const glm::mat4 &matrix) {
+ShaderGlobals &ShaderGlobals::setMatrix(const glm::mat4 &matrix)
+{
     glNamedBufferSubData(
-            dataBuffer,
-            offsetof(ShaderGlobalData, uMatrix),
-            sizeof(ShaderGlobalData::uMatrix),
-            glm::value_ptr(matrix)
+        dataBuffer, //
+        offsetof(ShaderGlobalData, uMatrix),
+        sizeof(ShaderGlobalData::uMatrix),
+        glm::value_ptr(matrix)
     );
     return *this;
 }

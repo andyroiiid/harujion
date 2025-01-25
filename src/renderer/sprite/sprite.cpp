@@ -1,30 +1,37 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
 #include "renderer/sprite/sprite.h"
 
-Sprite::Sprite(std::shared_ptr<Texture> &texture) : texture(texture) {
+Sprite::Sprite(std::shared_ptr<Texture> &texture)
+    : texture(texture)
+{
     const glm::ivec2 &textureSize = texture->size();
-    pixelRect = {0, 0, textureSize.x, textureSize.y};
-    pixelPivot = glm::vec2(textureSize) / 2.0f;
+    pixelRect                     = {0, 0, textureSize.x, textureSize.y};
+    pixelPivot                    = glm::vec2(textureSize) / 2.0f;
 }
 
-void Sprite::setPixelRect(int x, int y, int w, int h) {
+void Sprite::setPixelRect(int x, int y, int w, int h)
+{
     pixelRect = {x, y, w, h};
 }
 
-void Sprite::setPixelPivot(float x, float y) {
+void Sprite::setPixelPivot(float x, float y)
+{
     pixelPivot = {x, y};
 }
 
-void Sprite::setFlip(bool x, bool y) {
+void Sprite::setFlip(bool x, bool y)
+{
     flipX = x;
     flipY = y;
 }
 
-void Sprite::draw(float x, float y, float r, float sx, float sy) {
-    if (!texture) return;
+void Sprite::draw(float x, float y, float r, float sx, float sy)
+{
+    if (!texture)
+    {
+        return;
+    }
 
     shader.use();
     shader.setTexturePixelSize(texture->size());

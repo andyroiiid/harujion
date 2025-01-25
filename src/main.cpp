@@ -1,6 +1,7 @@
 #include "engine.h"
 
-int main() {
+int main()
+{
     auto &engine = Engine::getInstance();
     engine.mainLoop();
     return 0;

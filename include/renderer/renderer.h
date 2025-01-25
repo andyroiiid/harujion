@@ -1,17 +1,15 @@
-//
-// Created by andyroiiid on 6/13/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_RENDERER_H
-#define HARUJION_RENDERER_H
+#pragma once
 
 #include "non_copyable.h"
-#include "window.h"
-#include "renderer/shader_globals.h"
 #include "renderer/dynamic_draw_shader.h"
+#include "renderer/shader_globals.h"
 #include "renderer/vertex_array.h"
+#include "window.h"
 
-class Renderer : NonCopyable {
+class Renderer : NonCopyable
+{
 public:
     static Renderer &getInstance();
 
@@ -44,14 +42,12 @@ private:
 
     void dynamicDraw(std::initializer_list<Vertex> vertices, GLenum mode);
 
-    Window &window = Window::getInstance();
-    ShaderGlobals &shaderGlobals = ShaderGlobals::getInstance();
+    Window            &window            = Window::getInstance();
+    ShaderGlobals     &shaderGlobals     = ShaderGlobals::getInstance();
     DynamicDrawShader &dynamicDrawShader = DynamicDrawShader::getInstance();
 
     glm::vec4 clearColor = {0.2f, 0.2f, 0.2f, 1.0f};
-    glm::vec4 drawColor = {1.0f, 1.0f, 1.0f, 1.0f};
+    glm::vec4 drawColor  = {1.0f, 1.0f, 1.0f, 1.0f};
 
     VertexArray dynamicDrawVao;
 };
-
-#endif //HARUJION_RENDERER_H

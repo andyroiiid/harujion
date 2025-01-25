@@ -1,6 +1,4 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
 #include "renderer/image.h"
 
@@ -10,19 +8,21 @@
 
 #include "physfs.h"
 
-Image::Image(const std::string &filename) {
+Image::Image(const std::string &filename)
+{
     auto bytes = Physfs::getInstance().readFile(filename);
 
     _data = stbi_load_from_memory(
-            reinterpret_cast<const stbi_uc *>(bytes.data()),
-            static_cast<int>(bytes.length()),
-            &_size.x,
-            &_size.y,
-            nullptr,
-            4
+        reinterpret_cast<const stbi_uc *>(bytes.data()), //
+        static_cast<int>(bytes.length()),
+        &_size.x,
+        &_size.y,
+        nullptr,
+        4
     );
 }
 
-Image::~Image() {
+Image::~Image()
+{
     stbi_image_free(_data);
 }

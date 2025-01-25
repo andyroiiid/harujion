@@ -1,17 +1,14 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_FMOD_AUDIO_H
-#define HARUJION_FMOD_AUDIO_H
+#pragma once
 
-#include <string>
 #include <fmod_studio.hpp>
+#include <string>
 
-#include "non_copyable.h"
 #include "physfs.h"
 
-class FmodAudio {
+class FmodAudio
+{
 public:
     static FmodAudio &getInstance();
 
@@ -35,7 +32,5 @@ private:
     Physfs &physfs = Physfs::getInstance();
 
     FMOD::Studio::System *system = nullptr;
-    FMOD::Studio::Bus *bus = nullptr;
+    FMOD::Studio::Bus    *bus    = nullptr;
 };
-
-#endif //HARUJION_FMOD_AUDIO_H

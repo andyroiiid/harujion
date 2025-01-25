@@ -1,18 +1,14 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_DYNAMIC_DRAW_SHADER_H
-#define HARUJION_DYNAMIC_DRAW_SHADER_H
+#pragma once
 
 #include "renderer/shader.h"
 
-class DynamicDrawShader : public Shader {
+class DynamicDrawShader : public Shader
+{
 public:
     static DynamicDrawShader &getInstance();
 
 private:
     DynamicDrawShader();
 };
-
-#endif //HARUJION_DYNAMIC_DRAW_SHADER_H

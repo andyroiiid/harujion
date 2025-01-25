@@ -1,10 +1,9 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
 #include "renderer/vertex_array.h"
 
-VertexArray::VertexArray() {
+VertexArray::VertexArray()
+{
     glCreateBuffers(1, &vbo);
 
     glCreateVertexArrays(1, &vao);
@@ -23,18 +22,24 @@ VertexArray::VertexArray() {
     glVertexArrayAttribFormat(vao, 2, 4, GL_FLOAT, GL_FALSE, offsetof(Vertex, aColor));
 }
 
-VertexArray::~VertexArray() {
+VertexArray::~VertexArray()
+{
     glDeleteBuffers(1, &vbo);
     glDeleteVertexArrays(1, &vao);
 }
 
-void VertexArray::setData(std::initializer_list<Vertex> vertices, GLenum usage) {
+void VertexArray::setData(std::initializer_list<Vertex> vertices, GLenum usage)
+{
     count = static_cast<GLsizei>(vertices.size());
     glNamedBufferData(vbo, static_cast<GLsizeiptr>(sizeof(Vertex) * count), vertices.begin(), usage);
 }
 
-void VertexArray::bindAndDraw(GLenum mode) { // NOLINT(readability-make-member-function-const)
-    if (count <= 0) return;
+void VertexArray::bindAndDraw(GLenum mode)
+{ // NOLINT(readability-make-member-function-const)
+    if (count <= 0)
+    {
+        return;
+    }
     glBindVertexArray(vao);
     glDrawArrays(mode, 0, count);
 }

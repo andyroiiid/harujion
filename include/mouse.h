@@ -1,16 +1,14 @@
-//
-// Created by andyroiiid on 6/15/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_MOUSE_H
-#define HARUJION_MOUSE_H
+#pragma once
 
 #include <array>
 
 #include "non_copyable.h"
 #include "window.h"
 
-class Mouse : NonCopyable {
+class Mouse : NonCopyable
+{
 public:
     static Mouse &getInstance();
 
@@ -31,11 +29,9 @@ private:
 
     Window &window = Window::getInstance();
 
-    std::array<bool, GLFW_MOUSE_BUTTON_LAST + 1> prevState{false};
-    std::array<bool, GLFW_MOUSE_BUTTON_LAST + 1> currState{false};
+    std::array<bool, GLFW_MOUSE_BUTTON_LAST + 1> prevState {false};
+    std::array<bool, GLFW_MOUSE_BUTTON_LAST + 1> currState {false};
 
     float x = 0;
     float y = 0;
 };
-
-#endif //HARUJION_MOUSE_H

@@ -1,16 +1,14 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_SHADER_H
-#define HARUJION_SHADER_H
+#pragma once
 
-#include <string>
 #include <glad/gl.h>
+#include <string>
 
 #include "non_copyable.h"
 
-class Shader : NonCopyable {
+class Shader : NonCopyable
+{
 public:
     Shader(const std::string &vertexSource, const std::string &fragmentSource);
 
@@ -25,5 +23,3 @@ protected:
 
     GLuint program = 0;
 };
-
-#endif //HARUJION_SHADER_H

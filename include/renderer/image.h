@@ -1,16 +1,14 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_IMAGE_H
-#define HARUJION_IMAGE_H
+#pragma once
 
-#include <string>
 #include <glm/vec2.hpp>
+#include <string>
 
 #include "non_copyable.h"
 
-class Image : NonCopyable {
+class Image : NonCopyable
+{
 public:
     explicit Image(const std::string &filename);
 
@@ -21,8 +19,6 @@ public:
     [[nodiscard]] inline const unsigned char *data() const { return _data; }
 
 private:
-    glm::ivec2 _size{0, 0};
+    glm::ivec2     _size {0, 0};
     unsigned char *_data = nullptr;
 };
-
-#endif //HARUJION_IMAGE_H

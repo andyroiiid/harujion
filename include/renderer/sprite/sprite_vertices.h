@@ -1,23 +1,18 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_SPRITE_VERTICES_H
-#define HARUJION_SPRITE_VERTICES_H
+#pragma once
 
-#include "non_copyable.h"
 #include "renderer/vertex_array.h"
 
-class SpriteVertices {
+class SpriteVertices
+{
 public:
     static SpriteVertices &getInstance();
 
-    inline void bindAndDraw() { vao.bindAndDraw(GL_TRIANGLE_STRIP); }
+    void bindAndDraw() { vao.bindAndDraw(GL_TRIANGLE_STRIP); }
 
 private:
     SpriteVertices();
 
     VertexArray vao;
 };
-
-#endif //HARUJION_SPRITE_VERTICES_H

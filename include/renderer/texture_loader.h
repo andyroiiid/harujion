@@ -1,9 +1,6 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_TEXTURE_LOADER_H
-#define HARUJION_TEXTURE_LOADER_H
+#pragma once
 
 #include <memory>
 #include <string>
@@ -12,7 +9,8 @@
 #include "non_copyable.h"
 #include "renderer/texture.h"
 
-class TextureLoader : NonCopyable {
+class TextureLoader : NonCopyable
+{
 public:
     static TextureLoader &getInstance();
 
@@ -21,5 +19,3 @@ public:
 private:
     std::unordered_map<std::string, std::weak_ptr<Texture>> cache;
 };
-
-#endif //HARUJION_TEXTURE_LOADER_H

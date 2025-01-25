@@ -1,9 +1,6 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_VERTEX_ARRAY_H
-#define HARUJION_VERTEX_ARRAY_H
+#pragma once
 
 #include <glad/gl.h>
 #include <initializer_list>
@@ -11,7 +8,8 @@
 #include "non_copyable.h"
 #include "renderer/vertex.h"
 
-class VertexArray : NonCopyable {
+class VertexArray : NonCopyable
+{
 public:
     VertexArray();
 
@@ -27,5 +25,3 @@ private:
 
     GLsizei count = 0;
 };
-
-#endif //HARUJION_VERTEX_ARRAY_H

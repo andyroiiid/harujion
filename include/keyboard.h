@@ -1,16 +1,14 @@
-//
-// Created by andyroiiid on 6/19/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_KEYBOARD_H
-#define HARUJION_KEYBOARD_H
+#pragma once
 
 #include <array>
 
 #include "non_copyable.h"
 #include "window.h"
 
-class Keyboard : NonCopyable {
+class Keyboard : NonCopyable
+{
 public:
     static Keyboard &getInstance();
 
@@ -27,8 +25,6 @@ private:
 
     Window &window = Window::getInstance();
 
-    std::array<bool, GLFW_KEY_LAST + 1> prevState{false};
-    std::array<bool, GLFW_KEY_LAST + 1> currState{false};
+    std::array<bool, GLFW_KEY_LAST + 1> prevState {false};
+    std::array<bool, GLFW_KEY_LAST + 1> currState {false};
 };
-
-#endif //HARUJION_KEYBOARD_H

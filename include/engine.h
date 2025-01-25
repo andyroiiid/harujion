@@ -1,21 +1,19 @@
-//
-// Created by andyroiiid on 6/13/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_ENGINE_H
-#define HARUJION_ENGINE_H
+#pragma once
 
 #include <sol/sol.hpp>
 
-#include "non_copyable.h"
-#include "physfs.h"
-#include "window.h"
+#include "fmod_audio.h"
 #include "keyboard.h"
 #include "mouse.h"
+#include "non_copyable.h"
+#include "physfs.h"
 #include "renderer/renderer.h"
-#include "fmod_audio.h"
+#include "window.h"
 
-class Engine : NonCopyable {
+class Engine : NonCopyable
+{
 public:
     static Engine &getInstance();
 
@@ -36,15 +34,13 @@ private:
 
     void draw();
 
-    Physfs &physfs = Physfs::getInstance();
-    Window &window = Window::getInstance();
-    Keyboard &keyboard = Keyboard::getInstance();
-    Mouse &mouse = Mouse::getInstance();
-    Renderer &renderer = Renderer::getInstance();
+    Physfs    &physfs    = Physfs::getInstance();
+    Window    &window    = Window::getInstance();
+    Keyboard  &keyboard  = Keyboard::getInstance();
+    Mouse     &mouse     = Mouse::getInstance();
+    Renderer  &renderer  = Renderer::getInstance();
     FmodAudio &fmodAudio = FmodAudio::getInstance();
 
     sol::state lua;
     sol::table haru;
 };
-
-#endif //HARUJION_ENGINE_H

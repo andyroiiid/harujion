@@ -1,16 +1,14 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_SHADER_GLOBALS_H
-#define HARUJION_SHADER_GLOBALS_H
+#pragma once
 
 #include <glad/gl.h>
 #include <glm/mat4x4.hpp>
 
 #include "non_copyable.h"
 
-class ShaderGlobals : NonCopyable {
+class ShaderGlobals : NonCopyable
+{
 public:
     static ShaderGlobals &getInstance();
 
@@ -23,5 +21,3 @@ private:
 
     GLuint dataBuffer = 0;
 };
-
-#endif //HARUJION_SHADER_GLOBALS_H

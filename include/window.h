@@ -1,16 +1,14 @@
-//
-// Created by andyroiiid on 6/13/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_WINDOW_H
-#define HARUJION_WINDOW_H
+#pragma once
 
-#include <tuple>
 #include <GLFW/glfw3.h>
+#include <tuple>
 
 #include "non_copyable.h"
 
-class Window : NonCopyable {
+class Window : NonCopyable
+{
 public:
     static Window &getInstance();
 
@@ -35,5 +33,3 @@ private:
 
     GLFWwindow *glfwWindow = nullptr;
 };
-
-#endif //HARUJION_WINDOW_H

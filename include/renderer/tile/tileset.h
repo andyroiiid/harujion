@@ -1,9 +1,6 @@
-//
-// Created by andyroiiid on 6/25/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_TILESET_H
-#define HARUJION_TILESET_H
+#pragma once
 
 #include <vector>
 
@@ -12,7 +9,8 @@
 #include "renderer/sprite/sprite_vertices.h"
 #include "renderer/texture.h"
 
-class Tileset : NonCopyable {
+class Tileset : NonCopyable
+{
 public:
     Tileset(std::shared_ptr<Texture> &texture, int tileWidth, int tileHeight, int spacing);
 
@@ -21,13 +19,11 @@ public:
     void draw(int idx, float x, float y);
 
 private:
-    SpriteShader &shader = SpriteShader::getInstance();
+    SpriteShader   &shader   = SpriteShader::getInstance();
     SpriteVertices &vertices = SpriteVertices::getInstance();
 
     std::shared_ptr<Texture> texture;
-    int tileWidth = 0;
-    int tileHeight = 0;
-    std::vector<glm::ivec4> tiles;
+    int                      tileWidth  = 0;
+    int                      tileHeight = 0;
+    std::vector<glm::ivec4>  tiles;
 };
-
-#endif //HARUJION_TILESET_H

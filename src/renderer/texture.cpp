@@ -1,13 +1,12 @@
-//
-// Created by andyroiiid on 6/14/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
 #include "renderer/texture.h"
 
 #include "renderer/image.h"
 #include "renderer/texture_loader.h"
 
-Texture::Texture(const std::string &filename, bool filter, bool clamp, bool mipmap) {
+Texture::Texture(const std::string &filename, bool filter, bool clamp, bool mipmap)
+{
     Image image(filename);
 
     _size = image.size();
@@ -16,40 +15,53 @@ Texture::Texture(const std::string &filename, bool filter, bool clamp, bool mipm
     glTextureStorage2D(texture, 1, GL_RGBA8, _size.x, _size.y);
     glTextureSubImage2D(texture, 0, 0, 0, _size.x, _size.y, GL_RGBA, GL_UNSIGNED_BYTE, image.data());
 
-    if (filter) {
-        if (mipmap) {
+    if (filter)
+    {
+        if (mipmap)
+        {
             glTextureParameteri(texture, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        } else {
+        }
+        else
+        {
             glTextureParameteri(texture, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         }
-    } else {
+    }
+    else
+    {
         glTextureParameteri(texture, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
 
-    if (clamp) {
+    if (clamp)
+    {
         glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    } else {
+    }
+    else
+    {
         glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_REPEAT);
     }
 
-    if (mipmap) {
+    if (mipmap)
+    {
         glGenerateTextureMipmap(texture);
     }
 }
 
-Texture::~Texture() {
+Texture::~Texture()
+{
     glDeleteTextures(1, &texture);
 }
 
-void Texture::bind(GLuint unit) { // NOLINT(readability-make-member-function-const)
+void Texture::bind(GLuint unit) // NOLINT(readability-make-member-function-const)
+{
     glBindTextureUnit(unit, texture);
 }
 
-std::shared_ptr<Texture> Texture::load(const std::string &filename, bool filter, bool clamp, bool mipmap) {
+std::shared_ptr<Texture> Texture::load(const std::string &filename, bool filter, bool clamp, bool mipmap)
+{
     return TextureLoader::getInstance().load(filename, filter, clamp, mipmap);
 }

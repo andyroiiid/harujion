@@ -1,11 +1,9 @@
-//
-// Created by andyroiiid on 6/13/2021.
-//
+// Copyright 2021-2025 Andrew Huang. All Rights Reserved.
 
-#ifndef HARUJION_NON_COPYABLE_H
-#define HARUJION_NON_COPYABLE_H
+#pragma once
 
-class NonCopyable {
+class NonCopyable
+{
 public:
     NonCopyable() = default;
 
@@ -13,5 +11,3 @@ public:
 
     NonCopyable &operator=(const NonCopyable &) = delete;
 };
-
-#endif //HARUJION_NON_COPYABLE_H
