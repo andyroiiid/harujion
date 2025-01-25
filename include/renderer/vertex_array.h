@@ -6,6 +6,7 @@
 #define HARUJION_VERTEX_ARRAY_H
 
 #include <glad/gl.h>
+#include <initializer_list>
 
 #include "non_copyable.h"
 #include "renderer/vertex.h"

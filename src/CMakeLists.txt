@@ -1,6 +1,4 @@
-set(CMAKE_CXX_STANDARD 17)
-
-add_executable(${PROJECT_NAME}
+target_sources(${PROJECT_NAME} PRIVATE
         physfs.cpp
         window.cpp
         renderer/shader.cpp

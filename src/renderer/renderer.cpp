@@ -13,7 +13,7 @@ Renderer &Renderer::getInstance() {
 }
 
 Renderer::Renderer() {
-#define LOG_GL_STRING(name) spdlog::info(#name ": {}", glGetString(name))
+#define LOG_GL_STRING(name) spdlog::info(#name ": {}", reinterpret_cast<const char *>(glGetString(name)))
     LOG_GL_STRING(GL_VERSION);
     LOG_GL_STRING(GL_SHADING_LANGUAGE_VERSION);
     LOG_GL_STRING(GL_VENDOR);
